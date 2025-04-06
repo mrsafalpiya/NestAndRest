@@ -26,7 +26,7 @@
 		<!-- Header -->
 		<div class="auth-header">
 			<a href="${pageContext.request.contextPath}/"><img
-				src="${pageContext.request.contextPath}/resources/images/logo.png"
+				src="${pageContext.request.contextPath}/resources/system/images/logo.png"
 				alt="Logo" class="auth-header-logo" /></a> <a
 				href="${pageContext.request.contextPath}/contact-us"
 				class="subtitle2" style="color: var(--text-primary)">Need help?</a>
@@ -40,7 +40,7 @@
 				<p class="body1" style="text-align: center">Sign in to continue
 					your sustainable furniture journey.</p>
 				<img
-					src="${pageContext.request.contextPath}/resources/images/auth-illustration.png"
+					src="${pageContext.request.contextPath}/resources/system/images/auth-illustration.png"
 					alt="Auth Illustration" class="auth-illustration" />
 			</div>
 		</div>
