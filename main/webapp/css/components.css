@@ -1,0 +1,201 @@
+:root {
+	--text-primary: #1c252e;
+	--text-disabled: #919EAB;
+	--h1-size: 64px;
+	--h1-weight: 800;
+	--h1-line-height: 80px;
+	--h1-letter-spacing: 0px;
+	--h2-size: 48px;
+	--h2-weight: 800;
+	--h2-line-height: 64px;
+	--h2-letter-spacing: 0px;
+	--h3-size: 32px;
+	--h3-weight: 700;
+	--h3-line-height: 48px;
+	--h3-letter-spacing: 0px;
+	--h4-size: 24px;
+	--h4-weight: 700;
+	--h4-line-height: 36px;
+	--h4-letter-spacing: 0px;
+	--h5-size: 20px;
+	--h5-weight: 700;
+	--h5-line-height: 30px;
+	--h5-letter-spacing: 0px;
+	--text-secondary: #637381;
+	--body1-size: 16px;
+	--body1-weight: 400;
+	--body1-line-height: 24px;
+	--body1-letter-spacing: 0px;
+	--body2-size: 14px;
+	--body2-weight: 400;
+	--body2-line-height: 22px;
+	--body2-letter-spacing: 0px;
+	--primary-main: #caa272;
+	--subtitle2-size: 14px;
+	--subtitle2-weight: 600;
+	--subtitle2-line-height: 22px;
+	--subtitle2-letter-spacing: 0px;
+	--components-input-label-size: 12px;
+	--components-input-label-weight: 600;
+	--components-input-label-line-height: 12px;
+	--family-primary: "Public Sans";
+	--components-input-value-size: 15px;
+	--components-input-value-weight: 400;
+	--components-input-value-line-height: 22px;
+	--textfield-standard-input-md-pt: 3px;
+	--textfield-standard-input-pb: 4px;
+	--components-textfield-underline: rgba(145, 158, 171, 0.32);
+	--button-spacing: 8px;
+	--button-radius: 8px;
+	--button-md-height: 36px;
+	--button-md-px: 12px;
+	--primary-contrast-text: #fff;
+	--components-button-medium-size: 14px;
+	--components-button-medium-weight: 700;
+	--components-button-medium-line-height: 24px;
+	--button-lg-height: 48px;
+	--button-lg-px: 16px;
+	--components-button-large-size: 15px;
+	--components-button-large-weight: 700;
+	--components-button-large-line-height: 26px;
+}
+
+/* Headings */
+h1 {
+	font-size: var(--h1-size);
+	font-weight: var(--h1-weight);
+	line-height: var(--h1-line-height);
+	letter-spacing: var(--h1-letter-spacing);
+}
+
+h2 {
+	font-size: var(--h2-size);
+	font-weight: var(--h2-weight);
+	line-height: var(--h2-line-height);
+	letter-spacing: var(--h2-letter-spacing);
+}
+
+h3 {
+	color: var(--text-primary);
+	font-size: var(--h3-size);
+	font-weight: var(--h3-weight);
+	line-height: var(--h3-line-height);
+	letter-spacing: var(--h3-letter-spacing);
+}
+
+h4 {
+	font-size: var(--h4-size);
+	font-weight: var(--h4-weight);
+	line-height: var(--h4-line-height);
+	letter-spacing: var(--h4-letter-spacing);
+}
+
+h5 {
+	color: var(--text-primary);
+	font-size: var(--h5-size);
+	font-weight: var(--h5-weight);
+	line-height: var(--h5-line-height);
+	letter-spacing: var(--h5-letter-spacing);
+}
+
+h6 {
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 28px;
+	letter-spacing: 0px;
+}
+
+/* Body Text */
+.overline {
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 18px;
+	letter-spacing: 0px;
+	text-transform: uppercase;
+}
+
+.body1 {
+	color: var(--text-secondary);
+	font-size: var(--body1-size);
+	font-weight: var(--body1-weight);
+	line-height: var(--body1-line-height);
+	letter-spacing: var(--body1-letter-spacing);
+}
+
+.body2 {
+	color: var(--text-secondary);
+	font-size: var(--body2-size);
+	font-weight: var(--body2-weight);
+	line-height: var(--body2-line-height);
+	letter-spacing: var(--body2-letter-spacing);
+}
+
+.subtitle1 {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: 0px;
+}
+
+.subtitle2 {
+	color: var(--primary-main);
+	font-size: var(--subtitle2-size);
+	font-weight: var(--subtitle2-weight);
+	line-height: var(--subtitle2-line-height);
+	letter-spacing: var(--subtitle2-letter-spacing);
+}
+
+/* Inputs */
+.input-label {
+	color: var(--text-secondary);
+	font-size: var(--components-input-label-size);
+	font-weight: var(--components-input-label-weight);
+	line-height: var(--components-input-label-line-height);
+}
+
+.input-text {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-family: var(--family-primary);
+	font-size: var(--components-input-value-size);
+	font-weight: var(--components-input-value-weight);
+	line-height: var(--components-input-value-line-height);
+	padding: var(--textfield-standard-input-md-pt) 0px
+		var(--textfield-standard-input-pb) 0px;
+	border-bottom: 1px solid var(--components-textfield-underline);
+}
+
+/* Buttons */
+.btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--button-spacing);
+	align-self: stretch;
+	border-radius: var(--button-radius);
+	background: var(--primary-main);
+	height: var(--button-md-height);
+	padding: 0px var(--button-md-px);
+	/* Button Text */
+	color: var(--primary-contrast-text);
+	text-align: center;
+	font-size: var(--components-button-medium-size);
+	font-weight: var(--components-button-medium-weight);
+	line-height: var(--components-button-medium-line-height);
+}
+
+.btn-lg {
+	height: var(--button-lg-height);
+	padding: 0px var(--button-lg-px);
+	/* Button Text */
+	font-size: var(--components-button-large-size);
+	font-weight: var(--components-button-large-weight);
+	line-height: var(--components-button-large-line-height);
+}
+
+.btn-outlined {
+	border: 1px solid #919eab;
+	background-color: white;
+	color: var(--text-primary);
+}
