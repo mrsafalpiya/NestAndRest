@@ -32,12 +32,12 @@
 			<div class="images">
 				<div>
 					<img
-						src="${pageContext.request.contextPath}/resources/images/about-img1.jpg"
+						src="${pageContext.request.contextPath}/resources/system/images/about-img1.jpg"
 						alt="" />
 				</div>
 				<div>
 					<img
-						src="${pageContext.request.contextPath}/resources/images/about-img2.jpg"
+						src="${pageContext.request.contextPath}/resources/system/images/about-img2.jpg"
 						alt="" />
 				</div>
 			</div>
@@ -102,7 +102,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/images/about-member.jpeg" />
+							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +164,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/images/about-member.jpeg" />
+							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +226,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/images/about-member.jpeg" />
+							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -288,7 +288,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/images/about-member.jpeg" />
+							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -350,7 +350,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/images/about-member.jpeg" />
+							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"

@@ -2,7 +2,7 @@
 
 .hero {
   width: 100%;
-  background-image: url("../resources/images/about-hero-bg.png");
+  background-image: url("../resources/system/images/about-hero-bg.png");
   background-size: cover;
   background-position: top right;
   padding-top: 152px;

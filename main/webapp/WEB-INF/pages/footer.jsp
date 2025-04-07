@@ -3,7 +3,7 @@
 <footer>
 	<div class="container">
 		<div class="footer-left">
-			<a href="#"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="Logo" width="40"
+			<a href="#"><img src="${pageContext.request.contextPath}/resources/system/images/logo.png" alt="Logo" width="40"
 				height="40" /></a>
 			<p class="body2 info">Bringing Nepal's sustainable craftsmanship
 				to your home.</p>
