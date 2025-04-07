@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <header class="user-header">
 	<div class="header-menu-content">
-		<a href="#" style="width: 100%"><img src="${pageContext.request.contextPath}/resources/images/logo.png"
+		<a href="#" style="width: 100%"><img src="${pageContext.request.contextPath}/resources/system/images/logo.png"
 			alt="Nest and Rest" width="55" height="55" /></a>
 		<div class="header-menu-links-container">
 			<a href="#" class="header-menu-link">Home</a> <a href="#"
@@ -29,7 +29,7 @@
             </svg>
 			</button>
 
-			<a href="#"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="Nest and Rest"
+			<a href="#"><img src="${pageContext.request.contextPath}/resources/system/images/logo.png" alt="Nest and Rest"
 				width="40" height="40" /></a>
 		</div>
 
