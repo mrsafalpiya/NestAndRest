@@ -23,9 +23,9 @@
 	<div class="auth-layout full-page-height">
         <!-- Header -->
         <div class="auth-header">
-            <img
+            <a href="${pageContext.request.contextPath}/"><img
 				src="${pageContext.request.contextPath}/resources/system/images/logo.png"
-				alt="Logo" class="auth-header-logo" />
+				alt="Logo" class="auth-header-logo" /></a> 
             <a href="${pageContext.request.contextPath}/contact-us"
 			 class="subtitle2" style="color: var(--text-primary)">Need help?</a>
         </div>
