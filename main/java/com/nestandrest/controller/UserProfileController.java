@@ -17,5 +17,4 @@ public class UserProfileController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/pages/user/user-profile.jsp").forward(request, response);
 	}
 
-
 }

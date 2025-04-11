@@ -20,8 +20,9 @@
 	 <div class="error-layout">
 	    <!-- Header -->
 	    <div class="error-header">
+	    <a href="${pageContext.request.contextPath}/">
 	     <img src="${pageContext.request.contextPath}/resources/system/images/logo.png"
-		  alt="Logo" class="error-header-logo" />
+		  alt="Logo" class="error-header-logo" /></a>
 	      <a href="${pageContext.request.contextPath}/contact-us"
 		   class="subtitle2" style="color: var(--text-primary)">Need help?</a>
 	    </div>
