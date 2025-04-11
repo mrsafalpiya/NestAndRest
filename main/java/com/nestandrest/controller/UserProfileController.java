@@ -14,7 +14,7 @@ public class UserProfileController extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/pages/info/user-profile.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/user/user-profile.jsp").forward(request, response);
 	}
 
 
