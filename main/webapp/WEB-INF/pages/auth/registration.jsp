@@ -26,7 +26,8 @@
             <img
 				src="${pageContext.request.contextPath}/resources/system/images/logo.png"
 				alt="Logo" class="auth-header-logo" />
-            <a href="#" class="subtitle2" style="color: var(--text-primary)">Need help?</a>
+            <a href="${pageContext.request.contextPath}/contact-us"
+			 class="subtitle2" style="color: var(--text-primary)">Need help?</a>
         </div>
 
         <!-- Banner -->
