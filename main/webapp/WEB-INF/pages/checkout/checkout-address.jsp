@@ -28,8 +28,18 @@
 		<div class="checkout-progress">
 			<!-- Cart step -->
 			<div
-				class="step <%=currentStep.equals("cart") || currentStep.equals("checkout-address") ? "active completed" : ""%>">
+				class="step <%=currentStep.equals("checkout-address") || currentStep.equals("complete") ? "completed" : ""%>">
+				<%
+				if (currentStep.equals("checkout-address") || currentStep.equals("complete")) {
+				%>
+				<div class="tick-mark">✔</div>
+				<%
+				} else {
+				%>
 				<div class="circle"></div>
+				<%
+				}
+				%>
 				<span>Cart</span>
 			</div>
 			<div
@@ -45,8 +55,7 @@
 				class="line <%=currentStep.equals("complete") ? "active-line" : ""%>"></div>
 
 			<!-- Complete step -->
-			<div
-				class="step <%=currentStep.equals("complete") ? "active" : ""%>">
+			<div class="step <%=currentStep.equals("complete") ? "active" : ""%>">
 				<div class="circle"></div>
 				<span>Complete</span>
 			</div>
