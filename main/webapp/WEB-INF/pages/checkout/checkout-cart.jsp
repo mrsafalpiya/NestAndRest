@@ -20,12 +20,23 @@
 		<h4>Checkout</h4>
 
 		<%
-		String currentStep = "cart"; 
+		String currentStep = "cart";
 		%>
 
 		<div class="checkout-progress">
 			<div class="step <%=currentStep.equals("cart") ? "active" : ""%>">
+				<%
+				if (currentStep.equals("checkout-address") || currentStep.equals("complete")) {
+				%>
+				<div class="tick-mark">✓</div>
+				<%
+				} else {
+				%>
 				<div class="circle"></div>
+				<%
+				}
+				%>
+
 				<span>Cart</span>
 			</div>
 			<div
