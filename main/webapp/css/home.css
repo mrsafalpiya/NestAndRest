@@ -1,0 +1,273 @@
+.interactive-room-container {
+	width: 100%;
+	max-width: 2038px; /* Maximum width of the original image */
+	margin: 0 auto;
+	position: relative;
+}
+
+.mobile-hero {
+	display: none;
+	background: black;
+	position: relative;
+}
+
+@media screen and (max-width: 1100px) {
+	.interactive-room-container {
+		display: none;
+	}
+	.mobile-hero {
+		display: block;
+	}
+}
+
+.mobile-hero img {
+	opacity: 0.4;
+}
+
+.mobile-hero-contents {
+	position: absolute;
+	bottom: 24px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0 30px;
+}
+
+@keyframes slide-in-bottom {
+	0% {
+		transform: translateX(10px) translateY(30px);
+		opacity: 0;
+	}
+	
+	100% {
+		transform: translateX(10px) translateY(0);
+		opacity: 1;
+	}
+}
+
+.interactive-room-container-text {
+	position: absolute;
+	z-index: 20;
+	top: 20%;
+	transform: translateX(10px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: #88734D;
+	animation: slide-in-bottom 1.3s ease 0s 1 normal none;
+}
+
+.interactive-room-container-text .title {
+	color: #88734D;
+}
+
+.image-map-wrapper  {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.base-image {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.image-map-svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none; /* This ensures clicks go through to the paths */
+}
+
+.clickable-area {
+	fill: transparent;
+	stroke: transparent;
+	stroke-width: 0;
+	cursor: pointer;
+	pointer-events: all;
+	transition: fill 0.3s ease;
+}
+
+.clickable-area:hover {
+	fill: rgba(255, 255, 255, 0.3);
+	z-index: 10; /* Ensure the hovered area appears above others */
+}
+
+#furniture-info-div {
+	position: absolute;
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	padding: 10px;
+	border-radius: 4px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	margin-top: 10px;
+	display: none; /* Hidden by default */
+	max-width: 300px;
+}
+
+.contents-container {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	padding-top: 40px;
+	padding-bottom: 80px;
+}
+
+.list-container {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.list-items {
+	display: flex;
+	gap: 16px;
+	overflow: auto;
+	padding-bottom: 8px;
+}
+
+.item-card {
+	width: 270px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 16px;
+	background: #FFF;
+	box-shadow: 0px 0px 2px 0px rgba(145, 158, 171, 0.20), 0px 12px 24px
+		-4px rgba(145, 158, 171, 0.12);
+	position: relative;
+}
+
+.item-card .item-img {
+	height: 254px;
+	overflow: hidden;
+	border-radius: 12px;
+	margin: 8px;
+}
+
+.item-card img {
+	height: 254px;
+	width: 100%;
+	object-fit: cover;
+	transition: scale 0.3s;
+}
+
+.item-card:hover img {
+	scale: 1.15;
+}
+
+.item-info {
+	width: 100%;
+	padding: 16px 24px 24px 24px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.item-card.item-card-product .item-info {
+	text-align: left;
+}
+
+.price-info {
+	text-align: right;
+}
+
+.list-items a:hover {
+	text-decoration: none;
+}
+
+.price-info .discounted-price {
+	color: #919EAB;
+	text-decoration: line-through;
+	margin-right: 4px;
+}
+
+.category-listing {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.badge {
+	color: white;
+	font-weight: 600;
+	padding: 4px 12px;
+	border-radius: 8px;
+	font-size: 12px;
+	display: inline-block;
+	width: fit-content;
+	position: absolute;
+	top: 16px;
+	right: 16px;
+}
+
+.badge.sale {
+	background: #ff5e3a;
+}
+
+.about {
+  padding: 120px 0;
+  display: flex;
+  gap: 80px;
+  width: 100%;
+}
+
+.about .container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.about .container .images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
+.about .container .images img {
+  max-width: 100%;
+  border-radius: 24px;
+}
+
+.about .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.about .our-work-btn {
+  display: flex;
+}
+
+@media only screen and (max-width: 900px) {
+  .about {
+    padding: 80px 0;
+  }
+  .about .container {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    justify-content: center;
+    text-align: center;
+  }
+  .about .container .images {
+    display: none;
+  }
+  .about .our-work-btn {
+    justify-content: center;
+  }
+}
