@@ -6,14 +6,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-
-
 public class RedirectionUtil {
-
 	private static final String baseUrl = "/WEB-INF/pages/";
-	public static final String registerUrl = baseUrl + "register.jsp";
-	public static final String loginUrl = baseUrl + "login.jsp";
+	public static final String registerUrl = baseUrl + "/auth/registration.jsp";
+	public static final String loginUrl = baseUrl + "/auth/login.jsp";
 	public static final String homeUrl = baseUrl + "home.jsp";
 
 	public void setMsgAttribute(HttpServletRequest req, String msgType, String msg) {
