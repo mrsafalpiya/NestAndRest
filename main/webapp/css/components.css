@@ -204,3 +204,13 @@ h6 {
 	background-color: white;
 	color: var(--text-primary);
 }
+
+.success-message {
+	color: green;
+	font-size: 13px;
+}
+
+.error-message {
+	color: red;
+	font-size: 13px;
+}

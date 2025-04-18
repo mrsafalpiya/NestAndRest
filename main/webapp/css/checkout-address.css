@@ -1,0 +1,330 @@
+@charset "UTF-8";
+
+.cart-page {
+	padding: 40px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+/* Progress bar */
+.checkout-progress {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: 700px;
+	margin-bottom: 10px;
+	gap: 15px;
+	margin-top: 3rem;
+	margin-bottom: 3rem; /* already present, tweak if needed */
+}
+
+.step {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.circle {
+	width: 12px;
+	height: 12px;
+	border: 4px solid #e2e8f0; /* light border */
+	border-radius: 50%;
+	background-color: white;
+	transition: all 0.3s;
+}
+
+.line {
+	height: 2px;
+	width: 120px;
+	align-self: center;
+	margin-top: -18px;
+	background-color: #e5e7eb; /* Gray-200 */
+	flex-shrink: 0;
+	margin-top: -18px;
+	background-color: #e5e7eb;
+}
+
+/* Active Circle for current step */
+.step.active .circle {
+	border-color: #fbbf24;
+	background-color: #fbbf24;
+}
+
+.tick-mark {
+	background: none; /* remove background */
+	color: #fbbf24;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 0;
+	width: auto;
+	height: auto;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.step span {
+	margin-top: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4b5563; /* Gray-700 */
+}
+
+.step.completed span::after {
+	font-size: 18px;
+	color: #fbbf24;
+	margin-left: 5px; /* Adjust spacing between text and tick */
+}
+
+/* Active step text color */
+.step.active span, .step.completed span {
+	margin-top: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4b5563; /* Gray-700 */
+}
+
+/* Active line between steps */
+.line.active-line {
+	background-color: #fbbf24;
+}
+
+/* Main checkout section layout */
+.checkout-wrapper {
+	display: flex;
+	gap: 2rem;
+	justify-content: space-between;
+	margin-top: 9px;
+}
+
+/* Left side: address cards and actions */
+.left-section {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.address-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.address-card {
+	background-color: #fff;
+	border-radius: 16px;
+	padding: 1.2rem;
+	box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.address-card h4 {
+	margin: 0 0 0.3rem 0;
+	font-size: 1.05rem;
+}
+
+.address-card p {
+	margin: 0.15rem 0;
+	font-size: 0.9rem;
+	color: #333;
+}
+
+.address-card button {
+	padding: 0.5rem 1rem;
+	background-color: #f3f4f6;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	font-weight: 500;
+	transition: background-color 0.3s;
+}
+
+.address-card button:hover {
+	background-color: #e5e7eb;
+}
+
+/* Actions under address cards */
+.address-actions {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
+	padding-left: 0.5rem;
+}
+
+.back-btn, .new-address {
+	font-size: 0.9rem;
+	text-decoration: none;
+	color: black;
+	font-weight: 500;
+	display: inline-block;
+	transition: color 0.3s;
+}
+
+.back-btn:hover, .new-address:hover {
+	color: #d48d1f;
+}
+
+/* Right side: order summary */
+.order-summary {
+	background-color: #fff;
+	border-radius: 16px;
+	padding: 1.5rem;
+	box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+	width: 300px;
+	height: fit-content;
+}
+
+.order-summary h4 {
+	margin-bottom: 1rem;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.order-summary p {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.95rem;
+	margin: 0.5rem 0;
+}
+
+.order-summary strong {
+	font-weight: 600;
+}
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 999;
+}
+
+.modal {
+	background: white;
+	padding: 2rem;
+	border-radius: 10px;
+	width: 400px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal h3 {
+	margin-bottom: 1rem;
+}
+
+.input-row {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 0.5 rem;
+}
+
+.input-row input {
+	flex: 1;
+}
+
+.modal input {
+	width: 100%;
+	margin-bottom: 1rem;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+}
+
+.modal-actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cancel-btn, .submit-btn {
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.cancel-btn {
+	background: #f1f1f1;
+}
+
+.submit-btn {
+	background: #333;
+	color: #fff;
+}
+
+@media ( max-width : 768px) {
+	.checkout-wrapper {
+		flex-direction: column;
+		gap: 2rem;
+	}
+	.order-summary {
+		width: 100%;
+	}
+	.checkout-progress {
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 12px;
+		margin-top: 1rem;
+		margin-bottom: 2rem;
+	}
+	.step {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		flex-shrink: 0;
+	}
+	.circle {
+		width: 10px;
+		height: 10px;
+		background-color: #fbbf24;
+		border-radius: 50%;
+		border: none;
+	}
+	.tick-mark {
+		width: auto;
+		height: auto;
+		background: none;
+		color: #fbbf24;
+		font-size: 16px;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+		margin-bottom: 2px;
+		border: none;
+	}
+	.line, .line.active-line {
+		width: 40px;
+		height: 2px;
+		background-color: #e5e7eb;
+		margin-top: -2px 4px;
+	}
+	.line.active-line {
+		background-color: #fbbf24;
+	}
+	.step span {
+		font-size: 12px;
+		font-weight: 500;
+		margin-top: 6px;
+		color: #4b5563;
+		text-align: center;
+	}
+	.address-card button {
+	padding: 0.4rem 0.8rem;
+	font-size: 0.8rem;
+}
+	
+}

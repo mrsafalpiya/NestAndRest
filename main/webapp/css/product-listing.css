@@ -1,0 +1,140 @@
+.product-page {
+    padding: 32px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.product-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-sort-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.search-input, .category-select, .sort-select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    min-width: 160px;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+    width: 100%;
+}
+
+.product-card {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    text-decoration: none;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.product-card h3 {
+    font-size: 16px;
+    margin: 12px 0 6px;
+}
+
+.product-card p {
+    font-size: 14px;
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.category-buttons a {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.category-buttons a:hover {
+    background-color: #eee;
+}
+
+.category-buttons a.active {
+    background-color: #c89b63;
+    color: white;
+    border-color: #c89b63;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 0;
+    width: 100%;
+}
+
+.pagination span, .pagination a {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination span.active,
+.pagination span:hover,
+.pagination a:hover {
+    background: #c89b63;
+    color: white;
+    border-color: #c89b63;
+}
