@@ -32,7 +32,7 @@
     
         <div class="cards-container">
           
-          <!-- Photo Card -->
+          
           <!-- Photo Card -->
             <div class="photo-card">
               <div class="profile-photo">
