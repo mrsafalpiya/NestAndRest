@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @WebServlet(asyncSupported = true, urlPatterns = {"/products"})
 public class ProductListingController extends HttpServlet {
-    private static final int PAGE_SIZE = 6;
+    private static final int PAGE_SIZE = 12;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String category = req.getParameter("category");

@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Listing - Nest and Rest</title>
     <jsp:include page="../head.jsp" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-listing.css">
@@ -13,27 +14,36 @@
 <jsp:include page="../header.jsp" />
 <main class="product-page container">
     <div class="product-header">
+    <div class="product-header-top">
         <h4>Shop</h4>
         <div class="search-sort-container">
-            <input type="text" placeholder="Search..." class="search-input"/>
-
-            <select class="category-select" onchange="filterCategory(this.value)">
-               <option value="all" <%= (request.getAttribute("selectedCategory") == null || "all".equals(request.getAttribute("selectedCategory"))) ? "selected" : "" %>>All Categories</option>
-                <option value="sofa" <%= "sofa".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Sofas</option>
-                <option value="chair" <%= "chair".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Chairs</option>
-                <option value="stool" <%= "stool".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Stools</option>
-                <option value="rack" <%= "rack".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Racks</option>
-                <option value="hanger" <%= "hanger".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Hangers</option>
-                <option value="table" <%= "table".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Tables</option>
-            </select>
-
-            <select class="sort-select">
-                <option>Sort by: Featured</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
-            </select>
-        </div>
-    </div>
+        
+        		<input type="text" placeholder="Search..." class="search-input"/>
+	    	
+	    		<div class filter-controls>
+			        <select class="category-select" onchange="filterCategory(this.value)">
+			            <option value="all" <%= (request.getAttribute("selectedCategory") == null || "all".equals(request.getAttribute("selectedCategory"))) ? "selected" : "" %>>All Categories</option>
+			            <option value="sofa" <%= "sofa".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Sofas</option>
+			            <option value="chair" <%= "chair".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Chairs</option>
+			            <option value="stool" <%= "stool".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Stools</option>
+			            <option value="rack" <%= "rack".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Racks</option>
+			            <option value="hanger" <%= "hanger".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Hangers</option>
+			            <option value="table" <%= "table".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Tables</option>
+			        </select>
+			
+			        <select class="sort-select">
+			            <option>Sort by: Featured</option>
+			            <option>Price: Low to High</option>
+			            <option>Price: High to Low</option>
+			        </select>
+		        </div>
+					<a href="cart.jsp" class="cart-icon"> <img
+						src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/AddToCartIcon.png"
+						alt="Cart" /> <span class="cart-count"></span>
+					</a>
+			</div>
+</div>
+</div>
 
 		<div class="product-grid">
 			<%
@@ -47,7 +57,7 @@
 					<img
 						src="<%=request.getContextPath()%>/resources/system/images/<%=p.getImage()%>"
 						alt="<%=p.getName()%>">
-					<h3><%=p.getName()%></h3>
+					<h5><%=p.getName()%></h5>
 					<p>
 						Rs.<%=p.getPrice()%></p>
 				</div>
@@ -62,7 +72,7 @@
 			%>
 		</div>
 
-		</div>
+		
 
     <div class="pagination">
     <%
