@@ -68,10 +68,9 @@
 
 .checkout-container {
 	display: flex;
-	gap: 20px;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 100%;
+	gap: 1rem;
+	align-items: flex-start;
+	justify-content: space-between;
 }
 
 .cart-box, .order-summary {
@@ -271,25 +270,6 @@ th {
 }
 
 @media ( max-width : 768px) {
-	.cart-box {
-		padding: 20px;
-		min-width: unset;
-		width: 100%;
-	}
-	table {
-		font-size: 14px;
-	}
-	th, td {
-		padding: 10px;
-	}
-	.checkout-progress {
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		gap: 12px;
-		margin-top: 1rem;
-		margin-bottom: 2rem;
-	}
 	.step {
 		display: flex;
 		flex-direction: column;
@@ -307,7 +287,7 @@ th {
 		width: 40px;
 		height: 2px;
 		background-color: #e5e7eb;
-		margin-top: -2px 4px;
+		margin: 4px 0; /* Corrected margin syntax */
 	}
 	.line.active-line {
 		background-color: #fbbf24;
@@ -318,5 +298,49 @@ th {
 		margin-top: 6px;
 		color: #4b5563;
 		text-align: center;
+	}
+	body {
+		margin: 0;
+		padding: 0;
+		overflow-x: hidden;
+	}
+	.header-buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+		gap: 8px;
+		width: 100%;
+		padding: 0 16px;
+	}
+	.btn-signin, .btn-register {
+		padding: 6px 12px;
+		font-size: 14px;
+		border-radius: 6px;
+		white-space: nowrap;
+	}
+	.checkout-container {
+		flex-direction: column;
+		padding: 0 16px;
+	}
+	.cart-box {
+		width: 100%;
+		min-width: auto;
+		overflow-x: auto; /* this is key to avoid cutting off columns */
+	}
+	table {
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+	.product-info img {
+		width: 50px;
+		height: 50px;
+	}
+	.cart-box, .order-summary {
+		max-width: 100%;
+		width: 100%;
+		box-sizing: border-box;
 	}
 }

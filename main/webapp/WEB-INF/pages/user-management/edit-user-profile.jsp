@@ -27,6 +27,7 @@
 				alt="Admin Profile" class="profile-icon">
 		</div>
 	</div>
+	
 	<div class="container">
 		<div class="sidebar" id="sidebar">
 			<!-- Sidebar Placeholder -->
