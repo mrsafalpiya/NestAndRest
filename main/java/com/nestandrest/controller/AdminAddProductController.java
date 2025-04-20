@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 
-@WebServlet("/admin/products/add")
+@WebServlet(asyncSupported = true, urlPatterns = "/admin/products/add")
 public class AdminAddProductController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/products/list")
+@WebServlet(asyncSupported = true, urlPatterns = "/admin/products/list")
 public class AdminProductListController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final int PRODUCTS_PER_PAGE = 6;
