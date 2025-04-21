@@ -22,8 +22,12 @@
 <title>Login - Nest and Rest Furniture</title>
 </head>
 <body>
+
+	
+		
 	<div class="auth-layout full-page-height">
 		<!-- Header -->
+	
 		<div class="auth-header">
 			<a href="${pageContext.request.contextPath}/"><img
 				src="${pageContext.request.contextPath}/resources/system/images/logo.png"
@@ -47,7 +51,7 @@
 
 		<!-- Form -->
 		<div class="auth-form-container full-page-height">
-			<form class="auth-form" method="post">
+			<form class="auth-form" method="post" action="${pageContext.request.contextPath}/login">
 				<%
 				String successMessage = (String) request.getAttribute("success");
 				if (successMessage != null) {
@@ -65,14 +69,16 @@
 				<div class="auth-inputs">
 					<div>
 						<p class="input-label">Email address</p>
-						<input class="input-text" placeholder="test@mail.com" name="email"
-							id="email" />
+						<input type="email" name="email" class="input-text" placeholder="yourname@gmail.com"
+     					  value="${rememberedEmail != null ? rememberedEmail : ''}">
+						
 					</div>
 					<div>
 						<p class="input-label">Password</p>
 						<input type="password" class="input-text"
 							placeholder="8+ characters" name="password" id="password" />
 					</div>
+					
 
 					<%
 					String errorMessage = (String) request.getAttribute("error");
@@ -82,6 +88,10 @@
 					<%
 					}
 					%>
+					 <div class="checkbox-group" style="margin-bottom: 20px;">
+				        <input type="checkbox" name="rememberMe" id="rememberMe">
+				        <label for="rememberMe" style="margin-left: 8px;">Remember Me</label>
+				    </div>
 					<button class="btn btn-lg">Sign in</button>
 				</div>
 			</form>

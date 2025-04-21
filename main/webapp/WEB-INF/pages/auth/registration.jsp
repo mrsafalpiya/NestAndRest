@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +60,7 @@
 							<p class="input-label">First Name</p>
 							<input type="text" class="input-text"
 								placeholder="Your First Name" name="first-name" id="first-name">
+
 						</div>
 						<div>
 							<p class="input-label">Last Name</p>
@@ -72,6 +75,24 @@
 						<input class="input-text" placeholder="yourname@gmail.com"
 							name="email" id="email">
 					</div>
+
+					<div>
+						<p class="input-label">Phone Number</p>
+						<input class="input-text" placeholder="Phone Number" name="phone"
+							id="phone">
+					</div>
+
+					<div>
+						<p class="input-label">Gender</p>
+						<select id="gender-id" name="gender-id" class="input-text"
+							required>
+							<option value="" disabled>Select your gender</option>
+							<c:forEach var="gender" items="${genders}">
+								<option value="${gender.genderId}">${gender.name}</option>
+							</c:forEach>
+						</select>
+					</div>
+				
 
 					<div>
 						<p class="input-label">Password</p>
@@ -94,6 +115,7 @@
 					<%
 					}
 					%>
+					
 
 					<button class="btn btn-lg">Create account</button>
 				</div>

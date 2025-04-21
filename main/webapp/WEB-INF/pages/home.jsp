@@ -11,6 +11,8 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	
+	
 
 	<!-- Interactive Hero Section -->
 	<section class="interactive-room-container">
