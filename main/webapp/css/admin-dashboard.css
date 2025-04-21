@@ -1,0 +1,148 @@
+.content-container {
+	display: flex;
+	padding: var(--container-vertical-py, 40px)
+		var(--container-vertical-px, 40px);
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--spacing-3, 24px);
+}
+
+.product-sold-total-balance-contrainer {
+	display: grid;
+	gap: var(--spacing-3, 24px);
+	grid-template-columns: 1fr 1fr;
+	width: 100%;
+}
+
+@media only screen and (max-width: 1050px) {
+	.product-sold-total-balance-contrainer {
+		grid-template-columns: 1fr;
+	}
+}
+
+.card {
+	border-radius: var(--card-radius, 16px);
+	background: var(--background-paper, #FFF);
+	box-shadow: var(--card-x1, 0px) var(--card-y1, 0px)
+		var(--card-blur1, 2px) var(--card-spread1, 0px)
+		var(--shadow-20, rgba(145, 158, 171, 0.20)), var(--card-x2, 0px)
+		var(--card-y2, 12px) var(--card-blur2, 24px) var(--card-spread2, -4px)
+		var(--shadow-12, rgba(145, 158, 171, 0.12));
+	padding: var(--card-content-p, 24px);
+}
+
+.card.products-sold {
+	display: flex;
+	align-items: center;
+	flex: 1 0 0;
+}
+
+.products-sold .products-sold-content-div {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	flex: 1 0 0;
+}
+
+.products-sold-content-div .last-week-comp-stats {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-05, 4px);
+}
+
+.sales-gender-yearly-container {
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+	gap: var(--spacing-3, 24px);
+}
+
+@media only screen and (max-width: 1050px) {
+	.sales-gender-yearly-container {
+		flex-direction: column;
+	}
+	.sales-gender-yearly-container .sales-by-gender {
+		max-width: 100% !important;
+	}
+}
+
+.sales-gender-yearly-container .sales-by-gender {
+	display: flex;
+	max-width: 30%;
+	width: 100%;
+	flex-direction: column;
+	gap: var(--spacing-6, 48px);
+	flex-shrink: 0;
+	flex-direction: column;
+}
+
+.yearly-sales {
+	max-width: 65% !important;
+	flex-grow: 1;
+}
+
+.best-products {
+	width: 100%;
+}
+
+:where(th, td):not(.max) {
+	width: 0;
+	white-space: nowrap;
+}
+
+.best-products-table {
+	width: 100%;
+}
+
+.best-products-table th {
+	padding: 16px;
+	background: var(--background-neutral, #f4f6f8);
+	text-align: left;
+	color: #627281;
+}
+
+.best-products-table td {
+	padding: 16px;
+}
+
+.product-info {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.chip {
+	padding: 6px 10px;
+	border-radius: 10px;
+	line-height: 20px;
+	font-weight: 700;
+}
+
+.chip.top1 {
+	background: rgba(212, 200, 168, 0.16);
+	color: #B69963;
+}
+
+.chip.top2 {
+	background: rgba(125, 157, 127, 0.16);
+	color: #4D6A50;
+}
+
+.chip.top3 {
+	background: rgba(0, 184, 217, 0.16);
+	color: #006C9C;
+}
+
+.chip.top4 {
+	background: rgba(255, 171, 0, 0.16);
+	color: #B76E00;
+}
+
+.chip.top5 {
+	background: rgba(255, 86, 48, 0.16);
+	color: #B71D18;
+}
+
+.product-info img {
+	border-radius: 50%;
+}
