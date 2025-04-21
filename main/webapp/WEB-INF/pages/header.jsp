@@ -1,15 +1,21 @@
 <%@page import="com.nestandrest.util.CookiesUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <header class="user-header">
 	<div class="header-menu-content">
-		<a href="#" style="width: 100%"><img src="${pageContext.request.contextPath}/resources/system/images/logo.png"
+		<a href="${contextPath}/home" style="width: 100%"><img
+			src="${pageContext.request.contextPath}/resources/system/images/logo.png"
 			alt="Nest and Rest" width="55" height="55" /></a>
 		<div class="header-menu-links-container">
-			<a href="#" class="header-menu-link">Home</a> <a href="#"
-				class="header-menu-link">Shop</a> <a href="#"
-				class="header-menu-link">About Us</a> <a href="#"
-				class="header-menu-link">Contact Us</a>
+			<a href="${contextPath}/home" class="header-menu-link">Home</a> <a
+				href="${contextPath}/products" class="header-menu-link">Shop</a> <a
+				href="${contextPath}/about-us" class="header-menu-link">About Us</a>
+			<a href="${contextPath}/contact-us" class="header-menu-link">Contact
+				Us</a>
 		</div>
 	</div>
 	<div class="header-menu-open-overlay" onclick="closeHeaderMenu()"></div>
@@ -30,22 +36,24 @@
             </svg>
 			</button>
 
-			<a href="#"><img src="${pageContext.request.contextPath}/resources/system/images/logo.png" alt="Nest and Rest"
-				width="40" height="40" /></a>
+			<a href="${contextPath}/home"><img
+				src="${pageContext.request.contextPath}/resources/system/images/logo.png"
+				alt="Nest and Rest" width="40" height="40" /></a>
 		</div>
 
 		<div class="header-right">
 			<div class="header-links">
-				<a href="#">Home</a>
+				<a href="${contextPath}/home">Home</a>
 				<div class="categories-menu">
 					<div class="categories-menu-container">
 						<div class="categories-menu-content">
-							<a href="#" class="categories-entry">Category 1</a> <a href="#"
-								class="categories-entry">Category 2</a>
+							<a href="${contextPath}/products" class="categories-entry">Category
+								1</a> <a href="${contextPath}/products" class="categories-entry">Category
+								2</a>
 						</div>
 					</div>
-					<a href="#" class="categories-menu-link"> <svg
-							xmlns="http://www.w3.org/2000/svg" width="6" height="6"
+					<a href="${contextPath}/products" class="categories-menu-link">
+						<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6"
 							viewBox="0 0 6 6" fill="none">
                   <circle opacity="0.48" cx="3" cy="3" r="3"
 								fill="#1C252E" />
@@ -57,24 +65,27 @@
                 </svg>
 					</a>
 				</div>
-				<a href="#">About Us</a> <a href="#">Contact Us</a>
+				<a href="${contextPath}/about-us">About Us</a> <a
+					href="${contextPath}/contact-us">Contact Us</a>
 			</div>
 			<div class="header-auth">
-			    <%
-			        Cookie emailCookie = CookiesUtil.getCookie(request, "email");
-			        if (emailCookie != null) {
-			    %>
-			        <span style="margin-right: 12px; font-weight: 500;"><%= emailCookie.getValue() %></span>
-			        
-			        <a href="<%= request.getContextPath() %>/logout" class="btn btn-outlined">Logout</a>
-			    <%
-			        } else {
-			    %>
-			        <a href="<%= request.getContextPath() %>/login" class="btn btn-outlined">Sign In</a>
-			        <a href="<%= request.getContextPath() %>/registration" class="btn">Register</a>
-			    <%
-			        }
-			    %>
+				<%
+				Cookie emailCookie = CookiesUtil.getCookie(request, "email");
+				if (emailCookie != null) {
+				%>
+				<span style="margin-right: 12px; font-weight: 500;"><%=emailCookie.getValue()%></span>
+
+				<a href="<%=request.getContextPath()%>/logout"
+					class="btn btn-outlined">Logout</a>
+				<%
+				} else {
+				%>
+				<a href="<%=request.getContextPath()%>/login"
+					class="btn btn-outlined">Sign In</a> <a
+					href="<%=request.getContextPath()%>/registration" class="btn">Register</a>
+				<%
+				}
+				%>
 			</div>
 		</div>
 	</div>
