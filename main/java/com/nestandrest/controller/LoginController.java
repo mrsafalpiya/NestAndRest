@@ -46,18 +46,18 @@ public class LoginController extends HttpServlet {
 				redirectionUtil.setMsgAndRedirect(req, resp, "error", "Invalid credentials", RedirectionUtil.loginUrl);
 				return;
 			}
-			
-			int cookieTime = 60*60;
-			
+
+			int cookieTime = 60 * 60;
+
 			if (req.getParameter("rememberMe") != null) {
-				cookieTime = 24*60*60;
+				cookieTime = 24 * 60 * 60;
 			}
 
 			CookiesUtil.addCookie(resp, "email", userModel.getEmail(), cookieTime);
 			SessionUtil.setAttribute(req, "role_name", loginUserRole);
 
 			if (loginUserRole.equals("Admin")) {
-				resp.sendRedirect(req.getContextPath() + "/dashboard"); // Redirect to /home
+				resp.sendRedirect(req.getContextPath() + "/admin"); // Redirect to /admin
 			} else {
 				resp.sendRedirect(req.getContextPath() + "/home"); // Redirect to /home
 			}

@@ -21,6 +21,8 @@ public class AuthenticationFilter implements Filter {
 	private static final String LOGIN = "/login";
 	private static final String REGISTRATION = "/registration";
 	private static final String HOME = "/home";
+	private static final String ADMIN_DASHBOARD = "/admin";
+	private static final String UNAUTHORIZED = "/error403";
 	private static final String ROOT = "/";
 
 	@Override
@@ -43,10 +45,18 @@ public class AuthenticationFilter implements Filter {
 		boolean isLoggedIn = CookiesUtil.getCookie(req, "email") != null;
 
 		if (isLoggedIn) {
+			// Do not allow logged in users to access login and registration pages
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTRATION)) {
 				res.sendRedirect(req.getContextPath() + HOME);
 				return;
 			}
+		}
+
+		// Do not allow unauthorized access to admin dashboard
+		String userRole = (String) SessionUtil.getAttribute((HttpServletRequest) request, "role_name");
+		if ((uri.endsWith(ADMIN_DASHBOARD)) && (!isLoggedIn || (isLoggedIn && !userRole.equals("Admin")))) {
+			res.sendRedirect(req.getContextPath() + UNAUTHORIZED);
+			return;
 		}
 
 		chain.doFilter(request, response);
