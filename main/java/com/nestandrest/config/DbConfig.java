@@ -12,7 +12,7 @@ public class DbConfig {
 
 	// Database configuration information
 	private static final String DB_NAME = "nest_and_rest";
-	private static final String URL = "jdbc:mysql://localhost:3306/" + DB_NAME;
+	private static final String URL = "jdbc:mysql://localhost:3307/" + DB_NAME;
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "";
 

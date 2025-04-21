@@ -1,3 +1,4 @@
+<%@page import="com.nestandrest.util.CookiesUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <header class="user-header">
@@ -59,8 +60,21 @@
 				<a href="#">About Us</a> <a href="#">Contact Us</a>
 			</div>
 			<div class="header-auth">
-				<button class="btn btn-outlined">Sign In</button>
-				<button class="btn">Register</button>
+			    <%
+			        Cookie emailCookie = CookiesUtil.getCookie(request, "email");
+			        if (emailCookie != null) {
+			    %>
+			        <span style="margin-right: 12px; font-weight: 500;"><%= emailCookie.getValue() %></span>
+			        
+			        <a href="<%= request.getContextPath() %>/logout" class="btn btn-outlined">Logout</a>
+			    <%
+			        } else {
+			    %>
+			        <a href="<%= request.getContextPath() %>/login" class="btn btn-outlined">Sign In</a>
+			        <a href="<%= request.getContextPath() %>/registration" class="btn">Register</a>
+			    <%
+			        }
+			    %>
 			</div>
 		</div>
 	</div>

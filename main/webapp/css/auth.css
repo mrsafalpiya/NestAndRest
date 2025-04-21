@@ -28,6 +28,25 @@
 	align-items: center;
 }
 
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-primary); /* or your default text color */
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary); /* if using modern browser & custom color */
+}
+
+.checkbox-group label {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
 	.auth-banner {
 		display: none;
