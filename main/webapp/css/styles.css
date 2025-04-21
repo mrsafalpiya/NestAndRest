@@ -43,6 +43,7 @@ html {
 /* Set min height for the body */
 body, main {
 	min-height: 100dvh;
+	overflow-x: hidden;
 }
 
 /* Underline on anchor tag hover */

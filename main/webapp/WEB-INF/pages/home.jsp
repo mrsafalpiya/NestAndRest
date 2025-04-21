@@ -29,10 +29,10 @@
 					furniture to explore more</h4>
 				<svg width="26" height="35" viewBox="0 0 26 35" fill="#88734D"
 					xmlns="http://www.w3.org/2000/svg">
-<path
+					<path
 						d="M0 13.125H11.9167V0H10.8333C4.84792 0 0 4.89453 0 10.9375V13.125ZM0 15.3125V24.0625C0 30.1055 4.84792 35 10.8333 35H15.1667C21.1521 35 26 30.1055 26 24.0625V15.3125H13H0ZM26 13.125V10.9375C26 4.89453 21.1521 0 15.1667 0H14.0833V13.125H26Z"
 						fill="currentColor" />
-</svg>
+				</svg>
 				<a style="margin-top: 24px;"
 					href="${pageContext.request.contextPath}/products"><button
 						class="btn">View Shop</button></a>
@@ -41,60 +41,60 @@
 
 			<svg class="image-map-svg" viewBox="0 0 2038 1009"
 				preserveAspectRatio="xMidYMid meet">
-      <!-- Stools -->
-      <a
+			      <!-- Stools -->
+			      <a
 					href="${pageContext.request.contextPath}/products?category=stool"
 					title="Stools" data-tooltip="Stools">
-        <path
+        			<path
 						d="M95,993 L118,1006 L149,1009 L178,1006 L209,1002 L239,991 L259,984 L276,973 L281,948 L279,794 L247,785 L241,770 L187,765 L111,781 L106,796 L89,810 Z"
 						class="clickable-area" data-category="stools" />
-      </a>
+      				</a>
 
       <!-- Tables -->
-      <a
+      			<a
 					href="${pageContext.request.contextPath}/products?category=table"
 					title="Tables" data-tooltip="Tables">
-        <path
+        			<path
 						d="M793,879 L793,771 L770,763 L768,742 L777,731 L824,725 L846,718 L844,680 L867,673 L866,700 L895,698 L907,718 L938,720 L969,720 L988,729 L1010,740 L1009,760 L987,769 L987,857 L970,855 L967,772 L945,776 L943,875 L925,886 L927,792 L909,778 L860,778 L858,846 L842,846 L844,779 L835,776 L813,787 L811,877 Z"
 						class="clickable-area" data-category="tables" />
-      </a>
+      			</a>
 
       <!-- Chairs -->
-      <a
+      			<a
 					href="${pageContext.request.contextPath}/products?category=chair"
 					title="Chairs" data-tooltip="Chairs">
-        <path
+        			<path
 						d="M1314,801 L1312,658 L1327,651 L1434,649 L1455,593 L1468,588 L1472,566 L1488,570 L1596,575 L1607,575 L1598,658 L1611,664 L1605,680 L1614,821 L1595,817 L1595,779 L1472,781 L1468,837 L1450,839 L1450,787 L1329,758 L1327,799 Z"
 						class="clickable-area" data-category="chairs" />
-      </a>
+     			 </a>
 
       <!-- Hangers -->
-      <a
+     			 <a
 					href="${pageContext.request.contextPath}/products?category=hanger"
 					title="Hangers" data-tooltip="Hangers">
-        <path
+        			<path
 						d="M1714,273 L2020,181 L2038,181 L2032,195 L2018,203 L1926,228 L1929,253 L1958,282 L1971,308 L1984,360 L1982,405 L1969,443 L1947,543 L1942,555 L1913,550 L1893,543 L1891,622 L1832,622 L1841,526 L1828,539 L1794,525 L1803,478 L1788,470 L1785,405 L1728,405 L1719,352 L1737,341 L1743,285 L1716,290 Z"
 						class="clickable-area" data-category="hangers" />
-      </a>
+     				 </a>
 
       <!-- Sofas (first area) -->
-      <a
+      			<a
 					href="${pageContext.request.contextPath}/products?category=sofa"
 					title="Sofas" data-tooltip="Sofas">
-        <path
+       				 <path
 						d="M120,781 L118,662 L136,653 L167,649 L162,613 L196,590 L211,591 L259,590 L296,590 L321,582 L353,573 L375,571 L406,568 L428,571 L442,571 L466,566 L487,562 L498,573 L511,591 L522,586 L534,586 L569,642 L601,640 L630,638 L686,642 L686,685 L692,707 L685,725 L688,747 L686,781 L686,798 L670,798 L672,758 L609,796 L603,848 L603,859 L587,861 L585,819 L491,874 L484,942 L464,951 L457,884 L285,881 L279,796 L249,787 L247,770 L185,765 Z"
 						class="clickable-area" data-category="sofas" />
-      </a>
+      			</a>
 
       <!-- Sofas (second area) -->
-      <a
+     			 <a
 					href="${pageContext.request.contextPath}/products?category=sofa"
 					title="Sofas" data-tooltip="Sofas">
-        <path
+       				 <path
 						d="M707,787 L709,644 L740,628 L742,603 L754,595 L758,557 L782,557 L829,557 L877,556 L928,556 L973,554 L993,561 L1001,556 L1022,554 L1055,556 L1098,557 L1142,552 L1180,554 L1210,554 L1228,554 L1232,595 L1243,595 L1247,615 L1256,639 L1259,664 L1259,789 L1241,793 L1241,746 L1015,747 L976,723 L909,717 L898,696 L871,697 L867,670 L838,678 L836,719 L784,726 L768,732 L761,746 L724,743 L726,788 Z"
 						class="clickable-area" data-category="sofas" />
-      </a>
-    </svg>
+     			 </a>
+   			 </svg>
 
 			<!-- Tooltip container (positioned absolutely) -->
 			<div class="tooltip-container"></div>
