@@ -276,10 +276,13 @@ th {
 		align-items: center;
 		flex-shrink: 0;
 	}
+	.step.active .circle {
+		background-color: #fbbf24; /* Active step circle color */
+	}
 	.circle {
 		width: 10px;
 		height: 10px;
-		background-color: #fbbf24;
+		background-color: #e5e7eb; /* Inactive circle color */
 		border-radius: 50%;
 		border: none;
 	}
