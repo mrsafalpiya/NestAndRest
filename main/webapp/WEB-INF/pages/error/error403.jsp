@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>error403</title>
+<title>Unauthorized Error</title>
 
 <!-- Public Sans Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
