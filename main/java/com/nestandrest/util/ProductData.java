@@ -10,7 +10,7 @@ public class ProductData {
 
         // Sofa
         list.add(new Product("Two Sitter Sofa", "TwoSitterSofa.png", "sofa", 9000));
-        list.add(new Product("Apple Sofa Set 1", "AppleSofaSet1.jpeg", "sofa", 9000));
+        list.add(new Product("Apple Sofa Set 1", "AppleSofaSet1.jpeg", "sofa", 190000));
         list.add(new Product("Apple Sofa Set 2", "AppleSofaSet2.jpeg", "sofa", 9000));
         list.add(new Product("Apple Sofa Set 3", "AppleSofaSet3.jpeg", "sofa", 9000));
         list.add(new Product("Bamboo and Rattan Sofa Set", "BambooandRattanSofaSet.jpeg", "sofa", 9000));
@@ -36,7 +36,7 @@ public class ProductData {
         list.add(new Product("Bangles Stand", "BanglesStand.png", "hanger", 4500));
 
         // ✅ Table
-        list.add(new Product("Tea Table Set", "TeaTableSet.png", "table", 6000));
+        list.add(new Product("Tea Table Set", "TeaTableSet.jpeg", "table", 6000));
 
         return list;
     }

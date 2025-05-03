@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details - Nest and Rest</title>
     <jsp:include page="../head.jsp" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-details.css">
@@ -50,9 +51,6 @@
 			<div class="product-info">
             <span class="badge">SALE</span>
             <h1><%= product.getName() %></h1>
-            <p class="rating">
-                ★★★★★ <span>(20 reviews)</span>
-            </p>
             <p class="price">
                 <span class="original">Rs. <%= product.getPrice() + 1500 %></span>
                 <span class="discounted">Rs. <%= product.getPrice() %></span>
@@ -61,44 +59,49 @@
                 The simple style sofa is a great choice to relax and enjoy a nice day, take a nap or chat with your family or friends. The armchair, with an elegant design, fits perfectly into any living room decor.
             </p>
 
-            <form class="product-options">
-                <label>Size</label>
-                <select name="size">
-                    <option>10.5</option>
-                    <option>11</option>
-                    <option>12</option>
-                </select>
+				<form class="product-options">
+					<div class="option-row">
+						<label for="size">Size</label> <select name="size" id="size">
+							<option>10.5</option>
+							<option>11</option>
+							<option>12</option>
+						</select>
+					</div>
 
-                <label>Quantity</label>
-                <div class="quantity-control">
-                    <button type="button">-</button>
-                    <input type="number" name="quantity" value="1" min="1">
-                    <button type="button">+</button>
-                </div>
+					<div class="option-row">
+						<label for="quantity">Quantity</label>
+						<div class="quantity-control">
+							<button type="button">-</button>
+							<input type="number" name="quantity" value="1" min="1">
+							<button type="button">+</button>
+						</div>
+					</div>
 
-                <button class="add-to-cart">Add to cart</button>
-            </form>
-        </div>
+					<button class="add-to-cart">
+						<span class="cart-icon"></span> Add to cart
+					</button>
+				</form>
+
+			</div>
     </div>
 
     <div class="highlights">
         <div class="highlight">
-            <img src="<%= request.getContextPath() %>/resources/system/icons/original.svg" alt="">
+            <img src="<%= request.getContextPath() %>/resources/system/images/ProductPageLogo/Authentic.png" alt="">
             <p>100% Original<br><small>Authentic Nepalese craftsmanship</small></p>
         </div>
         <div class="highlight">
-            <img src="<%= request.getContextPath() %>/resources/system/icons/replacement.svg" alt="">
+            <img src="<%= request.getContextPath() %>/resources/system/images/ProductPageLogo/Replacement.png" alt="">
             <p>10 Day Replacement<br><small>Full replacement within 10 days</small></p>
         </div>
         <div class="highlight">
-            <img src="<%= request.getContextPath() %>/resources/system/icons/warranty.svg" alt="">
+            <img src="<%= request.getContextPath() %>/resources/system/images/ProductPageLogo/Warranty.png" alt="">
             <p>1 Year Warranty<br><small>365-day quality guarantee</small></p>
         </div>
     </div>
 
     <div class="tabs">
         <button class="active">Description</button>
-        <button>Reviews (20)</button>
     </div>
 
     <div class="tab-content">

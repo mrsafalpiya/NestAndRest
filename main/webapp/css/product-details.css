@@ -13,74 +13,37 @@
     align-items: start;
 }
 
-.gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* Breadcrumb */
 .breadcrumb {
     font-size: 14px;
-    margin: 20px 0;
+    margin: 5px 0;
     color: #555;
 }
-
 .breadcrumb a {
     color: #8b5e3c;
     text-decoration: none;
 }
-
 .breadcrumb a:hover {
     text-decoration: underline;
 }
-
 .breadcrumb span {
     color: #999;
 }
 
-
-.main-image {
-    width: 400px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 16px;
-}
-
-.thumbnail-container {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.thumbnail {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-radius: 8px;
-}
-
-.thumbnail:hover {
-    border-color: #c89b63;
-}
-
+/* Image Gallery */
 .carousel-container {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .main-image {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 300px;
     object-fit: cover;
     border-radius: 12px;
-    transition: opacity 0.3s ease-in-out;
 }
-
 .arrow {
     position: absolute;
     top: 45%;
@@ -88,207 +51,198 @@
     color: white;
     border: none;
     padding: 8px 12px;
-    cursor: pointer;
-    z-index: 2;
     font-size: 24px;
     border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
 }
-
-.arrow.left {
-    left: 10px;
-}
-
-.arrow.right {
-    right: 10px;
-}
-
+.arrow.left { left: 10px; }
+.arrow.right { right: 10px; }
 .thumbnail-container {
-    margin-top: 10px;
     display: flex;
     gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
 }
-
 .thumbnail {
     width: 60px;
     height: 60px;
     object-fit: cover;
-    border-radius: 6px;
     cursor: pointer;
+    border-radius: 6px;
     opacity: 0.6;
     border: 2px solid transparent;
 }
-
 .thumbnail.selected {
     border-color: #c89b63;
     opacity: 1;
 }
 
-
-/* Product Info */
+/* Product Info Section */
 .product-info {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
-
 .badge {
-    background: #ff5e3a;
+    background-color: #ff5e3a;
     color: white;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 8px;
     font-size: 12px;
-    display: inline-block;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 4px 10px;
     width: fit-content;
 }
-
 .product-info h1 {
     font-size: 24px;
-    font-weight: 700;
     color: #212121;
 }
-
-.rating {
-    font-size: 14px;
-    color: #444;
-}
-
 .price {
     display: flex;
     gap: 12px;
-    align-items: baseline;
 }
-
 .price .original {
     text-decoration: line-through;
-    color: #999;
-    font-size: 14px;
+    color: #888;
 }
-
 .price .discounted {
     color: #c89b63;
-    font-size: 18px;
-    font-weight: 600;
+    font-weight: bold;
 }
-
 .short-description {
-    font-size: 15px;
+    font-size: 14px;
     color: #444;
-    line-height: 1.6;
 }
 
-/* Form */
+/* Options */
 .product-options {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    margin-top: 12px;
+    gap: 20px;
 }
-
-.product-options label {
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
+.option-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
 }
-
-.product-options select {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-    background-color: #fff;
+.option-row label {
+    font-weight: 600;
+    min-width: 70px;
 }
-
 .quantity-control {
     display: flex;
-    align-items: center;
     gap: 8px;
 }
-
 .quantity-control input {
-    width: 40px;
-    padding: 6px;
+    width: 50px;
     text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
 }
-
 .quantity-control button {
-    padding: 6px 10px;
-    background-color: #eee;
-    border-radius: 6px;
-    font-size: 16px;
+    padding: 6px 12px;
+    background: #eee;
+    border: 1px solid #ccc;
+    cursor: pointer;
 }
-
 .add-to-cart {
     background-color: #f5a623;
-    color: white;
+    color: black;
     font-weight: 600;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-size: 16px;
+    padding: 12px 40px;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.cart-icon::before {
+    content: "🛒";
 }
 
-.add-to-cart:hover {
-    background-color: #c89b63;
-}
-
-/* Highlights Section */
+/* Highlights */
 .highlights {
     display: flex;
     justify-content: space-between;
+    gap: 32px;
     padding: 32px 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    flex-wrap: wrap;
-    gap: 24px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
-
 .highlight {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 12px;
-    max-width: 300px;
-    font-size: 14px;
+    text-align: center;
 }
-
 .highlight img {
     width: 32px;
-    height: 32px;
+    margin-bottom: 6px;
 }
 
 /* Tabs */
 .tabs {
     display: flex;
-    gap: 24px;
-    margin-bottom: 8px; 
     border-bottom: 1px solid #ccc;
 }
-
 .tabs button {
-    padding: 12px 16px;
+    padding: 10px 16px;
     background: none;
     border: none;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 15px;
-    color: #333;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s;
 }
-
-.tabs button.active,
-.tabs button:hover {
+.tabs button.active {
+    border-bottom: 2px solid #c89b63;
     color: #c89b63;
-    border-color: #c89b63;
 }
-
-/* Tab Content */
 .tab-content {
-    margin-top: 0;         
-    padding-top: 8px;      
+    padding-top: 20px;
+}
+.tab-content h6 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+.tab-content p {
+    font-size: 14px;
+    line-height: 1.6;
 }
 
+/* --------------------- MOBILE ---------------------- */
+@media screen and (max-width: 768px) {
+    .product-top {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    .main-image {
+        width: 100%;
+        height: auto;
+    }
+    .product-info {
+        padding: 0 16px;
+    }
+    .product-info h1 {
+        font-size: 20px;
+    }
+    .short-description {
+        font-size: 14px;
+    }
+    .product-options {
+        padding: 0 16px;
+    }
+    .option-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .add-to-cart {
+        width: 100%;
+    }
+    .highlights {
+        flex-direction: column;
+        align-items: center;
+    }
+    .tab-content {
+        padding: 0 16px;
+    }
+}
