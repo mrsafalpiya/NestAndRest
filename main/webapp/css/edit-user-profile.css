@@ -192,9 +192,9 @@ body {
 
 .main {
 	flex: 1;
-	padding: 20px 50px;
+	padding: 0 20px;
 	max-width: 1080px;
-	margin: 0 auto;
+	margin-left: 30px;
 	margin-top: -45px;
 }
 
@@ -373,28 +373,30 @@ body {
 
 /* Button */
 .update-button-wrapper {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 .update-button {
-	background-color: var(--primary-main);
-	color: var(--primary-contrast-text);
-	padding: var(--button-spacing) var(--button-lg-px);
-	height: var(--button-lg-height);
-	font-size: var(--components-button-large-size);
-	font-weight: var(--components-button-large-weight);
-	line-height: var(--components-button-large-line-height);
-	border: none;
-	border-radius: var(--button-radius);
-	cursor: pointer;
-	transition: background 0.3s;
+  background-color: var(--primary-main);
+  color: var(--primary-contrast-text);
+  padding: var(--button-spacing) var(--button-lg-px);
+  height: var(--button-lg-height);
+  font-size: var(--components-button-large-size);
+  font-weight: var(--components-button-large-weight);
+  line-height: var(--components-button-large-line-height);
+  border: none;
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  transition: background 0.3s;
+  
 }
 
 .update-button:hover {
-	background-color: var(--primary-main);
+  background-color:var(--primary-main);
 }
+
 
 .delete-button {
 	background-color: #ffe4d9; /* red */
