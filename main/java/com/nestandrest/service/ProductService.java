@@ -1,13 +1,22 @@
 package com.nestandrest.service;
 
+import com.nestandrest.dao.ProductDAO;
 import com.nestandrest.model.Product;
 
-
 public class ProductService {
-	
-	public void addProduct(Product product) {
-	    // TODO:can save to a database or static list here
-	    System.out.println("Product added: " + product.getName());
-	}
+    private ProductDAO productDAO;
 
+    public ProductService() {
+        productDAO = new ProductDAO();
+    }
+
+    public void addProduct(Product product) {
+        try {
+            productDAO.insertProduct(product);
+            System.out.println("✅ Product saved to DB: " + product.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("❌ Failed to save product: " + product.getName());
+        }
+    }
 }

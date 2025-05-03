@@ -17,10 +17,14 @@
     <div class="product-header-top">
         <h4>Shop</h4>
         <div class="search-sort-container">
-        
-        		<input type="text" placeholder="Search..." class="search-input"/>
-	    	
-	    		<div class filter-controls>
+
+					<form action="products" method="get">
+						<input type="text" name="search" value="${searchKeyword}"
+							placeholder="Search product...">
+						<button type="submit">Search</button>
+					</form>
+
+					<div class filter-controls>
 			        <select class="category-select" onchange="filterCategory(this.value)">
 			            <option value="all" <%= (request.getAttribute("selectedCategory") == null || "all".equals(request.getAttribute("selectedCategory"))) ? "selected" : "" %>>All Categories</option>
 			            <option value="sofa" <%= "sofa".equals(request.getAttribute("selectedCategory")) ? "selected" : "" %>>Sofas</option>
@@ -62,6 +66,7 @@
 
 				</div>
 			</a>
+			
 			<%
 			}
 			} else {
