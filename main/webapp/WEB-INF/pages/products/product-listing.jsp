@@ -58,8 +58,8 @@
 						src="<%=request.getContextPath()%>/resources/system/images/<%=p.getImage()%>"
 						alt="<%=p.getName()%>">
 					<h5><%=p.getName()%></h5>
-					<p>
-						Rs.<%=p.getPrice()%></p>
+					<p>Rs.<%= String.format("%.2f", p.getPrice()) %></p>
+
 				</div>
 			</a>
 			<%

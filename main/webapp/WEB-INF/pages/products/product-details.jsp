@@ -19,7 +19,7 @@
 %>
 		<nav class="breadcrumb">
 			<a href="${pageContext.request.contextPath}/index.jsp">Home</a> &gt;
-			<a href="${pageContext.request.contextPath}/products">Shop</a> &gt; <span>${product.name}</span>
+			<a href="${pageContext.request.contextPath}/products">Shop</a> &gt; <span><%= product.getName() %></span>
 		</nav>
 
 		<div class="product-top">
@@ -59,28 +59,32 @@
                 The simple style sofa is a great choice to relax and enjoy a nice day, take a nap or chat with your family or friends. The armchair, with an elegant design, fits perfectly into any living room decor.
             </p>
 
-				<form class="product-options">
-					<div class="option-row">
-						<label for="size">Size</label> <select name="size" id="size">
-							<option>10.5</option>
-							<option>11</option>
-							<option>12</option>
-						</select>
-					</div>
+				<form class="product-options" action="product-details" method="get">
+    <!-- Passing the product ID as hidden input -->
+    <input type="hidden" name="id" value="<%= product.getProductId() %>">
 
-					<div class="option-row">
-						<label for="quantity">Quantity</label>
-						<div class="quantity-control">
-							<button type="button">-</button>
-							<input type="number" name="quantity" value="1" min="1">
-							<button type="button">+</button>
-						</div>
-					</div>
+    <div class="option-row">
+        <label for="size">Size</label>
+        <select name="size" id="size">
+            <option>10.5</option>
+            <option>11</option>
+            <option>12</option>
+        </select>
+    </div>
 
-					<button class="add-to-cart">
-						<span class="cart-icon"></span> Add to cart
-					</button>
-				</form>
+    <div class="option-row">
+        <label for="quantity">Quantity</label>
+        <div class="quantity-control">
+            <button type="button" onclick="decreaseQuantity()">-</button>
+            <input type="number" name="quantity" value="1" min="1">
+            <button type="button" onclick="increaseQuantity()">+</button>
+        </div>
+    </div>
+
+    <button type="submit" class="add-to-cart">
+        <span class="cart-icon"></span> Add to cart
+    </button>
+</form>
 
 			</div>
     </div>
@@ -152,6 +156,18 @@
 
     // Initialize
     window.onload = updateImage;
+    
+    function increaseQuantity() {
+        const qtyInput = document.querySelector('input[name="quantity"]');
+        qtyInput.value = parseInt(qtyInput.value) + 1;
+    }
+
+    function decreaseQuantity() {
+        const qtyInput = document.querySelector('input[name="quantity"]');
+        if (qtyInput.value > 1) {
+            qtyInput.value = parseInt(qtyInput.value) - 1;
+        }
+    }
 </script>
 
 
