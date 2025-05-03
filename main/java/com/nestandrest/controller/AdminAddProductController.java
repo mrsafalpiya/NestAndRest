@@ -56,7 +56,7 @@ public class AdminAddProductController extends HttpServlet {
         product.setCategory(category);
         product.setColor(color);
         product.setSize(size);
-        product.setAPrice(price);
+        product.setPrice(price);
         product.setDiscountedPrice(discountedPrice);
         product.setQuantity(quantity);
         product.setInStock(inStock);
