@@ -98,5 +98,6 @@
   
   .input-text {
     width: 100%; /* Ensures inputs take full width of their container */
+    background: white;
   }
   
