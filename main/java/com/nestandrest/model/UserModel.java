@@ -8,10 +8,9 @@ public class UserModel {
 	private int genderId;
 	private String password;
 	private int roleId;
-	private String address;         
-	private String profileImage; 
-	
-    
+	private String address;
+	private String profileImage;
+
 	public UserModel() {
 		super();
 	}
@@ -58,6 +57,20 @@ public class UserModel {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the first name
+	 */
+	public String getFirstName() {
+		return name.split(" ")[0];
+	}
+
+	/**
+	 * @return the last name
+	 */
+	public String getLastName() {
+		return name.split(" ")[1];
 	}
 
 	/**
@@ -129,6 +142,7 @@ public class UserModel {
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
+
 	/**
 	 * @return the address
 	 */
@@ -142,19 +156,19 @@ public class UserModel {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	/**
 	 * @return the profileImage
 	 */
 	public String getProfileImage() {
 		return profileImage;
 	}
-	
+
 	/**
 	 * @param profileImage the profileImage to set
 	 */
 	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
-	
+
 }
