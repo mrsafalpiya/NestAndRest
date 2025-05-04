@@ -21,6 +21,7 @@ public class AuthenticationFilter implements Filter {
 	private static final String LOGIN = "/login";
 	private static final String REGISTRATION = "/registration";
 	private static final String HOME = "/home";
+	private static final String EDIT_USER_PROFILE = "/userprofile";
 	private static final String ADMIN_DASHBOARD = "/admin";
 	private static final String UNAUTHORIZED = "/error403";
 	private static final String ROOT = "/";
@@ -37,6 +38,9 @@ public class AuthenticationFilter implements Filter {
 		// Cast the request and response to HttpServletRequest and HttpServletResponse
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
+		
+		// Get the context path
+		String contextPath = req.getContextPath();
 
 		// Get the requested URI
 		String uri = req.getRequestURI();
@@ -47,7 +51,13 @@ public class AuthenticationFilter implements Filter {
 		if (isLoggedIn) {
 			// Do not allow logged in users to access login and registration pages
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTRATION)) {
-				res.sendRedirect(req.getContextPath() + HOME);
+				res.sendRedirect(contextPath + HOME);
+				return;
+			}
+		} else {
+			// Do not allow non-logged in users to access the edit user profile page
+			if (uri.endsWith(EDIT_USER_PROFILE)) {
+				res.sendRedirect(contextPath + UNAUTHORIZED);
 				return;
 			}
 		}
@@ -55,7 +65,7 @@ public class AuthenticationFilter implements Filter {
 		// Do not allow unauthorized access to admin dashboard
 		String userRole = (String) SessionUtil.getAttribute((HttpServletRequest) request, "role_name");
 		if ((uri.endsWith(ADMIN_DASHBOARD)) && (!isLoggedIn || (isLoggedIn && !userRole.equals("Admin")))) {
-			res.sendRedirect(req.getContextPath() + UNAUTHORIZED);
+			res.sendRedirect(contextPath + UNAUTHORIZED);
 			return;
 		}
 

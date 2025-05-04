@@ -73,7 +73,7 @@
 				Cookie emailCookie = CookiesUtil.getCookie(request, "email");
 				if (emailCookie != null) {
 				%>
-				<span style="margin-right: 12px; font-weight: 500;"><%=emailCookie.getValue()%></span>
+				<a href="${contextPath}/userprofile" style="margin-right: 12px; font-weight: 500;"><%=emailCookie.getValue()%></a>
 
 				<a href="<%=request.getContextPath()%>/logout"
 					class="btn btn-outlined">Logout</a>

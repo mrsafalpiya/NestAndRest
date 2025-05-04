@@ -1,6 +1,11 @@
 package com.nestandrest.service;
 
 import com.nestandrest.model.UserModel;
+import com.nestandrest.util.CookiesUtil;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+
 import com.nestandrest.model.UserAddressModel;
 
 import com.nestandrest.config.DbConfig;
@@ -13,6 +18,27 @@ import java.util.logging.Logger;
 public class UserService {
 
 	private static final Logger logger = Logger.getLogger(UserService.class.getName());
+
+	/**
+	 * 
+	 * @param request
+	 * @param customEmail Optionally provide the email of the user (useful in edit
+	 *                    user profile when the user just updated the email)
+	 * @return
+	 */
+	public UserModel getCurrentlyLoggedInUser(HttpServletRequest request, String customEmail) {
+		String email = customEmail;
+
+		if (email == null) {
+			Cookie currentUserEmailCookie = CookiesUtil.getCookie(request, "email");
+			if (currentUserEmailCookie == null) {
+				return null;
+			}
+			email = currentUserEmailCookie.getValue();
+		}
+
+		return getUserByEmail(email);
+	}
 
 	/**
 	 * Retrieves a list of users from the database with pagination.
@@ -79,6 +105,35 @@ public class UserService {
 		String query = "SELECT * FROM user WHERE user_id = ?";
 		try (Connection conn = DbConfig.getDbConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setInt(1, userId);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				UserModel user = new UserModel();
+				user.setUserId(rs.getInt("user_id"));
+				user.setName(rs.getString("name"));
+				user.setEmail(rs.getString("email"));
+				user.setPhone(rs.getString("phone"));
+				user.setGenderId(rs.getInt("gender_id"));
+				user.setRoleId(rs.getInt("role_id"));
+				return user;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Retrieves a user by their email.
+	 *
+	 * @param userEmail Email of the user
+	 * @return UserModel object if found, otherwise null
+	 */
+
+	/** Retrieves a user by their ID. */
+	public UserModel getUserByEmail(String userEmail) {
+		String query = "SELECT * FROM user WHERE email = ?";
+		try (Connection conn = DbConfig.getDbConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+			stmt.setString(1, userEmail);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				UserModel user = new UserModel();
@@ -210,20 +265,48 @@ public class UserService {
 	}
 
 	public boolean updateUserAddress(UserAddressModel address) {
-	    String query = "UPDATE user_address SET address = ? WHERE user_id = ?";
-	    try (Connection conn = DbConfig.getDbConnection(); 
-	         PreparedStatement stmt = conn.prepareStatement(query)) {
+		String query = "UPDATE user_address SET address = ? WHERE user_id = ?";
+		try (Connection conn = DbConfig.getDbConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
-	        stmt.setString(1, address.getAddress());
-	        stmt.setInt(2, address.getUserId());
+			stmt.setString(1, address.getAddress());
+			stmt.setInt(2, address.getUserId());
 
-	        int rowsUpdated = stmt.executeUpdate();
-	        return rowsUpdated > 0;
+			int rowsUpdated = stmt.executeUpdate();
+			return rowsUpdated > 0;
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Updates an existing user's password in the database.
+	 *
+	 * @param user a UserModel object containing the updated user data
+	 * @return true if the update was successful, false otherwise
+	 *
+	 */
+	public boolean updateUserPassword(UserModel user) {
+		String updateUserQuery = "UPDATE user SET password = ? WHERE user_id = ?";
+
+		try (Connection conn = DbConfig.getDbConnection();
+				PreparedStatement stmt = conn.prepareStatement(updateUserQuery)) {
+
+			// Setting the parameters correctly for the prepared statement
+			stmt.setString(1, user.getPassword());
+			stmt.setInt(2, user.getUserId()); // Set user_id
+
+			// Execute the update
+			int rowsUpdated = stmt.executeUpdate();
+
+			// Check if the update was successful
+			return rowsUpdated > 0;
+
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/**
@@ -233,17 +316,17 @@ public class UserService {
 	 * @return true if the user was successfully deleted, false otherwise
 	 */
 	public boolean deleteUserById(int userId) throws SQLException, ClassNotFoundException {
-	    try (Connection connection = DbConfig.getDbConnection()) {
-	        // Assuming cascading deletes are in place for foreign keys
-	    	String sql = "DELETE FROM user WHERE user_id = ?";
+		try (Connection connection = DbConfig.getDbConnection()) {
+			// Assuming cascading deletes are in place for foreign keys
+			String sql = "DELETE FROM user WHERE user_id = ?";
 
-	        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-	            stmt.setInt(1, userId);
-	            int rowsAffected = stmt.executeUpdate();
-	            System.out.println("Rows affected: " + rowsAffected); // Debugging line
-	            return rowsAffected > 0;
+			try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+				stmt.setInt(1, userId);
+				int rowsAffected = stmt.executeUpdate();
+				System.out.println("Rows affected: " + rowsAffected); // Debugging line
+				return rowsAffected > 0;
 
-	        }
-	    }
+			}
+		}
 	}
 }

@@ -131,8 +131,7 @@ body {
 
 /* Details Card */
 .details-card {
-  width: 712px;
-  min-height: 482px;
+  width: 570px;
   background: #fff;
   border-radius: 16px;
   padding: 30px;
