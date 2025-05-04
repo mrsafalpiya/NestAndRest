@@ -151,15 +151,6 @@ body, html {
 	position: relative;
 }
 
-.submenu-branch {
-	position: absolute;
-	top: -5px;
-	left: 19px;
-	height: 55px;
-	width: 2px;
-	background: #d1d5db;
-}
-
 .submenu-item {
 	padding: 6px 10px;
 	font-size: 14px;
@@ -320,7 +311,7 @@ body {
 /* Details Card */
 .details-card {
 	width: 712px;
-	min-height: 482px;
+	min-height: 325px;
 	background: #fff;
 	border-radius: 16px;
 	padding: 30px;
@@ -374,8 +365,10 @@ body {
 /* Button */
 .update-button-wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 20px;
+  margin-right:-750px;
+
 }
 
 .update-button {

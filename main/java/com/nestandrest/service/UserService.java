@@ -208,7 +208,13 @@ public class UserService {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Updates the address of a user in the user_address table based on the provided user ID.
+	 *
+	 * @param address A UserAddressModel object containing the new address and the associated user ID.
+	 * @return true if the update was successful (at least one row affected), false otherwise.
+	 */
 	public boolean updateUserAddress(UserAddressModel address) {
 	    String query = "UPDATE user_address SET address = ? WHERE user_id = ?";
 	    try (Connection conn = DbConfig.getDbConnection(); 

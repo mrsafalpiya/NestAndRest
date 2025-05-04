@@ -2,6 +2,7 @@ package com.nestandrest.controller;
 
 import java.io.IOException;
 
+
 import com.nestandrest.model.UserModel;
 import com.nestandrest.model.UserAddressModel;
 import com.nestandrest.service.UserService;
@@ -12,9 +13,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Controller to handle editing and deleting user profiles.
+ * Mapped to "/edit-user-profile" endpoint.
+ */
 @WebServlet("/edit-user-profile")
 public class EditUserProfileController extends HttpServlet {
-
+	
+	 /**
+     * Handles HTTP GET requests for retrieving and deleting user data.
+     * If 'action=delete' is provided, it deletes the user.
+     * Otherwise, it fetches user data and forwards to edit page.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,7 +39,8 @@ public class EditUserProfileController extends HttpServlet {
         try {
             int userId = Integer.parseInt(userIdParam);
             UserService userService = new UserService();
-
+            
+            // Handle deletion from POST request
             if ("delete".equalsIgnoreCase(action)) {
                 boolean deleted = userService.deleteUserById(userId);
                 if (deleted) {
@@ -60,7 +71,11 @@ public class EditUserProfileController extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An unexpected error occurred");
         }
     }
-
+    
+    /**
+     * Handles HTTP POST requests for updating or deleting user data.
+     * Updates user profile and address if valid form data is provided.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,13 +103,15 @@ public class EditUserProfileController extends HttpServlet {
             }
             return;
         }
-
+        
+        // Handle update
         try {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
-
+            
+            // Basic form validation
             if (name == null || name.isEmpty()) {
                 request.setAttribute("error", "Name is required");
                 request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
@@ -108,7 +125,8 @@ public class EditUserProfileController extends HttpServlet {
                         response);
                 return;
             }
-
+            
+            // Parse additional form values
             String userIdParam = request.getParameter("userId");
             String genderIdParam = request.getParameter("genderId");
             String roleIdParam = request.getParameter("roleId");
@@ -135,6 +153,7 @@ public class EditUserProfileController extends HttpServlet {
             UserService userService = new UserService();
             boolean updated = userService.updateUser(user);
 
+            // Update address if provided
             if (address != null && !address.isEmpty()) {
                 UserAddressModel addressModel = new UserAddressModel();
                 addressModel.setUserId(userId);
@@ -149,6 +168,7 @@ public class EditUserProfileController extends HttpServlet {
                 }
             }
 
+         // Final redirect or error message
             if (updated) {
                 response.sendRedirect(request.getContextPath() + "/usermanagement-list");
             } else {
