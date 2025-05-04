@@ -33,7 +33,7 @@
 					<div class="products-sold-content-div">
 						<p class="subtitle2" style="color: var(--text-primary);">Product
 							Sold</p>
-						<h3 style="margin: 12px 0">9,990</h3>
+						<h3 style="margin: 12px 0">${total_sales}</h3>
 						<div class="last-week-comp-stats">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
 								xmlns="http://www.w3.org/2000/svg">
@@ -198,14 +198,13 @@
 
 	<script>
 		// Products sold line graph
-		const productsSoldXValues = [ 100, 200, 300, 400, 500, 600, 700, 800,
-				900, 1000 ];
+		const productsSoldXValues = [ "2024-04-20", "2024-04-21", "2024-04-22" ];
 		new Chart("productSoldGraph", {
 			type : "line",
 			data : {
 				labels : productsSoldXValues,
 				datasets : [ {
-					data : [ 10, 13, 15, 40, 34, 50, 37 ],
+					data : [ 16, 16, 16, 16, 16, 16 ],
 					borderColor : "#C9A172",
 					fill : false,
 					pointStyle : false,
