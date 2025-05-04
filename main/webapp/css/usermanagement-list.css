@@ -151,14 +151,6 @@ body, html {
 	position: relative;
 }
 
-.submenu-branch {
-	position: absolute;
-	top: -5px;
-	left: 19px;
-	height: 55px;
-	width: 2px;
-	background: #d1d5db;
-}
 
 .submenu-item {
 	padding: 6px 10px;
@@ -203,7 +195,7 @@ body, html {
 
 /* Search bar spacing */
 .search-bar {
-	width: 100%;
+	width: 85%;
 	margin: 0 0 16px 0;
 	padding: 0;
 	display: flex;
@@ -223,31 +215,23 @@ body, html {
 
 .search-bar input:focus {
 	outline: none;
-	border-color: #3b82f6; /* blue-500 */
-	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* blue ring */
+	border-color: #3b82f6;
+	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); 
 }
 
 /* Search button styling */
-.button {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  background: transparent;
+.search-bar button {
+  background-color:  #caa272; 
+  color: white;
   border: none;
-  cursor: pointer;
+  margin-left:850px;
+  margin-top:-40px;
+  width:15%;
+  padding: 8px 16px;
   font-size: 16px;
-  color: #007bff;
-  padding: 0;
-  height: 20px;
-  width: 20px;
-  line-height: 20px;
-  text-align: center;
-}
-
-/* Hover effect for the button */
-.search-bar button:hover {
-  color: #0056b3;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 /* Keyword filter tags */
@@ -282,6 +266,7 @@ body, html {
 	border-radius: 12px;
 	overflow: hidden;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	margin-top:20px;
 }
 
 .user-table th, .user-table td {

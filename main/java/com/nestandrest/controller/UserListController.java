@@ -15,11 +15,25 @@ public class UserListController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserService userService;
 
+    /**
+     * Initializes the servlet by creating an instance of UserService.
+     * This method is called once when the servlet is first loaded.
+     */
+
     @Override
     public void init() {
         userService = new UserService();
     }
-
+    
+    /**
+     * Handles GET requests to list users with pagination and optional search.
+     *
+     * Parameters:
+     * - searchTerm (optional): Filters user list.
+     * - page (optional): Current page number (default is 1).
+     *
+     * Forwards to: usermanagement-list.jsp with user list and pagination data.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
