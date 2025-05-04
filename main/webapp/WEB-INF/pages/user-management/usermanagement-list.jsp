@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.nestandrest.model.UserModel"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,19 +55,18 @@
 				<div class="submenu">
 					<div class="submenu-branch"></div>
 					<div class="submenu-item active">List</div>
-					<div class="submenu-item">Edit</div>
 				</div>
 
 				<div class="menu-item">
 					<img
 						src="${pageContext.request.contextPath}/resources/system/images/product-icon.png"
-						alt="Product Icon" /> <span>Product</span> <span class="arrow">&#x203A;</span>
+						alt="Product Icon" /> <span>Product</span> 
 				</div>
 
 				<div class="menu-item">
 					<img
 						src="${pageContext.request.contextPath}/resources/system/images/order-icon.png"
-						alt="Order Icon" /> <span>Order</span> <span class="arrow">&#x203A;</span>
+						alt="Order Icon" /> <span>Order</span>
 				</div>
 			</div>
 		</div>
@@ -77,14 +79,19 @@
 				&nbsp; List</div>
 
 			<!-- Search bar -->
-			<div class="search-bar">
-				<input type="text" placeholder="Search..." />
-				<div class="search-tags">
-					<span>Search: <strong>Keyword</strong></span>
-					<button class="clear-btn">🗑 Clear</button>
+			<form method="get" action="usermanagement-list">
+				<div class="search-bar">
+					<input type="text" name="searchTerm" placeholder="Search..."
+						value="${param.searchTerm}" />
+					<button type="submit">Search</button>
+					<c:if test="${not empty param.searchTerm}">
+						<div class="search-tags">
+							<span>Search: <strong>${param.searchTerm}</strong></span> <a
+								href="usermanagement-list" class="clear-btn">🗑 Clear</a>
+						</div>
+					</c:if>
 				</div>
-			</div>
-
+			</form>
 
 			<!-- User table -->
 			<div class="table-responsive">
@@ -100,78 +107,55 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td><img
-								src="${pageContext.request.contextPath}/resources/system/images/user-images/user4.png" />
-								Jayvion Simon</td>
-							<td>365-374-4961</td>
-							<td>foo@bar.com</td>
-							<td>User</td>
-							<td><span class="edit-icon">✏️</span> <span
-								class="more-options">&#8942;</span> <!-- Vertical ellipsis --></td>
-
-						</tr>
+					<tbody>
+						<%
+						List<UserModel> userList = (List<UserModel>) request.getAttribute("userList");
+						if (userList != null) {
+							for (UserModel user : userList) {
+						%>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td><img
 								src="${pageContext.request.contextPath}/resources/system/images/user-images/user1.png" />
-								Lucian Obrien</td>
-							<td>904-966-2836</td>
-							<td>bar@buzz.com</td>
-							<td>User</td>
-							<td><span class="edit-icon">✏️</span> <span
-								class="more-options">&#8942;</span> <!-- Vertical ellipsis --></td>
+								<%=user.getName()%></td>
+							<td><%=user.getPhone()%></td>
+							<td><%=user.getEmail()%></td>
+							<td><%=user.getRoleId() == 1 ? "Admin" : "User"%></td>
+							<td><a
+								href="${pageContext.request.contextPath}/edit-user-profile?userId=<%=user.getUserId()%>">
+									<span class="edit-icon">✏️</span>
+							</a></td>
 
 						</tr>
+						<%
+						}
+						} else {
+						%>
 						<tr>
-							<td><input type="checkbox" /></td>
-							<td><img
-								src="${pageContext.request.contextPath}/resources/system/images/user-images/user2.png" />
-								Deja Brady</td>
-							<td>399-757-9909</td>
-							<td>test@admin.com</td>
-							<td>Admin</td>
-							<td><span class="edit-icon">✏️</span> <span
-								class="more-options">&#8942;</span> <!-- Vertical ellipsis --></td>
-
+							<td colspan="6">No users found.</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td><img
-								src="${pageContext.request.contextPath}/resources/system/images/user-images/user3.png" />Harrison
-								Stein</td>
-							<td>692-767-2903</td>
-							<td>buzz@boo.com</td>
-							<td>User</td>
-							<td><span class="edit-icon">✏️</span> <span
-								class="more-options">&#8942;</span> <!-- Vertical ellipsis --></td>
-
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td><img
-								src="${pageContext.request.contextPath}/resources/system/images/user-images/user5.png" />
-								Reece Chung</td>
-							<td>990-588-5716</td>
-							<td>test@email.com</td>
-							<td>Admin</td>
-							<td><span class="edit-icon">✏️</span> <span
-								class="more-options">&#8942;</span> <!-- Vertical ellipsis --></td>
-
-						</tr>
+						<%
+						}
+						%>
 					</tbody>
 				</table>
 			</div>
 
 			<!-- Pagination -->
 			<div class="pagination">
-				<span class="pagination-info">6-10 of 11</span> <span
-					class="pagination-nav">
-					<button class="page-btn">&#x276E;</button>
-					<button class="page-btn">&#x276F;</button>
-				</span>
+				<c:forEach begin="1" end="${totalPages}" var="i">
+					<c:choose>
+						<c:when test="${i == currentPage}">
+							<span class="current">${i}</span>
+						</c:when>
+						<c:otherwise>
+							<a
+								href="usermanagement-list?page=${i}&searchTerm=${param.searchTerm}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</div>
+
 		</div>
 	</div>
 	<script>
@@ -182,6 +166,12 @@
 			// Toggle the collapsed class on sidebar to hide or show instantly
 			sidebar.classList.toggle('collapsed');
 		}
+		function toggleSubmenu(el) {
+            const submenu = el.nextElementSibling;
+            submenu.style.display = submenu.style.display === "none" ? "block" : "none";
+            const arrow = el.querySelector('.arrow');
+            arrow.style.transform = submenu.style.display === "none" ? "rotate(-90deg)" : "rotate(0deg)";
+        }
 	</script>
 
 </body>
