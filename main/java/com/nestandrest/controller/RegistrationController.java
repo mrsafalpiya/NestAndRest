@@ -75,9 +75,23 @@ public class RegistrationController extends HttpServlet {
 			return null;
 		}
 
+		// Checking if a proper first and last name is provided
+		if (!validationUtil.isAlphabetic(firstName) || !validationUtil.isAlphabetic(lastName)) {
+			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter valid name!",
+					RedirectionUtil.registerUrl);
+			return null;
+		}
+
 		// Checking if a valid email was provided
 		if (!validationUtil.isValidEmail(email)) {
 			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid email address!",
+					RedirectionUtil.registerUrl);
+			return null;
+		}
+		
+		// Checking if a valid phone number was provided
+		if (!validationUtil.isValidPhoneNumber(phone)) {
+			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid phone number!",
 					RedirectionUtil.registerUrl);
 			return null;
 		}

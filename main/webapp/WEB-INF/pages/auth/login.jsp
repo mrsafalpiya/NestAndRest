@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="${contextPath}/css/styles.css" />
 <link rel="stylesheet" href="${contextPath}/css/components.css" />
 <link rel="stylesheet" href="${contextPath}/css/auth.css" />
-<title>Login - Nest and Rest Furniture</title>
+<title>Login</title>
 </head>
 <body>
 

@@ -104,7 +104,7 @@ public class RegistrationService {
 			return 0;
 		}
 	}
-	
+
 	public Boolean doesAUserWithEmailExist(String email) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -115,7 +115,7 @@ public class RegistrationService {
 
 		try {
 			PreparedStatement roleStmt = dbConn.prepareStatement(query);
-			roleStmt.setString(1, email);
+			roleStmt.setString(1, email.toLowerCase());
 			ResultSet result = roleStmt.executeQuery();
 
 			if (result.next()) {
@@ -128,7 +128,7 @@ public class RegistrationService {
 			return null;
 		}
 	}
-	
+
 	public Boolean doesAUserWithPhoneNumberExist(String phone) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
