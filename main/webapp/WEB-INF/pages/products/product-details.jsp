@@ -1,25 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.nestandrest.model.Product" %>
+<%@ page import="com.nestandrest.model.ProductModel"%>
+<%@ page import="com.nestandrest.model.ProductVariantModel"%>
+<%@ page import="com.nestandrest.model.ProductVariantValueModel"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - Nest and Rest</title>
-    <jsp:include page="../head.jsp" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-details.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details - Nest and Rest</title>
+<jsp:include page="../head.jsp" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/product-details.css">
 </head>
 <body>
-<jsp:include page="../header.jsp" />
-<main class="product-details container">
-<%
-    Product product = (Product) request.getAttribute("product");
-    if (product != null) {
-%>
+	<jsp:include page="../header.jsp" />
+	<main class="product-details container">
+		<%
+		ProductModel product = (ProductModel) request.getAttribute("product");
+		if (product != null) {
+		%>
 		<nav class="breadcrumb">
-			<a href="${pageContext.request.contextPath}/index.jsp">Home</a> &gt;
-			<a href="${pageContext.request.contextPath}/products">Shop</a> &gt; <span><%= product.getName() %></span>
+			<a href="${pageContext.request.contextPath}/home">Home</a> &gt; <a
+				href="${pageContext.request.contextPath}/products">Shop</a> &gt; <span><%=product.getName()%></span>
 		</nav>
 
 		<div class="product-top">
@@ -27,7 +31,7 @@
 				<button class="arrow left" onclick="prevSlide()">&#10094;</button>
 
 				<img id="mainImage" class="main-image"
-					src="<%=request.getContextPath()%>/resources/system/images/<%=product.getImage()%>"
+					src="<%=request.getContextPath()%>/resources/product-images/<%=product.getProductId()%>.png"
 					alt="<%=product.getName()%>">
 
 				<button class="arrow right" onclick="nextSlide()">&#10095;</button>
@@ -38,7 +42,7 @@
 					%>
 					<!-- repeat 5 thumbnails for now -->
 					<img class="thumbnail"
-						src="<%=request.getContextPath()%>/resources/system/images/<%=product.getImage()%>"
+						src="<%=request.getContextPath()%>/resources/product-images/<%=product.getProductId() + (i == 0 ? "" : "-" + (i + 1))%>.png"
 						onclick="changeSlide(<%=i%>)">
 					<%
 					}
@@ -49,83 +53,115 @@
 
 
 			<div class="product-info">
-            <span class="badge">SALE</span>
-            <h1><%= product.getName() %></h1>
-            <p class="price">
-                <span class="original">Rs. <%= product.getPrice() + 1500 %></span>
-                <span class="discounted">Rs. <%= product.getPrice() %></span>
-            </p>
-            <p class="short-description">
-                The simple style sofa is a great choice to relax and enjoy a nice day, take a nap or chat with your family or friends. The armchair, with an elegant design, fits perfectly into any living room decor.
-            </p>
+				<c:if test="${product.getDiscountedPrice() != 0.0}">
+					<span class="badge">SALE</span>
+				</c:if>
+				<h1><%=product.getName()%></h1>
+				<p class="price">
+					<c:if test="${product.getDiscountedPrice() != 0.0}">
+						<span class="original">Rs <%=product.getPrice()%></span>
+						<span class="discounted">Rs <%=product.getDiscountedPrice()%></span>
+					</c:if>
+					<c:if test="${product.getDiscountedPrice() == 0.0}">
+						<span class="discounted">Rs <%=product.getPrice()%></span>
+					</c:if>
 
-				<form class="product-options" action="product-details" method="get">
-    <!-- Passing the product ID as hidden input -->
-    <input type="hidden" name="id" value="<%= product.getProductId() %>">
+				</p>
+				<p class="short-description"><%=product.getShortDescription()%></p>
 
-    <div class="option-row">
-        <label for="size">Size</label>
-        <select name="size" id="size">
-            <option>10.5</option>
-            <option>11</option>
-            <option>12</option>
-        </select>
-    </div>
+				<c:if test="${product.getStockQty() == 0}">
+					<p
+						style="color: red; text-align: center; font-size: 24px; margin-top: 10px;">Out
+						of stock!</p>
+				</c:if>
 
-    <div class="option-row">
-        <label for="quantity">Quantity</label>
-        <div class="quantity-control">
-            <button type="button" onclick="decreaseQuantity()">-</button>
-            <input type="number" name="quantity" value="1" min="1">
-            <button type="button" onclick="increaseQuantity()">+</button>
-        </div>
-    </div>
+				<c:if test="${product.getStockQty() != 0}">
+					<form class="product-options" action="product-details"
+						method="post" style="margin-top: 20px">
+						<!-- Passing the product ID as hidden input -->
+						<input type="hidden" name="id" value="<%=product.getProductId()%>">
 
-    <button type="submit" class="add-to-cart">
-        <span class="cart-icon"></span> Add to cart
-    </button>
-</form>
+						<c:forEach var="variant" items="${productVariants}">
+							<div class="option-row">
+								<label for="variant-${variant.getProductVariantId()}">${variant.getVariantName()}</label>
+								<select name="variant-${variant.getProductVariantId()}"
+									id="variant-${variant.getProductVariantId()}">
+									<c:forEach var="variantValue"
+										items="${variant.getVariantValues()}">
+										<option value="${variantValue.getProductVariantValueId()}">${variantValue.getVariantValue()}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</c:forEach>
+
+
+
+						<div class="option-row">
+							<label for="quantity">Quantity</label>
+							<div class="quantity-control">
+								<button type="button" onclick="decreaseQuantity()">-</button>
+								<input type="number" name="quantity" value="1" min="1"
+									max="${product.getStockQty()}">
+								<button type="button" onclick="increaseQuantity()">+</button>
+							</div>
+						</div>
+
+						<button type="submit" class="add-to-cart">
+							<span class="cart-icon"></span> Add to cart
+						</button>
+					</form>
+				</c:if>
 
 			</div>
-    </div>
+		</div>
 
-    <div class="highlights">
-        <div class="highlight">
-            <img src="<%= request.getContextPath() %>/resources/system/images/ProductPageLogo/Authentic.png" alt="">
-            <p>100% Original<br><small>Authentic Nepalese craftsmanship</small></p>
-        </div>
-        <div class="highlight">
-            <img src="<%= request.getContextPath() %>/resources/system/images/ProductPageLogo/Replacement.png" alt="">
-            <p>10 Day Replacement<br><small>Full replacement within 10 days</small></p>
-        </div>
-        <div class="highlight">
-            <img src="<%= request.getContextPath() %>/resources/system/images/ProductPageLogo/Warranty.png" alt="">
-            <p>1 Year Warranty<br><small>365-day quality guarantee</small></p>
-        </div>
-    </div>
+		<div class="highlights">
+			<div class="highlight">
+				<img
+					src="<%=request.getContextPath()%>/resources/system/images/ProductPageLogo/Authentic.png"
+					alt="">
+				<p>
+					100% Original<br> <small>Authentic Nepalese
+						craftsmanship</small>
+				</p>
+			</div>
+			<div class="highlight">
+				<img
+					src="<%=request.getContextPath()%>/resources/system/images/ProductPageLogo/Replacement.png"
+					alt="">
+				<p>
+					10 Day Replacement<br> <small>Full replacement within
+						10 days</small>
+				</p>
+			</div>
+			<div class="highlight">
+				<img
+					src="<%=request.getContextPath()%>/resources/system/images/ProductPageLogo/Warranty.png"
+					alt="">
+				<p>
+					1 Year Warranty<br> <small>365-day quality guarantee</small>
+				</p>
+			</div>
+		</div>
 
-    <div class="tabs">
-        <button class="active">Description</button>
-    </div>
+		<div class="tabs">
+			<button class="active">Description</button>
+		</div>
 
-    <div class="tab-content">
-        <h6>Product details</h6>
-        <p>
-            Experience the perfect blend of traditional craftsmanship and modern comfort with our exquisite <%= product.getName() %>. Handcrafted by skilled Nepalese artisans using sustainable bamboo and premium cane weaving techniques perfected over generations, this elegantly designed piece transforms any living space into a sanctuary of relaxation and style.
-            <br><br>
-            The sturdy bamboo frame provides exceptional durability while maintaining a lightweight aesthetic that brings a touch of nature indoors. Its intricate cane weaving showcases the dedication and talent of our artisans, resulting in furniture that is not only beautiful but also environmentally conscious.
-            <br><br>
-            Perfect for living rooms, patios, or reading nooks, this item is a testament to timeless design. Add the Gecheer Sofa with Cushion to your home today and enjoy comfort, durability, and the warm elegance of Nepalese heritage.
-        </p>
-    </div>
+		<div class="tab-content">
+			<h6>Product details</h6>
+			<p>
+				<%=product.getLongDescription()%>
+			</p>
+		</div>
 
 		<script>
     const images = [
-        "<%= request.getContextPath() %>/resources/system/images/<%= product.getImage() %>",
-        "<%= request.getContextPath() %>/resources/system/images/<%= product.getImage() %>",
-        "<%= request.getContextPath() %>/resources/system/images/<%= product.getImage() %>",
-        "<%= request.getContextPath() %>/resources/system/images/<%= product.getImage() %>",
-        "<%= request.getContextPath() %>/resources/system/images/<%= product.getImage() %>"
+        "<%=request.getContextPath()%>/resources/product-images/<%=product.getProductId()%>.png",
+        "<%=request.getContextPath()%>/resources/product-images/<%=product.getProductId()%>-2.png",
+        "<%=request.getContextPath()%>/resources/product-images/<%=product.getProductId()%>-3.png",
+        "<%=request.getContextPath()%>/resources/product-images/<%=product.getProductId()%>-4.png",
+        "<%=request.getContextPath()%>/resources/product-images/<%=product.getProductId()%>-5.png"
     ];
 
     let currentIndex = 0;
@@ -159,7 +195,7 @@
     
     function increaseQuantity() {
         const qtyInput = document.querySelector('input[name="quantity"]');
-        qtyInput.value = parseInt(qtyInput.value) + 1;
+        qtyInput.value = Math.min(parseInt(qtyInput.value) + 1, ${product.getStockQty()});
     }
 
     function decreaseQuantity() {
@@ -171,14 +207,14 @@
 </script>
 
 
-<%
-    } else {
-%>
-    <p style="color:red;">Product not found.</p>
-<%
-    }
-%>
-<jsp:include page="../footer.jsp" />
-</main>
+		<%
+		} else {
+		%>
+		<p style="color: red;">Product not found.</p>
+		<%
+		}
+		%>
+		<jsp:include page="../footer.jsp" />
+	</main>
 </body>
 </html>

@@ -3,6 +3,9 @@ package com.nestandrest.controller;
 import java.io.IOException;
 
 import com.nestandrest.model.Product;
+import com.nestandrest.model.ProductModel;
+import com.nestandrest.model.ProductVariantModel;
+import com.nestandrest.service.ProductService;
 import com.nestandrest.util.ProductData;
 
 import jakarta.servlet.ServletException;
@@ -12,29 +15,44 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@WebServlet(asyncSupported = true, urlPatterns = {"/product-details"})
+@WebServlet(asyncSupported = true, urlPatterns = { "/product-details" })
 public class ProductDetailsController extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String idParam = req.getParameter("id");
+	private static final long serialVersionUID = 1L;
+	private ProductService productService;
 
-            if (idParam != null) {
-                int id = Integer.parseInt(idParam);
-                List<Product> allProducts = ProductData.getAllProducts();
+	@Override
+	public void init() throws ServletException {
+		this.productService = new ProductService();
+	}
 
-                if (id >= 0 && id < allProducts.size()) {
-                    Product product = allProducts.get(id);
-                    req.setAttribute("product", product);
-                } else {
-                    req.setAttribute("error", "Invalid product ID");
-                }
-            } else {
-                req.setAttribute("error", "Product ID is missing");
-            }
-        } catch (NumberFormatException e) {
-            req.setAttribute("error", "Invalid product ID format");
-        }
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			String idParam = req.getParameter("id");
 
-        req.getRequestDispatcher("/WEB-INF/pages/products/product-details.jsp").forward(req, resp);
-    }
+			if (idParam != null) {
+				int id = Integer.parseInt(idParam);
+
+				if (id >= 0) {
+					ProductModel product = productService.getById(id);
+					List<ProductVariantModel> productVariants = productService.getVariantsOfAProduct(id);
+
+					req.setAttribute("product", product);
+					req.setAttribute("productVariants", productVariants);
+				} else {
+					req.setAttribute("error", "Invalid product ID");
+				}
+			} else {
+				req.setAttribute("error", "Product ID is missing");
+			}
+		} catch (NumberFormatException e) {
+			req.setAttribute("error", "Invalid product ID format");
+		}
+
+		req.getRequestDispatcher("/WEB-INF/pages/products/product-details.jsp").forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/pages/products/product-details.jsp").forward(req, resp);
+	}
 }
