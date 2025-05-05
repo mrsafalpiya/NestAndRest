@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.nestandrest.config.DbConfig;
 import com.nestandrest.model.CartProductVariantValueModel;
+import com.nestandrest.model.Product;
+import com.nestandrest.model.ProductModel;
 import com.nestandrest.model.ProductVariantModel;
-import com.nestandrest.model.ProductVariantValueModel;
 
 public class CartService {
 	private Connection dbConn;
@@ -23,20 +26,21 @@ public class CartService {
 		}
 	}
 
-	public boolean addProductToCart(int userId, int productId, List<ProductVariantModel> variants, int qty) {
+	public boolean addProductToCart(int userId, int productId, Map<Integer, Integer> variantSelections, int qty) {
 		int cartId = this.createUserCartAndReturnIfNotExist(userId);
 		if (cartId == -1) {
 			return false;
 		}
 
-		for (ProductVariantModel entry : variants) {
-			for (ProductVariantValueModel valueEntry : entry.getVariantValues()) {
-				insertCartProductVariantValue(new CartProductVariantValueModel(cartId, productId,
-						entry.getProductVariantId(), valueEntry.getProductVariantValueId(), qty));
-			}
+		for (Map.Entry<Integer, Integer> entry : variantSelections.entrySet()) {
+			int variantId = entry.getKey();
+			int variantValueId = entry.getValue();
+
+			insertCartProductVariantValue(
+					new CartProductVariantValueModel(cartId, productId, variantId, variantValueId, qty));
 		}
 
-		return false;
+		return true; // Changed to return true if execution completes successfully
 	}
 
 	private int createUserCartAndReturnIfNotExist(int userId) {
@@ -81,7 +85,7 @@ public class CartService {
 			insertStmt.setInt(1, cartProductVariantValue.getCartId());
 			insertStmt.setInt(2, cartProductVariantValue.getProductId());
 			insertStmt.setInt(3, cartProductVariantValue.getProductVariantId());
-			insertStmt.setInt(4, cartProductVariantValue.getProductVariantId());
+			insertStmt.setInt(4, cartProductVariantValue.getProductVariantValueId());
 			insertStmt.setInt(5, cartProductVariantValue.getQty());
 			insertStmt.executeUpdate();
 		} catch (SQLException e) {
@@ -90,5 +94,58 @@ public class CartService {
 			return null;
 		}
 		return null;
+	}
+
+	public List<ProductModel> getUserCartItems(int userId) {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
+
+		String query = "SELECT product_id, qty FROM cart_product_variant_value cpvv LEFT JOIN cart c ON cpvv.cart_id = c.cart_id AND c.user_id = ? GROUP BY cpvv.product_id, qty;";
+		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+			stmt.setInt(1, userId);
+			ResultSet result = stmt.executeQuery();
+
+			List<ProductModel> products = new ArrayList<ProductModel>();
+
+			while (result.next()) {
+				int productId = result.getInt("product_id");
+				ProductModel product = (new ProductService()).getById(productId);
+				product.setVariants(this.getCartProductVariantsAsMap(userId, productId));
+				product.setCartQty(result.getInt("qty"));
+				products.add(product);
+			}
+
+			return products;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private Map<String, String> getCartProductVariantsAsMap(int userId, int productId) {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
+
+		String query = "SELECT pv.variant_name, pvv.variant_value FROM cart_product_variant_value cpvv LEFT JOIN cart c ON cpvv.cart_id = c.cart_id LEFT JOIN product_variant pv ON cpvv.product_variant_id = pv.product_variant_id LEFT JOIN product_variant_value pvv ON cpvv.product_variant_value_id = pvv.product_variant_value_id WHERE c.user_id = ? AND cpvv.product_id = ?";
+		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+			stmt.setInt(1, userId);
+			stmt.setInt(2, productId);
+			ResultSet result = stmt.executeQuery();
+
+			Map<String, String> variantsMap = new HashMap<String, String>();
+
+			while (result.next()) {
+				variantsMap.put(result.getString("variant_name"), result.getString("variant_value"));
+			}
+
+			return variantsMap;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

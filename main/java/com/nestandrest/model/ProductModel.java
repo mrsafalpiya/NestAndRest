@@ -1,5 +1,7 @@
 package com.nestandrest.model;
 
+import java.util.Map;
+
 public class ProductModel {
 	private int productId;
 	private String name;
@@ -10,6 +12,10 @@ public class ProductModel {
 	private int categoryId;
 	private String category;
 	private int stockQty;
+
+	// For Cart Page
+	private Map<String, String> variants;
+	private int cartQty;
 
 	public ProductModel(int productId, String name, String shortDescription, String longDescription, double price,
 			double discountedPrice, int categoryId, int stockQty) {
@@ -85,6 +91,13 @@ public class ProductModel {
 		this.discountedPrice = discountedPrice;
 	}
 
+	public double getSalePrice() {
+		if (this.discountedPrice != 0.0) {
+			return discountedPrice;
+		}
+		return price;
+	}
+
 	public int getCategoryId() {
 		return categoryId;
 	}
@@ -107,5 +120,21 @@ public class ProductModel {
 
 	public void setStockQty(int stockQty) {
 		this.stockQty = stockQty;
+	}
+
+	public Map<String, String> getVariants() {
+		return variants;
+	}
+
+	public void setVariants(Map<String, String> variants) {
+		this.variants = variants;
+	}
+
+	public int getCartQty() {
+		return cartQty;
+	}
+
+	public void setCartQty(int cartQty) {
+		this.cartQty = cartQty;
 	}
 }

@@ -1,7 +1,5 @@
 package com.nestandrest.util;
 
-
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.regex.Pattern;
@@ -76,4 +74,37 @@ public class ValidationUtil {
 		LocalDate today = LocalDate.now();
 		return Period.between(dob, today).getYears() >= 16;
 	}
+
+	/**
+	 * Validates if a name contains only alphabetic characters, allowing spaces
+	 * between words.
+	 * Each word in the name must contain only letters.
+	 * 
+	 * @param name The name to validate
+	 * @return true if the name is valid (each word contains only letters), false
+	 *         otherwise
+	 */
+	public boolean isValidName(String name) {
+		if (isNullOrEmpty(name)) {
+			return false;
+		}
+
+		// Split the name by spaces
+		String[] nameParts = name.trim().split("\\s+");
+
+		// Check if there's at least one part
+		if (nameParts.length == 0) {
+			return false;
+		}
+
+		// Validate each part
+		for (String part : nameParts) {
+			if (!isAlphabetic(part)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

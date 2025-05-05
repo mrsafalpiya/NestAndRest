@@ -12,6 +12,7 @@ public class RedirectionUtil {
 	public static final String loginUrl = baseUrl + "/auth/login.jsp";
 	public static final String homeUrl = baseUrl + "home.jsp";
 	public static final String editUserProfileUrl = baseUrl + "user/user-profile.jsp";
+	public static final String checkoutAddressUrl = baseUrl + "checkout/checkout-address.jsp";
 
 	public void setMsgAttribute(HttpServletRequest req, String msgType, String msg) {
 		req.setAttribute(msgType, msg);
