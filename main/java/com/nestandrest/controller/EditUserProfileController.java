@@ -1,7 +1,7 @@
 package com.nestandrest.controller;
 
 import java.io.IOException;
-
+import java.util.List;
 
 import com.nestandrest.model.UserModel;
 import com.nestandrest.model.UserAddressModel;
@@ -14,178 +14,178 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Controller to handle editing and deleting user profiles.
- * Mapped to "/edit-user-profile" endpoint.
+ * Controller to handle editing and deleting user profiles. Mapped to
+ * "/edit-user-profile" endpoint.
  */
 @WebServlet("/edit-user-profile")
 public class EditUserProfileController extends HttpServlet {
-	
-	 /**
-     * Handles HTTP GET requests for retrieving and deleting user data.
-     * If 'action=delete' is provided, it deletes the user.
-     * Otherwise, it fetches user data and forwards to edit page.
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String userIdParam = request.getParameter("userId");
-        String action = request.getParameter("action");
 
-        if (userIdParam == null || userIdParam.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User ID is required");
-            return;
-        }
+	/**
+	 * Handles HTTP GET requests for retrieving and deleting user data. If
+	 * 'action=delete' is provided, it deletes the user. Otherwise, it fetches user
+	 * data and forwards to edit page.
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String userIdParam = request.getParameter("userId");
+		String action = request.getParameter("action");
 
-        try {
-            int userId = Integer.parseInt(userIdParam);
-            UserService userService = new UserService();
-            
-            // Handle deletion from POST request
-            if ("delete".equalsIgnoreCase(action)) {
-                boolean deleted = userService.deleteUserById(userId);
-                if (deleted) {
-                    response.sendRedirect(request.getContextPath() + "/usermanagement-list");
-                } else {
-                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete user");
-                }
-                return;
-            }
+		if (userIdParam == null || userIdParam.isEmpty()) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User ID is required");
+			return;
+		}
 
-            UserModel user = userService.getUserById(userId);
-            UserAddressModel address = userService.getAddressByUserId(userId);
+		try {
+			int userId = Integer.parseInt(userIdParam);
+			UserService userService = new UserService();
 
-            if (user == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
-                return;
-            }
+			// Handle deletion from POST request
+			if ("delete".equalsIgnoreCase(action)) {
+				boolean deleted = userService.deleteUserById(userId);
+				if (deleted) {
+					response.sendRedirect(request.getContextPath() + "/usermanagement-list");
+				} else {
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete user");
+				}
+				return;
+			}
 
-            request.setAttribute("user", user);
-            request.setAttribute("address", address);
-            request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
-                    response);
+			UserModel user = userService.getUserById(userId);
+			List<UserAddressModel> address = userService.getAddressByUserId(userId);
 
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user ID format");
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An unexpected error occurred");
-        }
-    }
-    
-    /**
-     * Handles HTTP POST requests for updating or deleting user data.
-     * Updates user profile and address if valid form data is provided.
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+			if (user == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
+				return;
+			}
 
-        String action = request.getParameter("action");
+			request.setAttribute("user", user);
+			request.setAttribute("address", address);
+			request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
+					response);
 
-        if ("delete".equalsIgnoreCase(action)) {
-            try {
-                int userId = Integer.parseInt(request.getParameter("userId"));
-                UserService userService = new UserService();
-                boolean deleted = userService.deleteUserById(userId);
+		} catch (NumberFormatException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user ID format");
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An unexpected error occurred");
+		}
+	}
 
-                if (deleted) {
-                    response.sendRedirect(request.getContextPath() + "/usermanagement-list");
-                } else {
-                    request.setAttribute("error", "Failed to delete the user.");
-                    request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp")
-                            .forward(request, response);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.setAttribute("error", "An unexpected error occurred while deleting user.");
-                request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp")
-                        .forward(request, response);
-            }
-            return;
-        }
-        
-        // Handle update
-        try {
-            String name = request.getParameter("name");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            
-            // Basic form validation
-            if (name == null || name.isEmpty()) {
-                request.setAttribute("error", "Name is required");
-                request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
-                        response);
-                return;
-            }
+	/**
+	 * Handles HTTP POST requests for updating or deleting user data. Updates user
+	 * profile and address if valid form data is provided.
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-            if (email == null || email.isEmpty()) {
-                request.setAttribute("error", "Email is required");
-                request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
-                        response);
-                return;
-            }
-            
-            // Parse additional form values
-            String userIdParam = request.getParameter("userId");
-            String genderIdParam = request.getParameter("genderId");
-            String roleIdParam = request.getParameter("roleId");
+		String action = request.getParameter("action");
 
-            if (userIdParam == null || genderIdParam == null || roleIdParam == null) {
-                request.setAttribute("error", "Missing required fields");
-                request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
-                        response);
-                return;
-            }
+		if ("delete".equalsIgnoreCase(action)) {
+			try {
+				int userId = Integer.parseInt(request.getParameter("userId"));
+				UserService userService = new UserService();
+				boolean deleted = userService.deleteUserById(userId);
 
-            int userId = Integer.parseInt(userIdParam);
-            int genderId = Integer.parseInt(genderIdParam);
-            int roleId = Integer.parseInt(roleIdParam);
+				if (deleted) {
+					response.sendRedirect(request.getContextPath() + "/usermanagement-list");
+				} else {
+					request.setAttribute("error", "Failed to delete the user.");
+					request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp")
+							.forward(request, response);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				request.setAttribute("error", "An unexpected error occurred while deleting user.");
+				request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
+						response);
+			}
+			return;
+		}
 
-            UserModel user = new UserModel();
-            user.setUserId(userId);
-            user.setName(name);
-            user.setEmail(email);
-            user.setPhone(phone);
-            user.setGenderId(genderId);
-            user.setRoleId(roleId);
+		// Handle update
+		try {
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			String address = request.getParameter("address");
 
-            UserService userService = new UserService();
-            boolean updated = userService.updateUser(user);
+			// Basic form validation
+			if (name == null || name.isEmpty()) {
+				request.setAttribute("error", "Name is required");
+				request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
+						response);
+				return;
+			}
 
-            // Update address if provided
-            if (address != null && !address.isEmpty()) {
-                UserAddressModel addressModel = new UserAddressModel();
-                addressModel.setUserId(userId);
-                addressModel.setAddress(address);
+			if (email == null || email.isEmpty()) {
+				request.setAttribute("error", "Email is required");
+				request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
+						response);
+				return;
+			}
 
-                boolean addressUpdated = userService.updateUserAddress(addressModel);
-                if (!addressUpdated) {
-                    request.setAttribute("error", "Failed to update address. Please try again.");
-                    request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp")
-                            .forward(request, response);
-                    return;
-                }
-            }
+			// Parse additional form values
+			String userIdParam = request.getParameter("userId");
+			String genderIdParam = request.getParameter("genderId");
+			String roleIdParam = request.getParameter("roleId");
 
-         // Final redirect or error message
-            if (updated) {
-                response.sendRedirect(request.getContextPath() + "/usermanagement-list");
-            } else {
-                request.setAttribute("error", "Failed to update profile. Please try again.");
-                request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
-                        response);
-            }
+			if (userIdParam == null || genderIdParam == null || roleIdParam == null) {
+				request.setAttribute("error", "Missing required fields");
+				request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
+						response);
+				return;
+			}
 
-        } catch (NumberFormatException e) {
-            request.setAttribute("error", "Invalid input data. Please check your form values.");
-            request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
-                    response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("error", "An unexpected error occurred: " + e.toString());
-            request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
-                    response);
-        }
-    }
+			int userId = Integer.parseInt(userIdParam);
+			int genderId = Integer.parseInt(genderIdParam);
+			int roleId = Integer.parseInt(roleIdParam);
+
+			UserModel user = new UserModel();
+			user.setUserId(userId);
+			user.setName(name);
+			user.setEmail(email);
+			user.setPhone(phone);
+			user.setGenderId(genderId);
+			user.setRoleId(roleId);
+
+			UserService userService = new UserService();
+			boolean updated = userService.updateUser(user);
+
+			// Update address if provided
+			if (address != null && !address.isEmpty()) {
+				UserAddressModel addressModel = new UserAddressModel();
+				addressModel.setUserId(userId);
+				addressModel.setAddress(address);
+
+				boolean addressUpdated = userService.updateUserAddress(addressModel);
+				if (!addressUpdated) {
+					request.setAttribute("error", "Failed to update address. Please try again.");
+					request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp")
+							.forward(request, response);
+					return;
+				}
+			}
+
+			// Final redirect or error message
+			if (updated) {
+				response.sendRedirect(request.getContextPath() + "/usermanagement-list");
+			} else {
+				request.setAttribute("error", "Failed to update profile. Please try again.");
+				request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
+						response);
+			}
+
+		} catch (NumberFormatException e) {
+			request.setAttribute("error", "Invalid input data. Please check your form values.");
+			request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
+					response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("error", "An unexpected error occurred: " + e.toString());
+			request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
+					response);
+		}
+	}
 }

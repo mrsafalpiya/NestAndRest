@@ -5,24 +5,37 @@ import java.io.IOException;
 import com.nestandrest.model.Product;
 import com.nestandrest.model.ProductModel;
 import com.nestandrest.model.ProductVariantModel;
+import com.nestandrest.model.UserModel;
+import com.nestandrest.service.CartService;
 import com.nestandrest.service.ProductService;
+import com.nestandrest.service.UserService;
 import com.nestandrest.util.ProductData;
+import com.nestandrest.util.RedirectionUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/product-details" })
 public class ProductDetailsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService;
+	private CartService cartService;
+	private UserService userService;
+	private RedirectionUtil redirectionUtil;
 
 	@Override
 	public void init() throws ServletException {
 		this.productService = new ProductService();
+		this.cartService = new CartService();
+		this.userService = new UserService();
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -53,6 +66,48 @@ public class ProductDetailsController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/pages/products/product-details.jsp").forward(req, resp);
+		// Check if not logged in
+		UserModel currentUser = userService.getCurrentlyLoggedInUser(req, null);
+		if (currentUser == null) {
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+
+		// Get all request parameters
+		Enumeration<String> parameterNames = req.getParameterNames();
+		Map<Integer, Integer> variantSelections = new HashMap<>();
+
+		// Process quantity
+		String quantityStr = req.getParameter("quantity");
+		int quantity = 1; // Default value
+		try {
+			if (quantityStr != null && !quantityStr.isEmpty()) {
+				quantity = Integer.parseInt(quantityStr);
+			}
+		} catch (NumberFormatException e) {
+			req.setAttribute("error", "Invalid quantity format");
+		}
+
+		// Process product id
+		String productIdStr = req.getParameter("product_id");
+		int productId = Integer.parseInt(productIdStr);
+
+		// Extract all variant parameters
+		while (parameterNames.hasMoreElements()) {
+			String paramName = parameterNames.nextElement();
+			if (paramName.startsWith("variant-")) {
+				try {
+					int variantIndex = Integer.parseInt(paramName.substring(8)); // "variant-".length() = 8
+					int variantValue = Integer.parseInt(req.getParameter(paramName));
+					variantSelections.put(variantIndex, variantValue);
+				} catch (NumberFormatException e) {
+					// Skip if the variant index isn't a valid number
+				}
+			}
+		}
+
+		this.cartService.addProductToCart(currentUser.getUserId(), productId, variantSelections, quantity);
+
+		resp.sendRedirect(req.getContextPath() + "/checkout-cart");
 	}
 }
