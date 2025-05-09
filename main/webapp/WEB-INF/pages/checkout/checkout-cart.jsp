@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +61,7 @@
 		<div class="checkout-container">
 			<!-- Cart Box -->
 			<div class="cart-box">
-				<h5>Cart (3)</h5>
+				<h5>Cart (${products.size()})</h5>
 				<table>
 					<thead>
 						<tr>
@@ -71,78 +72,35 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<div class="product-info">
-									<img
-										src="${pageContext.request.contextPath}/resources/system/images/checkout-gecheer.png"
-										alt="Gecheer Sofa" />
-									<div>
-										<strong>Gecheer Sofa with Cushion</strong><br /> size: 9
+						<c:forEach var="product" items="${products}">
+							<tr>
+								<td>
+									<div class="product-info">
+										<img
+											src="${pageContext.request.contextPath}/resources/product-images/${product.getProductId()}.png"
+											alt="${product.getName()}" />
+										<div>
+											<strong>${product.getName()}</strong><br />
+											<c:if test="${not empty product.getVariants()}">
+												<c:forEach var="variant" items="${product.getVariants()}">
+													<span style="font-size: 10px">${variant.key}: ${variant.value}</span><br />
+												</c:forEach>
+											</c:if>
+											<c:if test="${empty product.getVariants()}">
+												No variants available
+											</c:if>
+										</div>
 									</div>
-								</div>
-							</td>
-							<td>Rs 75,000</td>
-							<td>
-								<div class="qty-control-column">
-									<div class="qty-control">
-										<button>-</button>
-										<span>1</span>
-										<button>+</button>
+								</td>
+								<td>Rs ${product.getSalePrice()}</td>
+								<td>
+									<div class="qty-control-column">
+										<span>${product.getCartQty()}</span>
 									</div>
-									<small>Available: 2</small>
-								</div>
-							</td>
-							<td>Rs 75,000</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="product-info">
-									<img
-										src="${pageContext.request.contextPath}/resources/system/images/checkout-apple.png"
-										alt="Apple Stick Sofa" />
-									<div>
-										<strong>Apple Stick Sofa Set</strong><br /> size: 5
-									</div>
-								</div>
-							</td>
-							<td>Rs 40,000</td>
-							<td>
-								<div class="qty-control-column">
-									<div class="qty-control">
-										<button>-</button>
-										<span>2</span>
-										<button>+</button>
-									</div>
-									<small>Available: 3</small>
-								</div>
-							</td>
-							<td>Rs 80,000</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="product-info">
-									<img
-										src="${pageContext.request.contextPath}/resources/system/images/checkout-cane.png"
-										alt="Cane Rattan Couch Set" />
-									<div>
-										<strong>Cane/Rattan Couch Set</strong><br /> size: 7
-									</div>
-								</div>
-							</td>
-							<td>Rs 48,000</td>
-							<td>
-								<div class="qty-control-column">
-									<div class="qty-control">
-										<button>-</button>
-										<span>3</span>
-										<button>+</button>
-									</div>
-									<small>Available: 6</small>
-								</div>
-							</td>
-							<td>Rs 1,44,000</td>
-						</tr>
+								</td>
+								<td>Rs ${product.getSalePrice() * product.getCartQty()}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -151,7 +109,11 @@
 			<div class="order-summary">
 				<h4>Order summary</h4>
 				<p>
-					<span>Subtotal:</span> <strong>Rs 48,000</strong>
+					<c:set var="subtotal" value="0" />
+					<c:forEach var="product" items="${products}">
+						<c:set var="subtotal" value="${subtotal + (product.getSalePrice() * product.getCartQty())}" />
+					</c:forEach>
+					<span>Subtotal:</span> <strong>Rs ${subtotal}</strong>
 				</p>
 				<p>
 					<span>Payment Method:</span> <strong>Cash on Delivery</strong>
@@ -166,7 +128,7 @@
 
 		<!-- Bottom Actions -->
 		<div class="address-actions">
-			<a href="${pageContext.request.contextPath}/shop" class="back-btn">←
+			<a href="${pageContext.request.contextPath}/products" class="back-btn">←
 				Continue Shopping</a>
 		</div>
 	</main>

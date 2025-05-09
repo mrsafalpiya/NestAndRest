@@ -105,6 +105,8 @@
 								<button type="button" onclick="increaseQuantity()">+</button>
 							</div>
 						</div>
+						
+						<input type="hidden" name="product_id" value="${product.getProductId()}" />
 
 						<button type="submit" class="add-to-cart">
 							<span class="cart-icon"></span> Add to cart

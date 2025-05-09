@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,48 +67,27 @@
 		<div class="checkout-wrapper">
 			<!-- Left Section: Addresses + Actions -->
 			<div class="left-section">
+				<c:if test="${success != null}">
+					<p style="margin-bottom: 20px; color: green;">${success}</p>
+				</c:if>
+				<c:if test="${error != null}">
+					<p style="margin-bottom: 20px; color: red;">${error}</p>
+				</c:if>
+
 				<!-- Address List -->
 				<div class="address-list">
-					<div class="address-card">
-						<div>
-							<h5>Lucian Obrien</h5>
-							<p>1147 Rohan Drive Suite 819 - Burlington, VT / 82021</p>
-							<p>904-966-2836</p>
+					<c:forEach var="address" items="${addresses}">
+						<div class="address-card">
+							<div>
+								<h5>${address.getUserName()}</h5>
+								<p>${address.getAddress()}</p>
+								<p>${address.getPhoneNumber()}</p>
+							</div>
+							<button
+								onclick="location.href='${pageContext.request.contextPath}/product-checkout-complete?address_id=${address.getUserAddressId()}'">Deliver
+								to this address</button>
 						</div>
-						<button
-							onclick="location.href='${pageContext.request.contextPath}/product-checkout-complete'">Deliver
-							to this address</button>
-					</div>
-					<div class="address-card">
-						<div>
-							<h5>Deja Brady</h5>
-							<p>18605 Thompson Circle Apt. 086 - Idaho Falls, WV / 50337</p>
-							<p>399-757-9909</p>
-						</div>
-						<button
-							onclick="location.href='${pageContext.request.contextPath}/product-checkout-complete'">Deliver
-							to this address</button>
-					</div>
-					<div class="address-card">
-						<div>
-							<h5>Jayvion Simon</h5>
-							<p>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</p>
-							<p>365-374-4961</p>
-						</div>
-						<button
-							onclick="location.href='${pageContext.request.contextPath}/product-checkout-complete'">Deliver
-							to this address</button>
-					</div>
-					<div class="address-card">
-						<div>
-							<h5>Harrison Stein</h5>
-							<p>110 Lamar Station Apt. 730 - Hagerstown, OK / 49808</p>
-							<p>692-767-2903</p>
-						</div>
-						<button
-							onclick="location.href='${pageContext.request.contextPath}/product-checkout-complete'">Deliver
-							to this address</button>
-					</div>
+					</c:forEach>
 				</div>
 
 				<!-- Bottom Actions -->
@@ -122,7 +102,12 @@
 			<div class="order-summary">
 				<h5>Order summary</h5>
 				<p>
-					<span>Subtotal:</span> <strong>Rs 48,000</strong>
+					<c:set var="subtotal" value="0" />
+					<c:forEach var="product" items="${products}">
+						<c:set var="subtotal"
+							value="${subtotal + (product.getSalePrice() * product.getCartQty())}" />
+					</c:forEach>
+					<span>Subtotal:</span> <strong>Rs ${subtotal}</strong>
 				</p>
 				<p>
 					<span>Payment Method:</span> <strong>Cash on Delivery</strong>
@@ -135,13 +120,13 @@
 	<div id="addressModal" class="modal-overlay" style="display: none;">
 		<div class="modal">
 			<h5>New address</h5>
-			<form>
+			<form method="POST">
 				<div class="input-row">
-					<input type="text" placeholder="Full name" required /> <input
-						type="text" placeholder="Phone number" required />
+					<input type="text" placeholder="Full name" name="full-name" /> <input
+						type="text" placeholder="Phone number" name="phone" />
 				</div>
-				<input type="text" placeholder="Address" required /> <input
-					type="text" placeholder="Town/city" required />
+				<input type="text" placeholder="Address" name="address" /> <input
+					type="text" placeholder="Town/city" name="city" />
 				<div class="modal-actions">
 					<button type="button" class="cancel-btn">Cancel</button>
 					<button type="submit" class="submit-btn">Deliver to this

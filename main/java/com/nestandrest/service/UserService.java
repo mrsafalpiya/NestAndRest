@@ -18,6 +18,19 @@ import java.util.logging.Logger;
 public class UserService {
 
 	private static final Logger logger = Logger.getLogger(UserService.class.getName());
+	private Connection dbConn;
+
+	/**
+	 * Constructor initializes the database connection.
+	 */
+	public UserService() {
+		try {
+			this.dbConn = DbConfig.getDbConnection();
+		} catch (SQLException | ClassNotFoundException ex) {
+			System.err.println("Database connection error: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
 
 	/**
 	 * 
@@ -151,21 +164,25 @@ public class UserService {
 		return null;
 	}
 
-	public UserAddressModel getAddressByUserId(int userId) {
+	public List<UserAddressModel> getAddressByUserId(int userId) {
 		String query = "SELECT * FROM user_address WHERE user_id = ?";
 		try (Connection conn = DbConfig.getDbConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
 			stmt.setInt(1, userId);
 			ResultSet rs = stmt.executeQuery();
 
-			if (rs.next()) {
+			List<UserAddressModel> addresses = new ArrayList<UserAddressModel>();
+
+			while (rs.next()) {
 				UserAddressModel address = new UserAddressModel();
 				address.setUserAddressId(rs.getInt("user_address_id"));
 				address.setUserId(rs.getInt("user_id"));
 				address.setAddress(rs.getString("address"));
 				address.setDefault(rs.getBoolean("is_default"));
-				return address;
+				addresses.add(address);
 			}
+
+			return addresses;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -263,12 +280,15 @@ public class UserService {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Updates the address of a user in the user_address table based on the provided user ID.
+	 * Updates the address of a user in the user_address table based on the provided
+	 * user ID.
 	 *
-	 * @param address A UserAddressModel object containing the new address and the associated user ID.
-	 * @return true if the update was successful (at least one row affected), false otherwise.
+	 * @param address A UserAddressModel object containing the new address and the
+	 *                associated user ID.
+	 * @return true if the update was successful (at least one row affected), false
+	 *         otherwise.
 	 */
 	public boolean updateUserAddress(UserAddressModel address) {
 		String query = "UPDATE user_address SET address = ? WHERE user_id = ?";
@@ -333,6 +353,51 @@ public class UserService {
 				return rowsAffected > 0;
 
 			}
+		}
+	}
+
+	public List<UserAddressModel> getAllUserAddresses(int userId) {
+		String sql = "SELECT * FROM user_address WHERE user_id = ? ORDER BY is_default DESC, user_address_id DESC";
+		List<UserAddressModel> list = new ArrayList<>();
+		try (Connection c = DbConfig.getDbConnection(); PreparedStatement p = c.prepareStatement(sql)) {
+			p.setInt(1, userId);
+			try (ResultSet rs = p.executeQuery()) {
+				while (rs.next()) {
+					UserAddressModel u = new UserAddressModel(rs.getInt("user_address_id"), rs.getInt("user_id"),
+							rs.getString("address"), rs.getInt("is_default") == 1);
+					u.setUserName(rs.getString("user_name"));
+					u.setPhoneNumber(rs.getString("phone_number"));
+					list.add(u);
+				}
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			logger.log(Level.SEVERE, "Error in get user addresses", e);
+		}
+		return list;
+	}
+
+	public Boolean addAddressOfUser(UserAddressModel userAddress) {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
+
+		String insertQuery = "INSERT INTO `user_address` (`user_id`, `address`, `user_name`, `phone_number`, `is_default`) VALUES (?, ?, ?, ?, ?);";
+
+		try {
+			PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
+			// Insert address details
+			insertStmt.setInt(1, userAddress.getUserId());
+			insertStmt.setString(2, userAddress.getAddress());
+			insertStmt.setString(3, userAddress.getUserName());
+			insertStmt.setString(4, userAddress.getPhoneNumber());
+			insertStmt.setInt(5, userAddress.isDefault() ? 1 : 0);
+
+			return insertStmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			System.err.println("Error during user address add: " + e.getMessage());
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

@@ -7,42 +7,102 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-// Simple Address model class
-class Address {
-    private String name;
-    private String address;
-    private String phone;
-
-    public Address(String name, String address, String phone) {
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-    }
-
-    public String getName() { return name; }
-    public String getAddress() { return address; }
-    public String getPhone() { return phone; }
-}
+import com.nestandrest.model.ProductModel;
+import com.nestandrest.model.UserAddressModel;
+import com.nestandrest.model.UserModel;
+import com.nestandrest.service.CartService;
+import com.nestandrest.service.RegistrationService;
+import com.nestandrest.service.UserService;
+import com.nestandrest.util.PasswordUtil;
+import com.nestandrest.util.RedirectionUtil;
+import com.nestandrest.util.ValidationUtil;
 
 @WebServlet("/checkout-address")
 public class CheckoutAddressController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	private CartService cartService;
+	private UserService userService;
+	private ValidationUtil validationUtil;
+	private RedirectionUtil redirectionUtil;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	@Override
+	public void init() throws ServletException {
+		this.userService = new UserService();
+		this.cartService = new CartService();
+		this.validationUtil = new ValidationUtil();
+		this.redirectionUtil = new RedirectionUtil();
+	}
 
-        // Mock addresses (could be fetched from DB later)
-        List<Address> addresses = new ArrayList<>();
-        addresses.add(new Address("Lucian Obrien", "1147 Rohan Drive Suite 819 - Burlington, VT / 82021", "904-966-2836"));
-        addresses.add(new Address("Deja Brady", "18605 Thompson Circle Apt. 086 - Idaho Falls, WV / 50337", "399-757-9909"));
-        addresses.add(new Address("Jayvion Simon", "19034 Verna Unions Apt. 164 - Honolulu, RI / 87535", "365-374-4961"));
-        addresses.add(new Address("Harrison Stein", "110 Lamar Station Apt. 730 - Hagerstown, OK / 49808", "692-767-2903"));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        request.setAttribute("addresses", addresses);
-        request.getRequestDispatcher("/WEB-INF/pages/checkout/checkout-address.jsp").forward(request, response);
-    }
+		UserModel currentUser = this.userService.getCurrentlyLoggedInUser(request, null);
+		if (currentUser == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
+
+		List<ProductModel> products = this.cartService.getUserCartItems(currentUser.getUserId());
+
+		request.setAttribute("products", products);
+		request.setAttribute("addresses", this.userService.getAllUserAddresses(currentUser.getUserId()));
+
+		request.getRequestDispatcher("/WEB-INF/pages/checkout/checkout-address.jsp").forward(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		UserModel currentUser = this.userService.getCurrentlyLoggedInUser(req, null);
+		if (currentUser == null) {
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+
+		List<ProductModel> products = this.cartService.getUserCartItems(currentUser.getUserId());
+
+		req.setAttribute("products", products);
+		req.setAttribute("addresses", this.userService.getAllUserAddresses(currentUser.getUserId()));
+
+		try {
+			UserAddressModel address = this.extractUserAddressModel(req, resp, currentUser.getUserId());
+			this.userService.addAddressOfUser(address);
+			resp.sendRedirect(req.getContextPath() + "/checkout-address");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private UserAddressModel extractUserAddressModel(HttpServletRequest req, HttpServletResponse resp, int userId)
+			throws Exception {
+		String fullName = req.getParameter("full-name");
+		String phone = req.getParameter("phone");
+		String address = req.getParameter("address");
+		String city = req.getParameter("city");
+
+		// Checking if all fields are filled
+		if (validationUtil.isNullOrEmpty(fullName) || validationUtil.isNullOrEmpty(phone)
+				|| validationUtil.isNullOrEmpty(address) || validationUtil.isNullOrEmpty(city)) {
+			redirectionUtil.setMsgAndRedirect(req, resp, "error", "All fields are required to be filled!",
+					RedirectionUtil.checkoutAddressUrl);
+			return null;
+		}
+
+		// Checking if a proper name is provided
+		if (!validationUtil.isValidName(fullName)) {
+			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter valid name!",
+					RedirectionUtil.checkoutAddressUrl);
+			return null;
+		}
+
+		// Checking if a valid phone number was provided
+		if (!validationUtil.isValidPhoneNumber(phone)) {
+			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid phone number!",
+					RedirectionUtil.checkoutAddressUrl);
+			return null;
+		}
+
+		return new UserAddressModel(userId, address + " " + city, fullName, phone, false);
+	}
 }
-
