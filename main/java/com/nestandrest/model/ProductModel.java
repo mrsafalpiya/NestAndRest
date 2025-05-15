@@ -31,7 +31,7 @@ public class ProductModel {
 	}
 
 	public ProductModel(int productId, String name, String shortDescription, String longDescription, double price,
-			double discountedPrice, int categoryId, String category) {
+			double discountedPrice, int categoryId, int stockQty, String category) {
 		super();
 		this.productId = productId;
 		this.name = name;
@@ -40,6 +40,7 @@ public class ProductModel {
 		this.price = price;
 		this.discountedPrice = discountedPrice;
 		this.categoryId = categoryId;
+		this.stockQty = stockQty;
 		this.category = category;
 	}
 
