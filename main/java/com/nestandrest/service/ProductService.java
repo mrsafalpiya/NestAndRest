@@ -147,7 +147,7 @@ public class ProductService {
 				products.add(new ProductModel(result.getInt("product_id"), result.getString("name"),
 						result.getString("short_description"), result.getString("long_description"),
 						result.getDouble("price"), result.getDouble("discounted_price"), result.getInt("category_id"),
-						result.getString("category_name")));
+						result.getInt("stock_qty"), result.getString("category_name")));
 			}
 
 			return products;
@@ -231,6 +231,34 @@ public class ProductService {
 			return productVariants;
 		} catch (SQLException e) {
 			System.err.println("Error during products get: " + e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Boolean updateProduct(ProductModel product) {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available!");
+			return null;
+		}
+
+		String query = "UPDATE product SET name = ?, short_description = ?, long_description = ?, price = ?, discounted_price = ?, category_id = ?, stock_qty = ? WHERE product_id = ?";
+
+		try {
+			PreparedStatement stmt = dbConn.prepareStatement(query);
+			stmt.setString(1, product.getName());
+			stmt.setString(2, product.getShortDescription());
+			stmt.setString(3, product.getLongDescription());
+			stmt.setDouble(4, product.getPrice());
+			stmt.setDouble(5, product.getDiscountedPrice());
+			stmt.setInt(6, product.getCategoryId());
+			stmt.setInt(7, product.getStockQty());
+			stmt.setInt(8, product.getProductId());
+
+			int rowsUpdated = stmt.executeUpdate();
+			return rowsUpdated > 0;
+		} catch (SQLException e) {
+			System.err.println("Error during product get: " + e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
