@@ -2,6 +2,13 @@ package com.nestandrest.model;
 
 import java.util.Map;
 
+/**
+ * Represents a product in the system.
+ * Stores all details necessary for displaying and managing a product,
+ * including ID, name, descriptions, pricing, category, and stock.
+ *
+ * @author Bhumika Karki
+ */
 public class ProductModel {
 	private int productId;
 	private String name;
@@ -17,6 +24,18 @@ public class ProductModel {
 	private Map<String, String> variants;
 	private int cartQty;
 
+	/**
+	 * Constructor for creating a ProductModel with stock quantity info (used for cart and stock management).
+	 *
+	 * @param productId         unique product identifier
+	 * @param name              product name
+	 * @param shortDescription  short text for quick view
+	 * @param longDescription   detailed product description
+	 * @param price             original product price
+	 * @param discountedPrice   discounted price (if any)
+	 * @param categoryId        category identifier
+	 * @param stockQty          stock quantity available
+	 */
 	public ProductModel(int productId, String name, String shortDescription, String longDescription, double price,
 			double discountedPrice, int categoryId, int stockQty) {
 		super();
@@ -30,6 +49,18 @@ public class ProductModel {
 		this.stockQty = stockQty;
 	}
 
+	/**
+	 * Constructor for use cases where the category name is required (e.g., listing with category name display).
+	 *
+	 * @param productId         unique product identifier
+	 * @param name              product name
+	 * @param shortDescription  short text for quick view
+	 * @param longDescription   detailed product description
+	 * @param price             original product price
+	 * @param discountedPrice   discounted price (if any)
+	 * @param categoryId        category identifier
+	 * @param category          category name
+	 */
 	public ProductModel(int productId, String name, String shortDescription, String longDescription, double price,
 			double discountedPrice, int categoryId, int stockQty, String category) {
 		super();
@@ -44,6 +75,11 @@ public class ProductModel {
 		this.category = category;
 	}
 
+	// Getters and Setters
+
+	/**
+	 * @return the product ID
+	 */
 	public int getProductId() {
 		return productId;
 	}
@@ -52,6 +88,9 @@ public class ProductModel {
 		this.productId = productId;
 	}
 
+	/**
+	 * @return the product name
+	 */
 	public String getName() {
 		return name;
 	}
@@ -60,6 +99,9 @@ public class ProductModel {
 		this.name = name;
 	}
 
+	/**
+	 * @return the short description
+	 */
 	public String getShortDescription() {
 		return shortDescription;
 	}
@@ -68,6 +110,9 @@ public class ProductModel {
 		this.shortDescription = shortDescription;
 	}
 
+	/**
+	 * @return the long description
+	 */
 	public String getLongDescription() {
 		return longDescription;
 	}
@@ -76,6 +121,9 @@ public class ProductModel {
 		this.longDescription = longDescription;
 	}
 
+	/**
+	 * @return the original price
+	 */
 	public double getPrice() {
 		return price;
 	}
@@ -84,6 +132,9 @@ public class ProductModel {
 		this.price = price;
 	}
 
+	/**
+	 * @return the discounted price
+	 */
 	public double getDiscountedPrice() {
 		return discountedPrice;
 	}
@@ -99,6 +150,9 @@ public class ProductModel {
 		return price;
 	}
 
+	/**
+	 * @return the category ID
+	 */
 	public int getCategoryId() {
 		return categoryId;
 	}
@@ -107,6 +161,9 @@ public class ProductModel {
 		this.categoryId = categoryId;
 	}
 
+	/**
+	 * @return the category name
+	 */
 	public String getCategory() {
 		return category;
 	}
@@ -115,6 +172,9 @@ public class ProductModel {
 		this.category = category;
 	}
 
+	/**
+	 * @return the available stock quantity
+	 */
 	public int getStockQty() {
 		return stockQty;
 	}

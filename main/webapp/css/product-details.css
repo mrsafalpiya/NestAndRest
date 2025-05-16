@@ -1,3 +1,4 @@
+/* Main page wrapper */
 .product-details {
     padding: 32px 0;
     display: flex;
@@ -13,7 +14,7 @@
     align-items: start;
 }
 
-/* Breadcrumb */
+/* ========== Breadcrumb Navigation ========== */
 .breadcrumb {
     font-size: 14px;
     margin: 5px 0;
@@ -30,7 +31,7 @@
     color: #999;
 }
 
-/* Image Gallery */
+/* ========== Image Gallery / Carousel ========== */
 .carousel-container {
     position: relative;
     display: flex;
@@ -44,6 +45,8 @@
     object-fit: cover;
     border-radius: 12px;
 }
+
+/* Navigation arrows */
 .arrow {
     position: absolute;
     top: 45%;
@@ -56,6 +59,7 @@
     cursor: pointer;
     z-index: 2;
 }
+
 .arrow.left { left: 10px; }
 .arrow.right { right: 10px; }
 .thumbnail-container {
@@ -64,6 +68,8 @@
     justify-content: center;
     margin-top: 10px;
 }
+
+/* Thumbnails */
 .thumbnail {
     width: 60px;
     height: 60px;
@@ -78,12 +84,15 @@
     opacity: 1;
 }
 
-/* Product Info Section */
+
+/* ========== Product Info Section ========== */
 .product-info {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
+/* SALE badge */
 .badge {
     background-color: #ff5e3a;
     color: white;
@@ -93,14 +102,19 @@
     padding: 4px 10px;
     width: fit-content;
 }
+
+/* Product title */
 .product-info h1 {
     font-size: 24px;
     color: #212121;
 }
+
+/* Pricing */
 .price {
     display: flex;
     gap: 12px;
 }
+
 .price .original {
     text-decoration: line-through;
     color: #888;
@@ -109,27 +123,34 @@
     color: #c89b63;
     font-weight: bold;
 }
+
+/* Description preview */
 .short-description {
     font-size: 14px;
     color: #444;
 }
 
-/* Options */
+/* ========== Product Variant & Quantity Selection ========== */
 .product-options {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
+
+/* Option field rows */
 .option-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
 }
+
 .option-row label {
     font-weight: 600;
     min-width: 70px;
 }
+
+/* Quantity selector */
 .quantity-control {
     display: flex;
     gap: 8px;
@@ -144,6 +165,8 @@
     border: 1px solid #ccc;
     cursor: pointer;
 }
+
+/* Add to cart button */
 .add-to-cart {
     background-color: #f5a623;
     color: black;
@@ -160,7 +183,7 @@
     content: "🛒";
 }
 
-/* Highlights */
+/* ========== Highlight Section ========== */
 .highlights {
     display: flex;
     justify-content: space-between;
@@ -180,7 +203,8 @@
     margin-bottom: 6px;
 }
 
-/* Tabs */
+
+/* ========== Tabs Section ========== */
 .tabs {
     display: flex;
     border-bottom: 1px solid #ccc;
@@ -209,6 +233,7 @@
 }
 
 /* --------------------- MOBILE ---------------------- */
+/* ========== Responsive Design ========== */
 @media screen and (max-width: 768px) {
     .product-top {
         display: flex;

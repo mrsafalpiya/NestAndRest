@@ -1,5 +1,12 @@
 package com.nestandrest.model;
 
+/**
+ * Represents a detailed product entity with full admin-side attributes.
+ * Used for managing product data such as category, price, availability,
+ * display details, and publication status.
+ * 
+ * @author Bhumika Karki
+ */
 public class Product {
 
 	private int productId;
@@ -18,125 +25,150 @@ public class Product {
 	private boolean inStock;
 	private boolean published;
 
-	// Constructors
-	public Product(String name, String image, String category, double price) {
-		this.name = name;
-		this.image = image;
-		this.category = category;
-		this.price = price;
-	}
+    /**
+     * Constructor used for listing or display purpose with limited fields.
+     *
+     * @param name      product name
+     * @param image     image filename or URL
+     * @param category  product category
+     * @param price     base price of the product
+     */
+    public Product(String name, String image, String category, double price) {
+        this.name = name;
+        this.image = image;
+        this.category = category;
+        this.price = price;
+    }
 
-	public Product() {
-	}
+    /**
+     * Default constructor for frameworks or manual field setting.
+     */
+    public Product() {
+    }
 
-	// Getters and Setters
-	public int getProductId() {
-		return productId;
-	}
+    // Getters and Setters
+    
+    /** @return the product ID */
+    public int getProductId() {
+        return productId;
+    }
 
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 
-	public String getName() {
-		return name;
-	}
+    /** @return product name */
+    public String getName() {
+        return name;
+    }
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getImage() {
-		return image;
-	}
+    /** @return image filename or path */
+    public String getImage() {
+        return image;
+    }
 
 	public void setImage(String image) {
 		this.image = image;
 	}
 
-	public String getCategory() {
-		return category;
-	}
+    /** @return product category */
+    public String getCategory() {
+        return category;
+    }
 
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
-	public double getPrice() {
-		return price;
-	}
+    /** @return base price */
+    public double getPrice() {
+        return price;
+    }
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public int getStock() {
-		return stock;
-	}
+    /** @return stock level */
+    public int getStock() {
+        return stock;
+    }
 
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
 
-	public String getSubDescription() {
-		return subDescription;
-	}
+    /** @return short description (used on cards or previews) */
+    public String getSubDescription() {
+        return subDescription;
+    }
 
 	public void setSubDescription(String subDescription) {
 		this.subDescription = subDescription;
 	}
 
-	public String getFullDescription() {
-		return fullDescription;
-	}
+    /** @return full detailed description */
+    public String getFullDescription() {
+        return fullDescription;
+    }
 
 	public void setFullDescription(String fullDescription) {
 		this.fullDescription = fullDescription;
 	}
 
-	public String getColor() {
-		return color;
-	}
+    /** @return product color option */
+    public String getColor() {
+        return color;
+    }
 
 	public void setColor(String color) {
 		this.color = color;
 	}
 
-	public String getSize() {
-		return size;
-	}
+    /** @return product size option */
+    public String getSize() {
+        return size;
+    }
 
 	public void setSize(String size) {
 		this.size = size;
 	}
 
-	public double getDiscountedPrice() {
-		return discountedPrice;
-	}
+    /** @return discounted price if available */
+    public double getDiscountedPrice() {
+        return discountedPrice;
+    }
 
 	public void setDiscountedPrice(double discountedPrice) {
 		this.discountedPrice = discountedPrice;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
+    /** @return quantity added in cart or selection */
+    public int getQuantity() {
+        return quantity;
+    }
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-	public boolean isInStock() {
-		return inStock;
-	}
+    /** @return true if the product is available in stock */
+    public boolean isInStock() {
+        return inStock;
+    }
 
 	public void setInStock(boolean inStock) {
 		this.inStock = inStock;
 	}
 
-	public boolean isPublished() {
-		return published;
-	}
+    /** @return true if the product is visible/published */
+    public boolean isPublished() {
+        return published;
+    }
 
 	public void setPublished(boolean published) {
 		this.published = published;

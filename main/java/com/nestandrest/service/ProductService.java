@@ -15,11 +15,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class for managing products, categories, and variants.
+ * Provides high-level business logic and database access coordination.
+ * 
+ * @author Bhumika Karki
+ */
 public class ProductService {
 	private ProductDAO productDAO;
 	private CategoryDAO categoryDAO;
 	private Connection dbConn;
 
+	/**
+	 * Initializes ProductService with DAO instances and DB connection.
+	 */
 	public ProductService() {
 		try {
 			this.dbConn = DbConfig.getDbConnection();
@@ -30,6 +39,11 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Adds a new product and sets stock status based on quantity.
+	 *
+	 * @param Product product object to insert
+	 */
 	public void addProduct(Product product) {
 		try {
 			product.setStock(product.getQuantity()); // Set stock equal to quantity
@@ -40,6 +54,11 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Retrieves all products from the database.
+	 *
+	 * @return list of products or null if error
+	 */
 	public List<Product> getAllProducts() {
 		try {
 			return productDAO.getAllProducts();
@@ -49,6 +68,12 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Retrieves a product by its ID.
+	 *
+	 * @param productId product ID to fetch
+	 * @return Product object or null if not found
+	 */
 	public Product getProductById(int productId) {
 		try {
 			return productDAO.getProductById(productId);
@@ -58,6 +83,11 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Updates a product and its stock status.
+	 *
+	 * @param Product product to update
+	 */
 	public void updateProduct(Product product) {
 		try {
 			product.setStock(product.getQuantity());
@@ -68,6 +98,11 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Deletes a product by its ID.
+	 *
+	 * @param productId product ID to delete
+	 */
 	public void deleteProduct(int productId) {
 		try {
 			productDAO.deleteProduct(productId);
@@ -76,6 +111,11 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Fetches all product categories from the database.
+	 *
+	 * @return list of Category objects or null if error
+	 */
 	public List<Category> getAllCategories() {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -103,7 +143,13 @@ public class ProductService {
 		}
 	}
 
-	//////////////////////
+	/**
+	 * Retrieves filtered product list based on search and sort criteria.
+	 *
+	 * @param searchQuery keyword to search
+	 * @param orderBy     sorting criteria: new, cheap, expensive
+	 * @return list of ProductModel objects
+	 */
 
 	public List<ProductModel> getProducts(String searchQuery, String orderBy) {
 		if (dbConn == null) {
@@ -158,6 +204,12 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Gets a single ProductModel by ID (used in detail page).
+	 *
+	 * @param id product ID
+	 * @return ProductModel object or null
+	 */
 	public ProductModel getById(int id) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -186,6 +238,12 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Retrieves all product variants and their values for a given product.
+	 *
+	 * @param productId ID of the product
+	 * @return list of ProductVariantModel objects
+	 */
 	public List<ProductVariantModel> getVariantsOfAProduct(int productId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -207,6 +265,7 @@ public class ProductService {
 				int productVariantVariantValueId = result.getInt("product_variant_value_id");
 				String variantValue = result.getString("variant_value");
 
+				// Check if variant already added
 				int addedIdx = -1;
 				for (int i = 0; i < productVariants.size(); i++) {
 					ProductVariantModel variantEntry = productVariants.get(i);
@@ -216,6 +275,7 @@ public class ProductService {
 					}
 				}
 
+				// If not added, create new entry
 				if (addedIdx == -1) {
 					productVariants.add(new ProductVariantModel(productVariantId, variantName,
 							new ArrayList<ProductVariantValueModel>()));
@@ -225,6 +285,8 @@ public class ProductService {
 				List<ProductVariantValueModel> productVariantValues = productVariants.get(addedIdx).getVariantValues();
 				productVariantValues.add(
 						new ProductVariantValueModel(productVariantVariantValueId, productVariantId, variantValue));
+				
+				// Add variant value to existing variant
 				productVariants.get(addedIdx).setVariantValues(productVariantValues);
 			}
 
