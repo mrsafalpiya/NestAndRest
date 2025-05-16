@@ -1,6 +1,8 @@
 package com.nestandrest.service;
 
 import com.nestandrest.model.UserModel;
+
+import com.nestandrest.util.ImageUtil;
 import com.nestandrest.util.CookiesUtil;
 
 import jakarta.servlet.http.Cookie;
@@ -12,6 +14,7 @@ import com.nestandrest.config.DbConfig;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.servlet.http.Part;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -117,6 +120,7 @@ public class UserService {
 	public UserModel getUserById(int userId) {
 		String query = "SELECT * FROM user WHERE user_id = ?";
 		try (Connection conn = DbConfig.getDbConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
 			stmt.setInt(1, userId);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
@@ -127,6 +131,10 @@ public class UserService {
 				user.setPhone(rs.getString("phone"));
 				user.setGenderId(rs.getInt("gender_id"));
 				user.setRoleId(rs.getInt("role_id"));
+
+				// Set profile image filename based on userId convention, e.g. "userId.png"
+				user.setProfileImage(user.getUserId() + ".png");
+
 				return user;
 			}
 		} catch (Exception e) {
@@ -282,31 +290,6 @@ public class UserService {
 	}
 
 	/**
-	 * Updates the address of a user in the user_address table based on the provided
-	 * user ID.
-	 *
-	 * @param address A UserAddressModel object containing the new address and the
-	 *                associated user ID.
-	 * @return true if the update was successful (at least one row affected), false
-	 *         otherwise.
-	 */
-	public boolean updateUserAddress(UserAddressModel address) {
-		String query = "UPDATE user_address SET address = ? WHERE user_id = ?";
-		try (Connection conn = DbConfig.getDbConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
-
-			stmt.setString(1, address.getAddress());
-			stmt.setInt(2, address.getUserId());
-
-			int rowsUpdated = stmt.executeUpdate();
-			return rowsUpdated > 0;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	/**
 	 * Updates an existing user's password in the database.
 	 *
 	 * @param user a UserModel object containing the updated user data
@@ -399,5 +382,24 @@ public class UserService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public String getUserProfileImage(int userId) {
+		String profileImage = null;
+		String sql = "SELECT profile_image FROM user WHERE user_id = ?";
+		try (Connection conn = DbConfig.getDbConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+			stmt.setInt(1, userId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					profileImage = rs.getString("profile_image");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// If no profile image, return default image
+		return (profileImage != null && !profileImage.isEmpty()) ? profileImage : "default.png";
 	}
 }
