@@ -129,7 +129,8 @@ public class UserProfileController extends HttpServlet {
 
 		// Checking if a valid phone number was provided
 		if (!validationUtil.isValidPhoneNumber(newPhone)) {
-			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid phone number!",
+			redirectionUtil.setMsgAndRedirect(req, resp, "error",
+					"Please enter a valid phone number! (Start with 98 and of 10 digits)",
 					RedirectionUtil.editUserProfileUrl);
 			return null;
 		}
