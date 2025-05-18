@@ -98,7 +98,7 @@ public class CheckoutAddressController extends HttpServlet {
 
 		// Checking if a valid phone number was provided
 		if (!validationUtil.isValidPhoneNumber(phone)) {
-			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid phone number!",
+			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid phone number! (Start with 98 and of 10 digits)",
 					RedirectionUtil.checkoutAddressUrl);
 			return null;
 		}
