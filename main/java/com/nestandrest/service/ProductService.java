@@ -57,14 +57,14 @@ public class ProductService {
 	/**
 	 * Retrieves all products from the database.
 	 *
-	 * @return list of products or null if error
+	 * @return list of products; returns an empty list if an error occurs
 	 */
 	public List<Product> getAllProducts() {
 		try {
 			return productDAO.getAllProducts();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return new ArrayList<>();
 		}
 	}
 
@@ -167,13 +167,14 @@ public class ProductService {
 		String orderByDir = "ASC";
 		switch (orderBy) {
 		case "cheap":
-			orderBy = "price";
+			orderBy = "discounted_price";
 			orderByDir = "ASC";
 			break;
 		case "expensive":
-			orderBy = "price";
+			orderBy = "discounted_price";
 			orderByDir = "DESC";
-		case "new":
+			break;
+		case "new": 
 		default:
 			orderBy = "product_id";
 			break;
