@@ -3,9 +3,9 @@ package com.nestandrest.model;
 import java.util.Map;
 
 /**
- * Represents a product in the system.
- * Stores all details necessary for displaying and managing a product,
- * including ID, name, descriptions, pricing, category, and stock.
+ * Represents a product in the system. Stores all details necessary for
+ * displaying and managing a product, including ID, name, descriptions, pricing,
+ * category, and stock.
  *
  * @author Bhumika Karki
  */
@@ -25,16 +25,33 @@ public class ProductModel {
 	private int cartQty;
 
 	/**
-	 * Constructor for creating a ProductModel with stock quantity info (used for cart and stock management).
+	 * Constructor for creating a ProductModel with only basic informations.
 	 *
-	 * @param productId         unique product identifier
-	 * @param name              product name
-	 * @param shortDescription  short text for quick view
-	 * @param longDescription   detailed product description
-	 * @param price             original product price
-	 * @param discountedPrice   discounted price (if any)
-	 * @param categoryId        category identifier
-	 * @param stockQty          stock quantity available
+	 * @param productId       unique product identifier
+	 * @param name            product name
+	 * @param price           original product price
+	 * @param discountedPrice discounted price (if any)
+	 */
+	public ProductModel(int productId, String name, double price, double discountedPrice) {
+		super();
+		this.productId = productId;
+		this.name = name;
+		this.price = price;
+		this.discountedPrice = discountedPrice;
+	}
+
+	/**
+	 * Constructor for creating a ProductModel with stock quantity info (used for
+	 * cart and stock management).
+	 *
+	 * @param productId        unique product identifier
+	 * @param name             product name
+	 * @param shortDescription short text for quick view
+	 * @param longDescription  detailed product description
+	 * @param price            original product price
+	 * @param discountedPrice  discounted price (if any)
+	 * @param categoryId       category identifier
+	 * @param stockQty         stock quantity available
 	 */
 	public ProductModel(int productId, String name, String shortDescription, String longDescription, double price,
 			double discountedPrice, int categoryId, int stockQty) {
@@ -50,16 +67,17 @@ public class ProductModel {
 	}
 
 	/**
-	 * Constructor for use cases where the category name is required (e.g., listing with category name display).
+	 * Constructor for use cases where the category name is required (e.g., listing
+	 * with category name display).
 	 *
-	 * @param productId         unique product identifier
-	 * @param name              product name
-	 * @param shortDescription  short text for quick view
-	 * @param longDescription   detailed product description
-	 * @param price             original product price
-	 * @param discountedPrice   discounted price (if any)
-	 * @param categoryId        category identifier
-	 * @param category          category name
+	 * @param productId        unique product identifier
+	 * @param name             product name
+	 * @param shortDescription short text for quick view
+	 * @param longDescription  detailed product description
+	 * @param price            original product price
+	 * @param discountedPrice  discounted price (if any)
+	 * @param categoryId       category identifier
+	 * @param category         category name
 	 */
 	public ProductModel(int productId, String name, String shortDescription, String longDescription, double price,
 			double discountedPrice, int categoryId, int stockQty, String category) {

@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service class for managing products, categories, and variants.
- * Provides high-level business logic and database access coordination.
+ * Service class for managing products, categories, and variants. Provides
+ * high-level business logic and database access coordination.
  * 
  * @author Bhumika Karki
  */
@@ -286,7 +286,7 @@ public class ProductService {
 				List<ProductVariantValueModel> productVariantValues = productVariants.get(addedIdx).getVariantValues();
 				productVariantValues.add(
 						new ProductVariantValueModel(productVariantVariantValueId, productVariantId, variantValue));
-				
+
 				// Add variant value to existing variant
 				productVariants.get(addedIdx).setVariantValues(productVariantValues);
 			}
@@ -322,6 +322,33 @@ public class ProductService {
 			return rowsUpdated > 0;
 		} catch (SQLException e) {
 			System.err.println("Error during product get: " + e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<ProductModel> getProductsOnSale() {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available!");
+			return null;
+		}
+
+		String query = "SELECT p.* FROM product p WHERE discounted_price > 0";
+
+		try {
+			PreparedStatement selectStmt = dbConn.prepareStatement(query);
+			ResultSet result = selectStmt.executeQuery();
+
+			List<ProductModel> products = new ArrayList<ProductModel>();
+
+			while (result.next()) {
+				products.add(new ProductModel(result.getInt("product_id"), result.getString("name"),
+						result.getDouble("price"), result.getDouble("discounted_price"));
+			}
+
+			return products;
+		} catch (SQLException e) {
+			System.err.println("Error during products get: " + e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
