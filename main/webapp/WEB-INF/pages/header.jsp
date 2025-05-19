@@ -84,7 +84,12 @@
 				<a href="${contextPath}/userprofile"
 					style="margin-right: 12px; font-weight: 500;"><%=emailCookie.getValue()%></a>
 
-				<a href="<%=request.getContextPath()%>/logout"
+				<!-- Cart Icon -->
+				<a href="${pageContext.request.contextPath}/checkout-cart"
+					class="cart-icon" style="transform: translate(-4px, 2px);"> <img
+					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/AddToCartIcon.png"
+					alt="Cart" /> <span class="cart-count"></span>
+				</a> <a href="<%=request.getContextPath()%>/logout"
 					class="btn btn-outlined">Logout</a>
 				<%
 				} else {

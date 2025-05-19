@@ -129,11 +129,13 @@
 				<p>
 					<span>Payment Method:</span> <strong>Cash on Delivery</strong>
 				</p>
-				<div class="checkout-wrapper">
-					<button class="checkout-btn"
-						onclick="location.href='${pageContext.request.contextPath}/checkout-address'">
-						Check out</button>
-				</div>
+				<c:if test="${not empty products}">
+					<div class="checkout-wrapper" style="width: 100%;">
+						<button class="checkout-btn"
+							onclick="location.href='${pageContext.request.contextPath}/checkout-address'">
+							Check out</button>
+					</div>
+				</c:if>
 			</div>
 		</div>
 

@@ -51,13 +51,6 @@
 						</select>
 					</div>
 
-					<!-- Cart Icon -->
-					<a href="${pageContext.request.contextPath}/checkout-cart"
-						class="cart-icon"> <img
-						src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/AddToCartIcon.png"
-						alt="Cart" /> <span class="cart-count"></span>
-					</a>
-
 				</form>
 			</div>
 		</div>
