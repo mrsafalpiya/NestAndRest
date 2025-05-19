@@ -1,147 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, com.nestandrest.model.UserModel"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="com.nestandrest.model.UserModel"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>User List</title>
-
+<title>Admin - User List</title>
 <jsp:include page="../head.jsp" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/styles.css" />
+	href="${pageContext.request.contextPath}/css/admin-style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/usermanagement-list.css" />
+	href="${pageContext.request.contextPath}/css/usermanagement-list.css">
 </head>
 <body>
-	<div class="admin-header">
-		<div class="header-right">
-			<img
-				src="${pageContext.request.contextPath}/resources/system/images/admin-logo.png"
-				alt="Admin Profile" class="profile-icon">
-		</div>
-	</div>
+	<div class="admin-layout">
+		<jsp:include page="../admin-header.jsp" />
+		<jsp:include page="../admin-sidebar.jsp" />
 
-	<div class="container">
-		<div class="sidebar" id="sidebar">
-			<!-- Sidebar Placeholder -->
-			<div class="sidebar">
-				<div class="logo">
-					<img
-						src="${pageContext.request.contextPath}/resources/system/images/logo.png"
-						alt="Logo" />
-				</div>
-
-				<div class="section-title">OVERVIEW</div>
-				<div class="menu-item">
-					<img
-						src="${pageContext.request.contextPath}/resources/system/images/dashboard.png"
-						alt="Dashboard Icon" /> <span>Dashboard</span>
-				</div>
-
-				<div class="section-title--second">MANAGEMENT</div>
-
-				<div class="menu-item collapsible" onclick="toggleSubmenu(this)">
-					<img
-						src="${pageContext.request.contextPath}/resources/system/images/icon.png"
-						alt="User Icon" /> <span>User</span> <span class="arrow">&#9662;</span>
-				</div>
-
-				<div class="submenu">
-					<div class="submenu-branch"></div>
-					<div class="submenu-item active">List</div>
-				</div>
-
-				<div class="menu-item">
-					<img
-						src="${pageContext.request.contextPath}/resources/system/images/product-icon.png"
-						alt="Product Icon" /> <span>Product</span> 
-				</div>
-
-				<div class="menu-item">
-					<img
-						src="${pageContext.request.contextPath}/resources/system/images/order-icon.png"
-						alt="Order Icon" /> <span>Order</span>
-				</div>
-			</div>
-		</div>
-		<div class="toggle-sidebar" onclick="toggleSidebar()" id="toggleArrow">&#10094;</div>
-
-		<!-- Main Content -->
 		<div class="main">
 			<div class="header">List</div>
 			<div class="breadcrumb">Dashboard &nbsp; • &nbsp; User &nbsp; •
 				&nbsp; List</div>
 
-			<!-- Search bar -->
 			<form method="get" action="usermanagement-list">
 				<div class="search-bar">
-					<input type="text" name="searchTerm" placeholder="Search..."
-						value="${param.searchTerm}" />
+					<input type="text" name="searchTerm"
+						placeholder="Search by name, email..." value="${param.searchTerm}" />
 					<button type="submit">Search</button>
-					<c:if test="${not empty param.searchTerm}">
-						<div class="search-tags">
-							<span>Search: <strong>${param.searchTerm}</strong></span> <a
-								href="usermanagement-list" class="clear-btn">🗑 Clear</a>
-						</div>
-					</c:if>
 				</div>
+
+				<c:if test="${not empty param.searchTerm}">
+					<div class="search-keyword">
+						<span>Search: <strong>${param.searchTerm}</strong></span> <a
+							href="usermanagement-list" class="clear-btn">🗑 Clear</a>
+					</div>
+				</c:if>
 			</form>
 
-			<!-- User table -->
 			<div class="table-responsive">
 				<table class="user-table">
 					<thead>
 						<tr>
 							<th><input type="checkbox" /></th>
 							<th>Name</th>
-							<th>Phone number</th>
+							<th>Phone</th>
 							<th>Email</th>
 							<th>Role</th>
-							<th></th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-					<tbody>
-						<%
-						List<UserModel> userList = (List<UserModel>) request.getAttribute("userList");
-						if (userList != null) {
-							for (UserModel user : userList) {
-						%>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td><img
-								src="${pageContext.request.contextPath}/resources/system/images/user-images/user1.png" />
-								<%=user.getName()%></td>
-							<td><%=user.getPhone()%></td>
-							<td><%=user.getEmail()%></td>
-							<td><%=user.getRoleId() == 1 ? "Admin" : "User"%></td>
-							<td><a
-								href="${pageContext.request.contextPath}/edit-user-profile?userId=<%=user.getUserId()%>">
-									<span class="edit-icon">✏️</span>
-							</a></td>
+						<c:choose>
+							<c:when test="${not empty userList}">
+								<c:forEach var="user" items="${userList}">
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><img
+											src="${pageContext.request.contextPath}/resources/user-images/${user.userId}.png"
+											onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/system/images/user-avatar.png';"
+											alt="Profile Image" width="150" /></td>
 
-						</tr>
-						<%
-						}
-						} else {
-						%>
-						<tr>
-							<td colspan="6">No users found.</td>
-						</tr>
-						<%
-						}
-						%>
+										<td>${user.phone}</td>
+										<td>${user.email}</td>
+										<td><c:choose>
+												<c:when test="${user.roleId == 2}">Admin</c:when>
+												<c:otherwise>User</c:otherwise>
+											</c:choose></td>
+										<td><a
+											href="${pageContext.request.contextPath}/edit-user-profile?userId=${user.userId}"
+											title="Edit">✏️</a></td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="6" class="no-data">No users found.</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>
 
-			<!-- Pagination -->
 			<div class="pagination">
 				<c:forEach begin="1" end="${totalPages}" var="i">
 					<c:choose>
@@ -155,24 +99,7 @@
 					</c:choose>
 				</c:forEach>
 			</div>
-
 		</div>
 	</div>
-	<script>
-		function toggleSidebar() {
-			const sidebar = document.querySelector('.sidebar');
-			const toggleArrow = document.getElementById("toggleArrow");
-
-			// Toggle the collapsed class on sidebar to hide or show instantly
-			sidebar.classList.toggle('collapsed');
-		}
-		function toggleSubmenu(el) {
-            const submenu = el.nextElementSibling;
-            submenu.style.display = submenu.style.display === "none" ? "block" : "none";
-            const arrow = el.querySelector('.arrow');
-            arrow.style.transform = submenu.style.display === "none" ? "rotate(-90deg)" : "rotate(0deg)";
-        }
-	</script>
-
 </body>
 </html>

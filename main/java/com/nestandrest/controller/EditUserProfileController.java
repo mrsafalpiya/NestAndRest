@@ -1,10 +1,9 @@
 package com.nestandrest.controller;
 
 import java.io.IOException;
-import java.util.List;
+
 
 import com.nestandrest.model.UserModel;
-import com.nestandrest.model.UserAddressModel;
 import com.nestandrest.service.UserService;
 
 import jakarta.servlet.ServletException;
@@ -13,10 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- * Controller to handle editing and deleting user profiles. Mapped to
- * "/edit-user-profile" endpoint.
- */
+
 @WebServlet("/edit-user-profile")
 public class EditUserProfileController extends HttpServlet {
 
@@ -52,7 +48,6 @@ public class EditUserProfileController extends HttpServlet {
 			}
 
 			UserModel user = userService.getUserById(userId);
-			List<UserAddressModel> address = userService.getAddressByUserId(userId);
 
 			if (user == null) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
@@ -60,7 +55,6 @@ public class EditUserProfileController extends HttpServlet {
 			}
 
 			request.setAttribute("user", user);
-			request.setAttribute("address", address);
 			request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
 					response);
 
@@ -109,7 +103,7 @@ public class EditUserProfileController extends HttpServlet {
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
-			String address = request.getParameter("address");
+			
 
 			// Basic form validation
 			if (name == null || name.isEmpty()) {
@@ -153,20 +147,7 @@ public class EditUserProfileController extends HttpServlet {
 			UserService userService = new UserService();
 			boolean updated = userService.updateUser(user);
 
-			// Update address if provided
-			if (address != null && !address.isEmpty()) {
-				UserAddressModel addressModel = new UserAddressModel();
-				addressModel.setUserId(userId);
-				addressModel.setAddress(address);
-
-				boolean addressUpdated = userService.updateUserAddress(addressModel);
-				if (!addressUpdated) {
-					request.setAttribute("error", "Failed to update address. Please try again.");
-					request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp")
-							.forward(request, response);
-					return;
-				}
-			}
+			
 
 			// Final redirect or error message
 			if (updated) {
