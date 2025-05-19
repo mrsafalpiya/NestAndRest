@@ -1,4 +1,8 @@
 <aside id="adminSidebar" class="admin-sidebar">
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 	<!-- Mobile Menu Button -->
 	<button class="mobile-menu-btn" onclick="toggleSidebar()">
 		<img
@@ -19,18 +23,18 @@
 	<nav class="sidebar-nav">
 		<ul>
 			<li class="menu-title">OVERVIEW</li>
-			<li><a href="#"><img
+			<li><a href="${contextPath}/admin"><img
 					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/Dashboard.png"
 					class="icon"> Dashboard</a></li>
 			<li class="menu-title">MANAGEMENT</li>
 			<li></li>
 			<!-- USER MENU -->
-			<li><a href="#"><img
+			<li><a href="${contextPath}/usermanagement-list"><img
 					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/User.png"
 					class="icon"> User</a></li>
 
 			<!-- PRODUCT MENU -->
-			<li><a href="#"><img
+			<li><a href="${contextPath}/admin/products/list"><img
 					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/Product.png"
 					class="icon"> Product</a></li>
 			<li><a href="#"><img
