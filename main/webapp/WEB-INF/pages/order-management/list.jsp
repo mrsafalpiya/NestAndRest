@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,43 +41,20 @@
 			</div>
 
 			<div class="list-table-container">
-				<!-- Tabs -->
-				<div class="table-tabs">
-					<button class="table-tab-item">
-						<span>All</span>
-						<div class="tab-item-count">132</div>
-					</button>
-					<button class="table-tab-item selected">
-						<span>Pending</span>
-						<div class="tab-item-count pending">32</div>
-					</button>
-					<button class="table-tab-item">
-						<span>Completed</span>
-						<div class="tab-item-count completed">23</div>
-					</button>
-				</div>
-
 				<!-- Filters -->
 				<div class="table-filters">
-					<div style="min-width: 180px">
-						<p class="input-label">Start date</p>
-						<input type="date" class="input-text" placeholder="Start date" />
-					</div>
-					<div style="min-width: 180px">
-						<p class="input-label">End date</p>
-						<input type="date" class="input-text" placeholder="End date" />
-					</div>
-					<div style="width: 100%">
-						<p class="input-label">Search customer</p>
-						<input type="text" class="input-text" />
-					</div>
+					<form style="width: 100%">
+						<p class="input-label">Search by Order ID</p>
+						<input type="text" class="input-text" name="order_id"
+							value="${orderId}" />
+					</form>
 				</div>
 
 				<!-- Results Count -->
 				<div class="results-count">
 					<p class="body2">
-						<span class="subtitle2" style="color: #1c252e">8</span> results
-						found
+						<span class="subtitle2" style="color: #1c252e">${orders.size()}</span>
+						results found
 					</p>
 				</div>
 
@@ -87,87 +69,51 @@
 							<th>Price</th>
 							<th>Status</th>
 						</tr>
-						<tr>
-							<td>#6078</td>
-							<td>
-								<div class="customer-info">
-									<img
-										src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-										width="40" height="40" />
-									<div class="customer-details">
-										<p class="body2 name">Jayvion Simon</p>
-										<p class="body2 phone">9876543210</p>
+						<c:forEach var="order" items="${orders}">
+							<tr
+								onclick="window.location='${contextPath}/admin-order-details?id=${order.orderId}';"
+								style="cursor: pointer;">
+								<td>#${order.orderId}</td>
+								<td>
+									<div class="customer-info">
+										<img
+											src="${pageContext.request.contextPath}/resources/user-images/${order.user.userId}.png"
+											onerror="this.src='${pageContext.request.contextPath}/resources/system/images/Avatar.png'"
+											width="40" height="40" />
+										<div class="customer-details">
+											<p class="body2 name">${order.user.name}</p>
+											<p class="body2 phone">${order.user.phone}</p>
+										</div>
 									</div>
-								</div>
-							</td>
-							<td>
-								<div>
-									<p class="body2" style="margin-bottom: 4px">12 Jan 2022</p>
-									<p class="caption">10:00 PM</p>
-								</div>
-							</td>
-							<td>52</td>
-							<td>Rs 10,000</td>
-							<td>
-								<div style="display: flex; gap: 32px">
-									<div class="tab-item-count completed">Completed</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>#6019</td>
-							<td>
-								<div class="customer-info">
-									<img
-										src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-										width="40" height="40" />
-									<div class="customer-details">
-										<p class="body2 name">Lucian Obrien</p>
-										<p class="body2 phone">9876543210</p>
+								</td>
+								<td>
+									<div>
+										<p class="body2" style="margin-bottom: 4px">
+											<fmt:formatDate value="${order.orderDate}"
+												pattern="dd MMM yyyy" var="formattedDate" />${formattedDate}
+										</p>
+										<p class="caption">
+											<fmt:formatDate value="${order.orderDate}" pattern="hh:mm a"
+												var="formattedTime" />${formattedTime}
+										</p>
 									</div>
-								</div>
-							</td>
-							<td>
-								<div>
-									<p class="body2" style="margin-bottom: 4px">11 Feb 2022</p>
-									<p class="caption">09:00 PM</p>
-								</div>
-							</td>
-							<td>43</td>
-							<td>Rs 15,000</td>
-							<td>
-								<div style="display: flex; gap: 32px">
-									<div class="tab-item-count pending">Pending</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>#6009</td>
-							<td>
-								<div class="customer-info">
-									<img
-										src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-										width="40" height="40" />
-									<div class="customer-details">
-										<p class="body2 name">Reece Chung</p>
-										<p class="body2 phone">9876543210</p>
+								</td>
+
+								<c:set var="itemsCount" value="${0}" />
+								<c:forEach var="product" items="${order.cartProducts}">
+									<c:set var="itemsCount" value="${itemsCount + product.cartQty}" />
+								</c:forEach>
+
+								<td>${itemsCount}</td>
+								<td>Rs ${order.totalPrice}</td>
+								<td>
+									<div style="display: flex; gap: 32px">
+										<div
+											class="tab-item-count ${fn:toLowerCase(order.orderStatus)}">${order.orderStatus}</div>
 									</div>
-								</div>
-							</td>
-							<td>
-								<div>
-									<p class="body2" style="margin-bottom: 4px">08 Apr 2022</p>
-									<p class="caption">06:00 PM</p>
-								</div>
-							</td>
-							<td>22</td>
-							<td>Rs 8,000</td>
-							<td>
-								<div style="display: flex; gap: 32px">
-									<div class="tab-item-count completed">Completed</div>
-								</div>
-							</td>
-						</tr>
+								</td>
+							</tr>
+						</c:forEach>
 					</table>
 				</div>
 			</div>

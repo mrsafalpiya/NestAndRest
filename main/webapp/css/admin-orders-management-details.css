@@ -53,9 +53,24 @@
 	color: var(--swap-dark-light-warning, #b76e00);
 }
 
-.status.completed {
+.status.delivered {
 	background: var(--success-16, rgba(34, 197, 94, 0.16));
 	color: var(--swap-dark-light-success, #118d57);
+}
+
+.status.cancelled {
+	background: var(--error-16, rgba(255, 86, 48, 0.16));
+	color: var(--swap-dark-light-error, #B71D18);
+}
+
+.status.processing {
+	background: var(--secondary-16, rgba(125, 157, 127, 0.16));
+	color: var(--swap-dark-light-secondary, #4D6A50);
+}
+
+.status.shipped {
+	background: var(--info-16, rgba(0, 184, 217, 0.16));
+	color: var(--swap-dark-light-info, #006C9C);
 }
 
 .order-status {

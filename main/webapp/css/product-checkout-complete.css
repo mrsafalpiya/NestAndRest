@@ -1,82 +1,82 @@
 @charset "UTF-8";
+
 body {
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 40px 8px; /* reduce left/right padding */
+	background-color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	padding: 40px 8px; /* reduce left/right padding */
 }
 
 .container {
-  text-align: center;
-  max-width: 400px;
-  padding: 20px;
+	text-align: center;
+	max-width: 400px;
+	padding: 20px;
 }
 
 h1 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #1f2937; /* text-gray-900 */
-  margin-bottom: 24px;
+	font-size: 24px;
+	font-weight: 600;
+	color: #1f2937; /* text-gray-900 */
+	margin-bottom: 24px;
 }
 
 .image-container img {
-  width: 160px;
-  height: 160px;
-  margin-bottom: 24px;
+	width: 160px;
+	height: 160px;
+	margin-bottom: 24px;
 }
 
 .text-muted {
-  color: #6b7280; /* text-gray-600 */
-  font-size: 14px;
-  margin-bottom: 8px;
+	color: #6b7280; /* text-gray-600 */
+	font-size: 14px;
+	margin-bottom: 8px;
 }
 
 .order-id {
-  color: #ea580c; /* text-orange-500 */
-  font-size: 14px;
-  margin-bottom: 16px;
+	color: #ea580c; /* text-orange-500 */
+	font-size: 36px;
+	margin-bottom: 16px;
 }
 
 .signature {
-  color: #6b7280;
-  font-size: 14px;
-  margin-top: 16px;
+	color: #6b7280;
+	font-size: 14px;
+	margin-top: 16px;
 }
 
 .button-group {
-  margin-top: 24px;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
+	margin-top: 24px;
+	display: flex;
+	justify-content: center;
+	gap: 12px;
 }
 
 button {
-  padding: 10px 16px;
-  font-size: 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+	padding: 10px 16px;
+	font-size: 14px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.3s ease;
 }
 
 .btn-outline {
-  background: #fff;
-  border: 1px solid #d1d5db; /* border-gray-300 */
-  color: #374151; /* text-gray-700 */
+	background: #fff;
+	border: 1px solid #d1d5db; /* border-gray-300 */
+	color: #374151; /* text-gray-700 */
 }
 
 .btn-outline:hover {
-  background: #f3f4f6; /* hover:bg-gray-100 */
+	background: #f3f4f6; /* hover:bg-gray-100 */
 }
 
 .btn-primary {
-  background: #1f2937; /* bg-gray-800 */
-  color: #ffffff;
-  border: none;
+	background: #1f2937; /* bg-gray-800 */
+	color: #ffffff;
+	border: none;
 }
 
 .btn-primary:hover {
-  background: #111827; /* hover:bg-gray-700 */
+	background: #111827; /* hover:bg-gray-700 */
 }
-

@@ -25,7 +25,7 @@
 		</div>
 
 		<p class="text-muted">Thanks for placing order :</p>
-		<p class="order-id">${orderId}</p>
+		<p class="order-id">Order ID: #${orderId}</p>
 
 		<p class="text-muted">
 			We will send you a notification within 5 days when it ships. <br />
@@ -35,7 +35,9 @@
 		<p class="signature">All the best,</p>
 
 		<div class="button-group">
-			<button class="btn-outline"onclick="location.href='${pageContext.request.contextPath}/checkout-address'">← Continue shopping</button>
+			<button class="btn-outline"
+				onclick="location.href='${pageContext.request.contextPath}/'">←
+				Continue shopping</button>
 		</div>
 	</div>
 </body>

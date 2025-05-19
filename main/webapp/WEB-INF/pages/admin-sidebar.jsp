@@ -11,9 +11,9 @@
 	</button>
 
 	<div class="logo">
-		<img
+		<a href="${contextPath}/"> <img
 			src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/HeadLogo.png"
-			alt="Logo">
+			alt="Logo"></a>
 	</div>
 	<button id="sidebarToggle" class="sidebar-toggle-btn">
 		<img
@@ -37,7 +37,7 @@
 			<li><a href="${contextPath}/admin/products/list"><img
 					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/Product.png"
 					class="icon"> Product</a></li>
-			<li><a href="#"><img
+			<li><a href="${contextPath}/admin-orders"><img
 					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/Cart.png"
 					class="icon"> Order</a></li>
 		</ul>
