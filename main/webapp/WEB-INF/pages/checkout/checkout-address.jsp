@@ -21,42 +21,39 @@
 	<main class="checkout-page container">
 		<h4>Checkout</h4>
 
-		<%
-		// Dynamically set the current step for the progress bar
-		String currentStep = "checkout-address"; // Set dynamically based on the page (e.g., "cart", "checkout-address", "complete")
-		%>
+		<!-- Set currentStep without scriptlet -->
+		<c:set var="currentStep" value="checkout-address" />
 
 		<div class="checkout-progress">
 			<!-- Cart step -->
 			<div
-				class="step <%=currentStep.equals("checkout-address") || currentStep.equals("complete") ? "completed" : ""%>">
-				<%
-				if (currentStep.equals("checkout-address") || currentStep.equals("complete")) {
-				%>
-				<div class="tick-mark">✔</div>
-				<%
-				} else {
-				%>
-				<div class="circle"></div>
-				<%
-				}
-				%>
+				class="step <c:if test='${currentStep == "checkout-address" or currentStep == "complete"}'>completed</c:if>">
+				<c:choose>
+					<c:when
+						test="${currentStep == 'checkout-address' or currentStep == 'complete'}">
+						<div class="tick-mark">✔</div>
+					</c:when>
+					<c:otherwise>
+						<div class="circle"></div>
+					</c:otherwise>
+				</c:choose>
 				<span>Cart</span>
 			</div>
 			<div
-				class="line <%=currentStep.equals("checkout-address") || currentStep.equals("complete") ? "active-line" : ""%>"></div>
+				class="line <c:if test='${currentStep == "checkout-address" or currentStep == "complete"}'>active-line</c:if>"></div>
 
 			<!-- Billing & Address step -->
 			<div
-				class="step <%=currentStep.equals("checkout-address") || currentStep.equals("complete") ? "active" : ""%>">
+				class="step <c:if test='${currentStep == "checkout-address" or currentStep == "complete"}'>active</c:if>">
 				<div class="circle"></div>
 				<span>Billing & Address</span>
 			</div>
 			<div
-				class="line <%=currentStep.equals("complete") ? "active-line" : ""%>"></div>
+				class="line <c:if test='${currentStep == "complete"}'>active-line</c:if>"></div>
 
 			<!-- Complete step -->
-			<div class="step <%=currentStep.equals("complete") ? "active" : ""%>">
+			<div
+				class="step <c:if test='${currentStep == "complete"}'>active</c:if>">
 				<div class="circle"></div>
 				<span>Complete</span>
 			</div>
