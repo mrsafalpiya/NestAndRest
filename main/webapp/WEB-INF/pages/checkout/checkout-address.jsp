@@ -102,7 +102,7 @@
 					<c:set var="subtotal" value="0" />
 					<c:forEach var="product" items="${products}">
 						<c:set var="subtotal"
-							value="${subtotal + (product.getSalePrice() * product.getCartQty())}" />
+							value="${subtotal + (product.salePrice * product.cartQty)}" />
 					</c:forEach>
 					<span>Subtotal:</span> <strong>Rs ${subtotal}</strong>
 				</p>

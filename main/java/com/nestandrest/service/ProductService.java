@@ -174,7 +174,7 @@ public class ProductService {
 			orderBy = "discounted_price";
 			orderByDir = "DESC";
 			break;
-		case "new": 
+		case "new":
 		default:
 			orderBy = "product_id";
 			break;
@@ -343,7 +343,7 @@ public class ProductService {
 
 			while (result.next()) {
 				products.add(new ProductModel(result.getInt("product_id"), result.getString("name"),
-						result.getDouble("price"), result.getDouble("discounted_price"));
+						result.getDouble("price"), result.getDouble("discounted_price")));
 			}
 
 			return products;
