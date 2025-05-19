@@ -148,4 +148,40 @@ public class CartService {
 			return null;
 		}
 	}
+	
+	public boolean removeProductFromCart(int userId, int productId) {
+	    if (dbConn == null) {
+	        System.err.println("Database connection is not available.");
+	        return false;
+	    }
+
+	    try {
+	        // First get the user's cart ID
+	        String selectCartIdQuery = "SELECT cart_id FROM cart WHERE user_id = ?";
+	        PreparedStatement selectStmt = dbConn.prepareStatement(selectCartIdQuery);
+	        selectStmt.setInt(1, userId);
+	        ResultSet rs = selectStmt.executeQuery();
+
+	        if (rs.next()) {
+	            int cartId = rs.getInt("cart_id");
+
+	            // Delete the product variants from cart_product_variant_value table for this cart and product
+	            String deleteQuery = "DELETE FROM cart_product_variant_value WHERE cart_id = ? AND product_id = ?";
+	            PreparedStatement deleteStmt = dbConn.prepareStatement(deleteQuery);
+	            deleteStmt.setInt(1, cartId);
+	            deleteStmt.setInt(2, productId);
+	            int affectedRows = deleteStmt.executeUpdate();
+
+	            return affectedRows > 0;
+	        } else {
+	            // No cart found for user
+	            return false;
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("Error during removing product from cart: " + e.getMessage());
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 }

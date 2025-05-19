@@ -25,7 +25,7 @@
 		</div>
 
 		<p class="text-muted">Thanks for placing order :</p>
-		<p class="order-id">01dc1370-3df6-11eb-b378-0242ac130002</p>
+		<p class="order-id">${orderId}</p>
 
 		<p class="text-muted">
 			We will send you a notification within 5 days when it ships. <br />
@@ -36,7 +36,6 @@
 
 		<div class="button-group">
 			<button class="btn-outline"onclick="location.href='${pageContext.request.contextPath}/checkout-address'">← Continue shopping</button>
-			<button class="btn-primary">⬇ Download as PDF</button>
 		</div>
 	</div>
 </body>

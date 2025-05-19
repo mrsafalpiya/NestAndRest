@@ -338,6 +338,13 @@ public class UserService {
 			}
 		}
 	}
+	
+	/**
+	 * Retrieves all addresses associated with a specific user, prioritizing the default address.
+	 *
+	 * @param userId The ID of the user whose addresses are to be fetched.
+	 * @return A list of UserAddressModel objects representing the user's addresses.
+	 */
 
 	public List<UserAddressModel> getAllUserAddresses(int userId) {
 		String sql = "SELECT * FROM user_address WHERE user_id = ? ORDER BY is_default DESC, user_address_id DESC";
@@ -358,7 +365,13 @@ public class UserService {
 		}
 		return list;
 	}
-
+	
+	/**
+	 * Inserts a new address for a user into the database.
+	 *
+	 * @param userAddress The UserAddressModel object containing the address details.
+	 * @return True if the insertion was successful, false if not, or null if the DB connection is unavailable.
+	 */
 	public Boolean addAddressOfUser(UserAddressModel userAddress) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -383,7 +396,13 @@ public class UserService {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * Retrieves the profile image filename for a specific user.
+	 *
+	 * @param userId The ID of the user.
+	 * @return The filename of the profile image, or "default.png" if none is found.
+	 */
 	public String getUserProfileImage(int userId) {
 		String profileImage = null;
 		String sql = "SELECT profile_image FROM user WHERE user_id = ?";
