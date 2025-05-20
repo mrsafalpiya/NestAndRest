@@ -31,7 +31,7 @@
 			<div class="page-title">
 				<h4>Orders List</h4>
 				<div class="links">
-					<a href="#">Dashboard</a>
+					<a href="${contextPath}/admin">Dashboard</a>
 					<svg width="4" height="4" viewBox="0 0 4 4" fill="none"
 						xmlns="http://www.w3.org/2000/svg">
 						<circle cx="2" cy="2" r="2" fill="#919EAB" />

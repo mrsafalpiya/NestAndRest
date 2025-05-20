@@ -82,10 +82,10 @@ public class LoginController extends HttpServlet {
 		// Checking if a valid email was provided
 		if (!validationUtil.isValidEmail(email)) {
 			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid email address!",
-					RedirectionUtil.registerUrl);
+					RedirectionUtil.loginUrl);
 			return null;
 		}
-		
+
 		return new UserModel(email, password);
 	}
 }
