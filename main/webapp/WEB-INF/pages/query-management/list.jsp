@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin - Orders List</title>
+<title>Admin - Queries List</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="../head.jsp" />
 <link rel="stylesheet"
@@ -29,32 +29,24 @@
 		<%-- Main Orders List Container --%>
 		<main class="container">
 			<div class="page-title">
-				<h4>Orders List</h4>
+				<h4>Queries List</h4>
 				<div class="links">
 					<a href="${contextPath}/admin">Dashboard</a>
 					<svg width="4" height="4" viewBox="0 0 4 4" fill="none"
 						xmlns="http://www.w3.org/2000/svg">
 						<circle cx="2" cy="2" r="2" fill="#919EAB" />
 					</svg>
-					<a href="#">Orders List</a>
+					<a href="#">Queries List</a>
 				</div>
 			</div>
 
 			<div class="list-table-container">
-				<!-- Filters -->
-				<div class="table-filters">
-					<form style="width: 100%">
-						<p class="input-label">Search by Order ID</p>
-						<input type="text" class="input-text" name="order_id"
-							value="${orderId}" />
-					</form>
-				</div>
 
 				<!-- Results Count -->
 				<div class="results-count">
 					<p class="body2">
-						<span class="subtitle2" style="color: #1c252e">${orders.size()}</span>
-						results found
+						<span class="subtitle2" style="color: #1c252e">${queries.size()}</span>
+						queries found
 					</p>
 				</div>
 
@@ -62,56 +54,36 @@
 				<div class="results-table-container">
 					<table class="results-table">
 						<tr>
-							<th>Order</th>
-							<th class="max">Customer</th>
-							<th>Date</th>
-							<th>Items</th>
-							<th>Price</th>
-							<th>Status</th>
+							<th>Query</th>
+							<th>User</th>
+							<th>Created At</th>
+							<th class="max">Message</th>
 						</tr>
-						<c:forEach var="order" items="${orders}">
-							<tr
-								onclick="window.location='${contextPath}/admin-order-details?id=${order.orderId}';"
-								style="cursor: pointer;">
-								<td>#${order.orderId}</td>
+						<c:forEach var="query" items="${queries}">
+							<tr>
+								<td>#${query.queryId}</td>
 								<td>
 									<div class="customer-info">
-										<img
-											src="${pageContext.request.contextPath}/resources/user-images/${order.user.userId}.png"
-											onerror="this.src='${pageContext.request.contextPath}/resources/system/images/Avatar.png'"
-											width="40" height="40" />
 										<div class="customer-details">
-											<p class="body2 name">${order.user.name}</p>
-											<p class="body2 phone">${order.user.phone}</p>
+											<p class="body2 name">${query.userName}</p>
+											<p class="body2 phone">${query.userEmail}</p>
 										</div>
 									</div>
 								</td>
 								<td>
 									<div>
 										<p class="body2" style="margin-bottom: 4px">
-											<fmt:formatDate value="${order.orderDate}"
+											<fmt:formatDate value="${query.createdAt}"
 												pattern="dd MMM yyyy" var="formattedDate" />${formattedDate}
 										</p>
 										<p class="caption">
-											<fmt:formatDate value="${order.orderDate}" pattern="hh:mm a"
+											<fmt:formatDate value="${query.createdAt}" pattern="hh:mm a"
 												var="formattedTime" />${formattedTime}
 										</p>
 									</div>
 								</td>
 
-								<c:set var="itemsCount" value="${0}" />
-								<c:forEach var="product" items="${order.cartProducts}">
-									<c:set var="itemsCount" value="${itemsCount + product.cartQty}" />
-								</c:forEach>
-
-								<td>${itemsCount}</td>
-								<td>Rs ${order.totalPrice}</td>
-								<td>
-									<div style="display: flex; gap: 32px">
-										<div
-											class="tab-item-count ${fn:toLowerCase(order.orderStatus)}">${order.orderStatus}</div>
-									</div>
-								</td>
+								<td>${query.message}</td>
 							</tr>
 						</c:forEach>
 					</table>

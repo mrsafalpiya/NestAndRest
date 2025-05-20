@@ -13,6 +13,7 @@ public class RedirectionUtil {
 	public static final String homeUrl = baseUrl + "home.jsp";
 	public static final String editUserProfileUrl = baseUrl + "user/user-profile.jsp";
 	public static final String checkoutAddressUrl = baseUrl + "checkout/checkout-address.jsp";
+	public static final String contactUsUrl = baseUrl + "info/contact-us.jsp";
 
 	public void setMsgAttribute(HttpServletRequest req, String msgType, String msg) {
 		req.setAttribute(msgType, msg);
