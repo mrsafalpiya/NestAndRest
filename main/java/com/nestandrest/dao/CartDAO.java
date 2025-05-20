@@ -5,9 +5,18 @@ import java.util.*;
 import com.nestandrest.model.Product;
 import com.nestandrest.config.DbConfig;
 
+/**
+ * Data Access Object (DAO) for managing cart-related operations.
+ * Handles retrieval, creation, and modification of carts and cart items in the database.
+ */
 public class CartDAO {
 
-    // Get cart_id for user
+	 /**
+     * Retrieves the active cart ID for a specific user.
+     *
+     * @param userId the ID of the user
+     * @return the cart ID if found, otherwise -1
+     */
     public int getActiveCartId(int userId) {
         String query = "SELECT cart_id FROM cart WHERE user_id = ?";
         try (Connection conn = DbConfig.getDbConnection();
@@ -25,7 +34,13 @@ public class CartDAO {
         return -1; // no cart found
     }
 
-    // Create new cart for user
+    
+    /**
+     * Creates a new cart for the given user.
+     *
+     * @param userId the ID of the user
+     * @return the generated cart ID, or -1 if creation fails
+     */
     public int createCart(int userId) {
         String query = "INSERT INTO cart (user_id) VALUES (?)";
         try (Connection conn = DbConfig.getDbConnection();
@@ -45,7 +60,14 @@ public class CartDAO {
         return -1;
     }
 
-    // Check if product is already in cart
+    
+    /**
+     * Checks if a product already exists in a specific cart.
+     *
+     * @param cartId    the ID of the cart
+     * @param productId the ID of the product
+     * @return true if the product is already in the cart, false otherwise
+     */
     public boolean isProductInCart(int cartId, int productId) {
         String query = "SELECT COUNT(*) FROM cart_product WHERE cart_id = ? AND product_id = ?";
         try (Connection conn = DbConfig.getDbConnection();
@@ -64,7 +86,13 @@ public class CartDAO {
         return false;
     }
 
-    // Add product to cart with quantity 1
+   
+    /**
+     * Adds a product to the cart with an initial quantity of 1.
+     *
+     * @param cartId    the ID of the cart
+     * @param productId the ID of the product to be added
+     */
     public void addProductToCart(int cartId, int productId) {
         String query = "INSERT INTO cart_product (cart_id, product_id, quantity) VALUES (?, ?, 1)";
         try (Connection conn = DbConfig.getDbConnection();
@@ -79,7 +107,14 @@ public class CartDAO {
         }
     }
 
-    // Update quantity for a product in cart
+  
+    /**
+     * Updates the quantity of a specific product in the cart.
+     *
+     * @param cartId      the ID of the cart
+     * @param productId   the ID of the product
+     * @param newQuantity the new quantity to set
+     */
     public void updateProductQuantity(int cartId, int productId, int newQuantity) {
         String query = "UPDATE cart_product SET quantity = ? WHERE cart_id = ? AND product_id = ?";
         try (Connection conn = DbConfig.getDbConnection();
@@ -95,7 +130,13 @@ public class CartDAO {
         }
     }
 
-    // Get products in cart
+    
+    /**
+     * Retrieves all products in the cart along with their quantities.
+     *
+     * @param cartId the ID of the cart
+     * @return a list of Product objects representing the items in the cart
+     */
     public List<Product> getCartItems(int cartId) {
         List<Product> cartItems = new ArrayList<>();
         String query = "SELECT p.*, cp.quantity FROM cart_product cp JOIN products p ON cp.product_id = p.productId WHERE cp.cart_id = ?";
@@ -125,7 +166,12 @@ public class CartDAO {
         return cartItems;
     }
 
-    // Clear cart
+    
+    /**
+     * Clears all items from the specified cart.
+     *
+     * @param cartId the ID of the cart to be cleared
+     */
     public void clearCart(int cartId) {
         String query = "DELETE FROM cart_product WHERE cart_id = ?";
         try (Connection conn = DbConfig.getDbConnection();

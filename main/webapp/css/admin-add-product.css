@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-/* Main Container */
+/* -------------------- Layout Container -------------------- */
+/* Main layout for the admin add product page */
 .admin-product-container {
     margin-left: 180px;
     padding: 24px;
@@ -11,7 +12,8 @@
     justify-content: center;
 }
 
-/* Breadcrumb */
+/* -------------------- Breadcrumb Navigation -------------------- */
+/* Styles for breadcrumb section showing page title and path */
 .breadcrumb {
 	margin-top: 10px;
     margin-bottom: 30px;
@@ -36,7 +38,8 @@
     color: #000;
 }
 
-/* Product Form */
+/* -------------------- Product Form Layout -------------------- */
+/* Container for the product add/edit form */
 .product-form {
     background-color: #fff;
     border-radius: 12px;
@@ -49,13 +52,15 @@
     max-width: 800px;
 }
 
+/* Section inside form with vertical spacing */
 .form-section{
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-/* Section Title */
+/* -------------------- Section Headers -------------------- */
+/* Subtitles and description under each form section */
 .form-section h5 {
     font-size: 15px;
     margin-bottom: 3px;
@@ -68,7 +73,8 @@
     margin-bottom: 15px;
 }
 
-/* All inputs/textareas/selects uniform style */
+/* -------------------- Input Fields -------------------- */
+/* Uniform styles for inputs, textareas, and select boxes */
 .product-form input[type="text"],
 .product-form input[type="number"],
 .product-form textarea,
@@ -83,7 +89,7 @@
     min-height: 48px;
 }
 
-/* Fix textareas' height */
+/* Set specific height for description textareas */
 textarea[name="fullDescription"] {
     min-height: 140px;
 }
@@ -91,6 +97,8 @@ textarea[name="subDescription"] {
     min-height: 100px;
 }
 
+/* -------------------- Image Upload Section -------------------- */
+/* Style for the image upload label area */
 .image-upload label {
     display: flex;
     flex-direction: column;
@@ -102,7 +110,7 @@ textarea[name="subDescription"] {
     padding: 20px;
 }
 
-/* Image Upload Box */
+/* Box for uploading product image */
 .image-upload {
     border: 2px dashed #ccc;
     border-radius: 10px;
@@ -127,10 +135,14 @@ textarea[name="subDescription"] {
     color: #aaa;
 }
 
+/* Hide actual file input */
 .image-upload input[type="file"] {
     display: none;
 }
 
+
+/* -------------------- Image Action Buttons -------------------- */
+/* Layout and styling for upload and remove buttons */
 .image-actions {
     display: flex;
     justify-content: flex-end;
@@ -168,7 +180,8 @@ textarea[name="subDescription"] {
     height: 16px;
 }
 
-/* Checkbox and Label */
+/* -------------------- Checkbox and Label -------------------- */
+/* Style for toggle options and associated text */
 .product-form label {
     display: flex;
     align-items: center;
@@ -177,6 +190,9 @@ textarea[name="subDescription"] {
     color: #333;
 }
 
+
+/* -------------------- Properties Grid -------------------- */
+/* Grid layout for selecting colors, sizes, etc. */
 .properties-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -184,6 +200,9 @@ textarea[name="subDescription"] {
     gap: 20px;
 }
 
+
+/* -------------------- Form Group -------------------- */
+/* Common structure for labeled input fields */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -206,6 +225,9 @@ textarea[name="subDescription"] {
     width: 100%;
 }
 
+
+/* -------------------- Discount Toggle -------------------- */
+/* Layout for checkbox toggle related to discount */
 .discount-toggle {
     display: flex;
     align-items: center;
@@ -217,7 +239,8 @@ textarea[name="subDescription"] {
     height: 20px;
 }
 
-/* Button */
+/* -------------------- Submit Button -------------------- */
+/* Style for final 'Create' or 'Submit' button */
 .btn-create {
     background-color: #111827;
     color: white;
@@ -231,6 +254,9 @@ textarea[name="subDescription"] {
     align-self: flex-end;
 }
 
+
+/* -------------------- Responsive Design -------------------- */
+/* Media queries for mobile responsiveness */
 @media screen and (max-width: 768px) {
     .admin-product-container {
         margin-left: 0;

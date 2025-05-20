@@ -11,17 +11,37 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller servlet for handling admin-side product listing, pagination, search,
+ * and product management actions like update and delete.
+ * @author Safal Piya 
+ * @author Bhumika Karki
+ * @author Ayush Shrestha
+ */
 @WebServlet(asyncSupported = true, urlPatterns = "/admin/products/list")
 public class AdminProductListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int PRODUCTS_PER_PAGE = 6;
 	private ProductService productService;
 
+	
+	/**
+	 * Initializes the ProductService instance during servlet startup.
+	 */
 	@Override
 	public void init() throws ServletException {
 		productService = new ProductService();
 	}
 
+	
+	/**
+	 * Handles GET requests to fetch and display paginated list of products with optional search functionality.
+	 *
+	 * @param request  HTTP request containing optional search and pagination parameters
+	 * @param response HTTP response forwarded to the admin product list JSP
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException      if an I/O error occurs during forwarding
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -61,6 +81,15 @@ public class AdminProductListController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/pages/admin-products/admin-product-list.jsp").forward(request, response);
 	}
 
+	
+	/**
+	 * Handles POST requests to perform actions like deleting or updating products from the admin panel.
+	 *
+	 * @param request  HTTP request containing form data and action type
+	 * @param response HTTP response redirected back to the product list
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException      if an I/O error occurs during redirect
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

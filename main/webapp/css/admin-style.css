@@ -1,4 +1,5 @@
 /* === Layout Container === */
+/* Main sidebar container */
 .admin-sidebar {
     width: 180px;
     background: #f9f9f9;
@@ -10,10 +11,12 @@
     left: 0;
 }
 
+/* Enable scrolling if sidebar is collapsed */
 .admin-sidebar.collapsed {
 	overflow-y: auto;
 }
 
+/* Sidebar logo section */
 .admin-sidebar .logo {
     text-align: left;
     margin-bottom: 30px;
@@ -23,6 +26,7 @@
     width: 50px;
 }
 
+/* Sidebar navigation list */
 .admin-sidebar ul {
     list-style: none;
     padding: 0;
@@ -33,6 +37,7 @@
     margin-bottom: 18px;
 }
 
+/* Sidebar links */
 .admin-sidebar a {
     color: #111;
     text-decoration: none;
@@ -42,11 +47,13 @@
     gap: 10px;
 }
 
+/* Icon styling inside links */
 .admin-sidebar .icon {
     width: 30px;
     height: 20px;
 }
 
+/* Nested submenu items */
 .admin-sidebar .submenu {
     margin-left: 45px;
     margin-top: 15px;
@@ -62,6 +69,7 @@
     color: #333;
 }
 
+/* Section title in the sidebar */
 .menu-title {
     font-size: 12px;
     color: #888;
@@ -69,11 +77,12 @@
     margin: 20px 0 10px 5px;
 }
 
+/* For expandable menu items (optional) */
 .menu-item.collapsible {
 	margin-top: 12px;
 }
 
-
+/* Arrow icon for collapsible menus */
 .sidebar-arrow {
 	margin-left: auto;
 	font-size: 12px;
@@ -81,7 +90,7 @@
 	transition: transform 0.3s ease;
 }
 
-/* Toggle button */
+/* === Sidebar Toggle Button === */
 .sidebar-toggle-btn {
     position: absolute;
     top: 12px;
@@ -96,41 +105,49 @@
     transition: left 0.3s ease;
 }
 
+/* When sidebar is collapsed, reposition toggle */
 .admin-sidebar.collapsed .sidebar-toggle-btn {
 	top: 72px;
     right: 12px;
 }
 
-/* Collapsed Sidebar */
+/* Collapsed sidebar width */
 .admin-sidebar.collapsed {
     width: 64px;
 }
 
+/* Sidebar toggle positioning when collapsed */
 .admin-sidebar.collapsed ~ .sidebar-toggle-btn {
     left: 60px;
 }
 
+/* Hide titles, submenus, and text in collapsed view */
 .admin-sidebar.collapsed .menu-title,
 .admin-sidebar.collapsed .submenu,
 .admin-sidebar.collapsed a span {
     display: none;
 }
 
+/* === Content container beside sidebar === */
 /* Also shift content left */
 .admin-product-container {
     transition: margin-left 0.3s ease;
 }
 
+
+/* Shift content left when sidebar is collapsed */
 .admin-sidebar.collapsed + .admin-product-container {
     margin-left: 60px;
 }
 
+/* Layout for collapsible menu item */
 .menu-item.collapsible {
     display: flex;
     align-items: center;
     cursor: pointer;
     gap: 8px;
 }
+
 
 .sidebar-arrow {
     margin-left: auto;
@@ -139,10 +156,12 @@
     transition: transform 0.3s ease;
 }
 
+/* Arrow animation for open state */
 .menu-item.open .sidebar-arrow {
     transform: rotate(180deg);
 }
 
+/* Submenu visibility toggle */
 .submenu {
     display: none;
     flex-direction: column;
@@ -155,7 +174,7 @@
     display: flex;
 }
 
-
+/* === Admin Header Section === */
 .admin-header {
 	margin-left: -19px;
 	margin-top: 0px;
@@ -171,6 +190,7 @@
 	box-sizing: border-box;
 }
 
+/* Right section of header (e.g., profile icon) */
 .header-right {
 	display: flex;
 	align-items: center;
@@ -178,6 +198,7 @@
 	width: auto;
 }
 
+/* Profile image styling */
 .profile-icon {
 	width: 40px;
 	height: 40px;
@@ -185,23 +206,28 @@
 	object-fit: cover;
 }
 
+/* Adjust header width when sidebar is collapsed */
 .admin-sidebar.collapsed ~ .admin-header {
 	margin-left: 0;
 	width: calc(100% - 60px);
 }
 
+/* Sidebar nav slight shift when collapsed */
 .admin-sidebar.collapsed .sidebar-nav {
 	transform: translateY(20px);
 }
 
+/* Rotate toggle icon when collapsed */
 .admin-sidebar.collapsed #sidebarToggle {
 	rotate: 180deg;
 }
 
+/* === Mobile Menu Button === */
 .mobile-menu-btn {
 	display: none;
 }
 
+/* === Responsive Styles for Tablets & Mobiles === */
 @media screen and (max-width: 768px) {
     .admin-sidebar {
         display: none;
@@ -217,10 +243,12 @@
         transition: all 0.3s ease;
     }
 
+	 /* Show sidebar when mobile toggle is activated */
     .admin-sidebar.active {
         display: block;
     }
 
+	/* Mobile menu toggle button */
     .mobile-menu-btn {
     	display: block;
         position: fixed;

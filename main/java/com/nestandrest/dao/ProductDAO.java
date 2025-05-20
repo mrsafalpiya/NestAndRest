@@ -35,7 +35,7 @@ public class ProductDAO {
     public void addProduct(Product product) throws SQLException {
         String sql = "INSERT INTO product (name, short_description, long_description, price, discounted_price, category_id, image, stock, color, size, quantity, in_stock, published) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-        	// Setting product properties into SQL placeholders
+        	// Setting product properties into SQL placeholder
         	stmt.setString(1, product.getName());
             stmt.setString(2, product.getFullDescription());
             stmt.setString(3, product.getSubDescription());
