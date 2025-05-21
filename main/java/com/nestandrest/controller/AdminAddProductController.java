@@ -12,17 +12,35 @@ import jakarta.servlet.http.Part;
 import java.io.*;
 import java.sql.SQLException;
 
+/**
+ * Controller servlet responsible for handling the addition of new products by admin users.
+ * It supports GET and POST methods to render the form and process product data including image upload.
+ * @author Safal Piya 
+ * @author Bhumika Karki
+ * @author Ayush Shrestha
+ */
 @WebServlet(asyncSupported = true, urlPatterns = "/admin/products/add")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class AdminAddProductController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ProductService productService;
 
+    
+    /**
+     * Initializes the ProductService instance when the servlet is first created.
+     */
     @Override
     public void init() throws ServletException {
         productService = new ProductService();
     }
 
+    
+    /**
+     * Handles GET requests to show the "Add Product" form with category data.
+     *
+     * @param request  HTTP request containing data from the client
+     * @param response HTTP response sent back to the client
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,6 +48,14 @@ public class AdminAddProductController extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/admin-products/admin-add-product.jsp").forward(request, response);
     }
 
+    
+    /**
+     * Handles POST requests to process form submission, validate input,
+     * handle image upload, and persist product information.
+     *
+     * @param request  HTTP request containing form and file data
+     * @param response HTTP response sent back to the client
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -98,6 +124,13 @@ public class AdminAddProductController extends HttpServlet {
         }
     }
 
+    
+    /**
+     * Extracts the file name from the Content-Disposition header of the uploaded file.
+     *
+     * @param part The Part object representing the uploaded file
+     * @return The extracted file name as a string
+     */
     private String extractFileName(Part part) {
         String contentDisposition = part.getHeader("content-disposition");
         String[] items = contentDisposition.split(";");

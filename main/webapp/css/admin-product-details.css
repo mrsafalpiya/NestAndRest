@@ -1,12 +1,15 @@
 @charset "UTF-8";
 
-/* Layout container adjustments */
+/* -------------------- Layout Wrapper -------------------- */
+/* Main layout container for admin product details page */
 .admin-layout {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
 }
 
+/* -------------------- Header Section -------------------- */
+/* Header bar for product details with back button and controls */
 .admin-details-header {
 	display: flex;
 	justify-content: space-between;
@@ -55,6 +58,7 @@
 	background-color: #f9f9f9;
 }
 
+/* Grid layout for product image and details section */
 .product-top {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -98,6 +102,7 @@
 	border-radius: 12px;
 }
 
+/* Carousel navigation arrows */
 .arrow {
 	position: absolute;
 	top: 45%;
@@ -119,6 +124,7 @@
 	right: 10px;
 }
 
+/* Thumbnail images for product carousel */
 .thumbnail-container {
 	display: flex;
 	gap: 10px;
@@ -202,6 +208,7 @@
 	min-width: 70px;
 }
 
+/* Quantity input with +/- buttons */
 .quantity-control {
 	display: flex;
 	gap: 8px;
@@ -219,7 +226,8 @@
 	cursor: pointer;
 }
 
-/* Highlights */
+/* -------------------- Highlights Section -------------------- */
+/* Highlighted features or guarantees */
 .highlights {
 	display: flex;
 	justify-content: space-between;
@@ -241,7 +249,8 @@
 	margin-bottom: 6px;
 }
 
-/* Tabs */
+/* -------------------- Description Tabs -------------------- */
+/* Tab navigation for additional product details */
 .tabs {
 	display: flex;
 	border-bottom: 1px solid #ccc;

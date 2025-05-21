@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* Container Layout */
+/* Main container for admin product list page */
 .admin-product-container {
 	margin-left: 180px;
 	padding: 24px;
@@ -53,6 +53,7 @@
 	border-collapse: collapse;
 }
 
+/* Table header cells */
 .product-table th {
 	text-align: left;
 	padding: 12px;
@@ -62,6 +63,7 @@
 	border-bottom: 1px solid #eee;
 }
 
+/* Table data cells */
 .product-table td {
 	padding: 16px 12px;
 	font-size: 14px;
@@ -71,6 +73,7 @@
 }
 
 /* === Product Info Column === */
+/* Layout for image and product name inside a cell */
 .product-info {
 	display: flex;
 	align-items: center;
@@ -154,6 +157,7 @@
 	flex-wrap: wrap;
 }
 
+/* Tag styling for applied filters */
 .filter-tag {
 	background-color: #f3f4f6;
 	padding: 10px 12px;
@@ -202,6 +206,7 @@
 	background-color: #374151;
 }
 
+/* Adjust table cell padding globally */
 .product-table th, .product-table td {
 	padding: 16px 12px;
 	font-size: 14px;
@@ -209,10 +214,12 @@
 	vertical-align: middle;
 }
 
+/* Row hover effect */
 .product-table tr:hover {
 	background-color: #f4f4f4;
 }
 
+/* Layout for pagination links */
 .admin-pagination {
 	display: flex;
 	justify-content: flex-end;
