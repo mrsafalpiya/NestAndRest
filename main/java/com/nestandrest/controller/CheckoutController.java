@@ -15,11 +15,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * CheckoutController.java
- * 
  * Handles displaying the cart and removing products from the cart.
  * 
- * Author: Sanniva Shakya
+ * @author 23047589 Sanniva Shakya
  */
 @WebServlet("/checkout-cart")
 public class CheckoutController extends HttpServlet {

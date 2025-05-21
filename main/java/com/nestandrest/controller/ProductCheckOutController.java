@@ -12,7 +12,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-// This maps the controller to /checkout path
+/**
+ * Controller servlet for handling product checkout completion requests.
+ *
+ * @author 23048460 Safal Piya
+ * @author 23047589 Sanniva Shakya
+ */
 @WebServlet("/product-checkout-complete")
 public class ProductCheckOutController extends HttpServlet {
 
@@ -20,12 +25,28 @@ public class ProductCheckOutController extends HttpServlet {
 	private CartService cartService;
 	private UserService userService;
 
+	/**
+	 * Initializes the CartService and UserService instances when the servlet is
+	 * first created.
+	 *
+	 * @throws ServletException if an error occurs during servlet initialization.
+	 */
 	@Override
 	public void init() throws ServletException {
 		this.cartService = new CartService();
 		this.userService = new UserService();
 	}
 
+	/**
+	 * Handles HTTP GET requests to complete the product checkout process. Creates
+	 * an order for the cart items of the currently logged-in user and forwards the
+	 * request to the checkout completion JSP page.
+	 *
+	 * @param req  The HttpServletRequest containing the client request.
+	 * @param resp The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Create order of the cart items of current user

@@ -40,6 +40,9 @@
 			<li><a href="${contextPath}/admin-orders"><img
 					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/Cart.png"
 					class="icon"> Order</a></li>
+			<li><a href="${contextPath}/user-query"><img
+					src="${pageContext.request.contextPath}/resources/system/images/user-query.png"
+					class="icon"> User Query</a></li>
 		</ul>
 	</nav>
 

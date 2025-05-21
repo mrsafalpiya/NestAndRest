@@ -1,273 +1,293 @@
 /* Main page wrapper */
 .product-details {
-    padding: 32px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
+	padding: 32px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 48px;
 }
 
 /* Product Top Layout (Gallery + Info Side by Side) */
 .product-top {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: start;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 48px;
+	align-items: start;
 }
 
 /* ========== Breadcrumb Navigation ========== */
 .breadcrumb {
-    font-size: 14px;
-    margin: 5px 0;
-    color: #555;
+	font-size: 14px;
+	margin: 5px 0;
+	color: #555;
 }
+
 .breadcrumb a {
-    color: #8b5e3c;
-    text-decoration: none;
+	color: #8b5e3c;
+	text-decoration: none;
 }
+
 .breadcrumb a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
+
 .breadcrumb span {
-    color: #999;
+	color: #999;
 }
 
 /* ========== Image Gallery / Carousel ========== */
 .carousel-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
+
 .main-image {
-    width: 100%;
-    max-width: 400px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 12px;
+	width: 100%;
+	max-width: 400px;
+	height: 300px;
+	object-fit: cover;
+	border-radius: 12px;
 }
 
 /* Navigation arrows */
 .arrow {
-    position: absolute;
-    top: 45%;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    font-size: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 2;
+	position: absolute;
+	top: 45%;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	font-size: 24px;
+	border-radius: 50%;
+	cursor: pointer;
+	z-index: 2;
 }
 
-.arrow.left { left: 10px; }
-.arrow.right { right: 10px; }
+.arrow.left {
+	left: 10px;
+}
+
+.arrow.right {
+	right: 10px;
+}
+
 .thumbnail-container {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 10px;
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	margin-top: 10px;
 }
 
 /* Thumbnails */
 .thumbnail {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    cursor: pointer;
-    border-radius: 6px;
-    opacity: 0.6;
-    border: 2px solid transparent;
-}
-.thumbnail.selected {
-    border-color: #c89b63;
-    opacity: 1;
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	cursor: pointer;
+	border-radius: 6px;
+	opacity: 0.6;
+	border: 2px solid transparent;
 }
 
+.thumbnail.selected {
+	border-color: #c89b63;
+	opacity: 1;
+}
 
 /* ========== Product Info Section ========== */
 .product-info {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 /* SALE badge */
 .badge {
-    background-color: #ff5e3a;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 6px;
-    padding: 4px 10px;
-    width: fit-content;
+	background-color: #ff5e3a;
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius: 6px;
+	padding: 4px 10px;
+	width: fit-content;
 }
 
 /* Product title */
 .product-info h1 {
-    font-size: 24px;
-    color: #212121;
+	font-size: 24px;
+	color: #212121;
 }
 
 /* Pricing */
 .price {
-    display: flex;
-    gap: 12px;
+	display: flex;
+	gap: 12px;
 }
 
 .price .original {
-    text-decoration: line-through;
-    color: #888;
+	text-decoration: line-through;
+	color: #888;
 }
+
 .price .discounted {
-    color: #c89b63;
-    font-weight: bold;
+	color: #c89b63;
+	font-weight: bold;
 }
 
 /* Description preview */
 .short-description {
-    font-size: 14px;
-    color: #444;
+	font-size: 14px;
+	color: #444;
 }
 
 /* ========== Product Variant & Quantity Selection ========== */
 .product-options {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 /* Option field rows */
 .option-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
 }
 
 .option-row label {
-    font-weight: 600;
-    min-width: 70px;
+	font-weight: 600;
+	min-width: 70px;
 }
 
 /* Quantity selector */
 .quantity-control {
-    display: flex;
-    gap: 8px;
+	display: flex;
+	gap: 8px;
 }
+
 .quantity-control input {
-    width: 50px;
-    text-align: center;
+	width: 50px;
+	text-align: center;
 }
+
 .quantity-control button {
-    padding: 6px 12px;
-    background: #eee;
-    border: 1px solid #ccc;
-    cursor: pointer;
+	padding: 6px 12px;
+	background: #eee;
+	border: 1px solid #ccc;
+	cursor: pointer;
 }
 
 /* Add to cart button */
 .add-to-cart {
-    background-color: #f5a623;
-    color: black;
-    font-weight: 600;
-    padding: 12px 40px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+	background-color: #f5a623;
+	color: black;
+	font-weight: 600;
+	padding: 12px 40px;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
 }
+
 button>span.cart-icon::before {
-    content: "🛒";
+	content: "🛒";
 }
 
 /* ========== Highlight Section ========== */
 .highlights {
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
-    padding: 32px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-}
-.highlight {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.highlight img {
-    width: 32px;
-    margin-bottom: 6px;
+	display: flex;
+	justify-content: space-between;
+	gap: 32px;
+	padding: 32px 0;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
 }
 
+.highlight {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.highlight img {
+	width: 32px;
+	margin-bottom: 6px;
+}
 
 /* ========== Tabs Section ========== */
 .tabs {
-    display: flex;
-    border-bottom: 1px solid #ccc;
+	display: flex;
+	border-bottom: 1px solid #ccc;
 }
+
 .tabs button {
-    padding: 10px 16px;
-    background: none;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
+	padding: 10px 16px;
+	background: none;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
 }
+
 .tabs button.active {
-    border-bottom: 2px solid #c89b63;
-    color: #c89b63;
+	border-bottom: 2px solid #c89b63;
+	color: #c89b63;
 }
+
 .tab-content {
-    padding-top: 20px;
+	padding-top: 20px;
 }
+
 .tab-content h6 {
-    font-size: 16px;
-    margin-bottom: 8px;
+	font-size: 16px;
+	margin-bottom: 8px;
 }
+
 .tab-content p {
-    font-size: 14px;
-    line-height: 1.6;
+	font-size: 14px;
+	line-height: 1.6;
 }
 
 /* --------------------- MOBILE ---------------------- */
 /* ========== Responsive Design ========== */
 @media screen and (max-width: 768px) {
-    .product-top {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-    .main-image {
-        width: 100%;
-        height: auto;
-    }
-    .product-info {
-        padding: 0 16px;
-    }
-    .product-info h1 {
-        font-size: 20px;
-    }
-    .short-description {
-        font-size: 14px;
-    }
-    .product-options {
-        padding: 0 16px;
-    }
-    .option-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .add-to-cart {
-        width: 100%;
-    }
-    .highlights {
-        flex-direction: column;
-        align-items: center;
-    }
-    .tab-content {
-        padding: 0 16px;
-    }
+	.product-top {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+	.main-image {
+		width: 100%;
+		height: auto;
+	}
+	.product-info {
+		padding: 0 16px;
+	}
+	.product-info h1 {
+		font-size: 20px;
+	}
+	.short-description {
+		font-size: 14px;
+	}
+	.product-options {
+		padding: 0 16px;
+	}
+	.option-row {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.add-to-cart {
+		width: 100%;
+	}
+	.highlights {
+		flex-direction: column;
+		align-items: center;
+	}
+	.tab-content {
+		padding: 0 16px;
+	}
 }

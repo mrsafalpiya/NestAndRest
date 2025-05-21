@@ -68,7 +68,7 @@
 /* Grid layout for listing product cards */
 .product-grid {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);  /* 4-column layout */
+	grid-template-columns: repeat(4, 1fr); /* 4-column layout */
 	gap: 32px;
 	margin-top: 10px;
 	width: 100%;
@@ -164,13 +164,15 @@
 /* ============================ */
 @media screen and (max-width: 1024px) {
 	.product-grid {
-		grid-template-columns: repeat(3, 1fr);  /* 3-column layout for tablets */
+		grid-template-columns: repeat(3, 1fr);
+		/* 3-column layout for tablets */
 	}
 }
 
 @media screen and (max-width: 768px) {
 	.product-grid {
-		grid-template-columns: repeat(2, 1fr);  /* 2-column layout for small tablets */
+		grid-template-columns: repeat(2, 1fr);
+		/* 2-column layout for small tablets */
 		gap: 20px;
 		padding: 0 16px;
 	}
@@ -195,7 +197,7 @@
 
 @media screen and (max-width: 480px) {
 	.product-grid {
-		grid-template-columns: 1fr;  /* Single column layout for phones */
+		grid-template-columns: 1fr; /* Single column layout for phones */
 		padding: 0 12px;
 	}
 }

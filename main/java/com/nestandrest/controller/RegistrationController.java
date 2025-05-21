@@ -15,6 +15,12 @@ import com.nestandrest.util.PasswordUtil;
 import com.nestandrest.util.RedirectionUtil;
 import com.nestandrest.util.ValidationUtil;
 
+/**
+ * Controller servlet for handling user registration requests.
+ *
+ * @author 23049063 Himani Chaudhary
+ * @author 23048460 Safal Piya
+ */
 @WebServlet(asyncSupported = true, urlPatterns = { "/registration" })
 public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +28,12 @@ public class RegistrationController extends HttpServlet {
 	private RedirectionUtil redirectionUtil;
 	private RegistrationService registrationService;
 
+	/**
+	 * Initializes the ValidationUtil, RedirectionUtil, and RegistrationService
+	 * instances.
+	 *
+	 * @throws ServletException if an error occurs during servlet initialization.
+	 */
 	@Override
 	public void init() throws ServletException {
 		this.validationUtil = new ValidationUtil();
@@ -29,12 +41,31 @@ public class RegistrationController extends HttpServlet {
 		this.registrationService = new RegistrationService();
 	}
 
+	/**
+	 * Handles HTTP GET requests to display the registration page. Retrieves gender
+	 * options and forwards the request to the registration JSP page.
+	 *
+	 * @param request  The HttpServletRequest containing the client request.
+	 * @param response The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("genders", registrationService.getGenders());
 		request.getRequestDispatcher("/WEB-INF/pages/auth/registration.jsp").forward(request, response);
 	}
 
+	/**
+	 * Handles HTTP POST requests to process user registration. Validates the
+	 * submitted form data, creates a new user, and redirects to the login page upon
+	 * success.
+	 *
+	 * @param req  The HttpServletRequest containing the client request.
+	 * @param resp The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("genders", registrationService.getGenders());
@@ -57,6 +88,14 @@ public class RegistrationController extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Extracts and validates user input to build a UserModel.
+	 *
+	 * @param req  The HttpServletRequest containing the client request.
+	 * @param resp The HttpServletResponse for sending the response.
+	 * @return A UserModel object containing the validated registration data.
+	 * @throws Exception if validation fails or an error occurs during processing.
+	 */
 	private UserModel extractUserModel(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String firstName = req.getParameter("first-name");
 		String lastName = req.getParameter("last-name");

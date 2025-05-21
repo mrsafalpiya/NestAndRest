@@ -3,11 +3,12 @@ package com.nestandrest.model;
 import java.util.Map;
 
 /**
- * Represents a product in the system. Stores all details necessary for
- * displaying and managing a product, including ID, name, descriptions, pricing,
- * category, and stock.
- *
- * @author Bhumika Karki
+ * Represents the model for a product.
+ * 
+ * @author 23047626 Ayush Shrestha
+ * @author 23047584 Bhumika Karki
+ * @author 23048460 Safal Piya
+ * @author 23047589 Sanniva Shakya
  */
 public class ProductModel {
 	private int productId;

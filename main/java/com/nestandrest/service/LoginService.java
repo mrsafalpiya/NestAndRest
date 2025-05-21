@@ -9,7 +9,14 @@ import com.nestandrest.config.DbConfig;
 import com.nestandrest.model.UserModel;
 import com.nestandrest.util.PasswordUtil;
 
+/**
+ * Service class that handles user login operations. Provides methods to
+ * authenticate users and retrieve user roles.
+ * 
+ * @author 23049063 Himani Chaudhary
+ */
 public class LoginService {
+	// Database connection
 	private Connection dbConn;
 
 	/**
@@ -23,9 +30,14 @@ public class LoginService {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * Returns the role of the logged in user.
+	 * Authenticates a user and returns their role.
+	 * 
+	 * @param userModel the user model containing email and password for
+	 *                  authentication
+	 * @return the role name of the authenticated user, or null if authentication
+	 *         fails
 	 */
 	public String loginUser(UserModel userModel) {
 		if (dbConn == null) {

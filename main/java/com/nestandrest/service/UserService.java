@@ -18,9 +18,20 @@ import jakarta.servlet.http.Part;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Service class that handles user profile operations. Provides methods to
+ * manage user accounts, addresses, and profile information.
+ * 
+ * @author 23049063 Himani Chaudhary
+ * @author 23048460 Safal Piya
+ * @author 23047589 Sanniva Shakya
+ */
 public class UserService {
 
+	// Logger for this class
 	private static final Logger logger = Logger.getLogger(UserService.class.getName());
+
+	// Database connection
 	private Connection dbConn;
 
 	/**
@@ -338,9 +349,10 @@ public class UserService {
 			}
 		}
 	}
-	
+
 	/**
-	 * Retrieves all addresses associated with a specific user, prioritizing the default address.
+	 * Retrieves all addresses associated with a specific user, prioritizing the
+	 * default address.
 	 *
 	 * @param userId The ID of the user whose addresses are to be fetched.
 	 * @return A list of UserAddressModel objects representing the user's addresses.
@@ -365,12 +377,14 @@ public class UserService {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Inserts a new address for a user into the database.
 	 *
-	 * @param userAddress The UserAddressModel object containing the address details.
-	 * @return True if the insertion was successful, false if not, or null if the DB connection is unavailable.
+	 * @param userAddress The UserAddressModel object containing the address
+	 *                    details.
+	 * @return True if the insertion was successful, false if not, or null if the DB
+	 *         connection is unavailable.
 	 */
 	public Boolean addAddressOfUser(UserAddressModel userAddress) {
 		if (dbConn == null) {
@@ -396,7 +410,7 @@ public class UserService {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Retrieves the profile image filename for a specific user.
 	 *

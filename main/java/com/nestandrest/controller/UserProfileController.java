@@ -19,6 +19,14 @@ import com.nestandrest.util.PasswordUtil;
 import com.nestandrest.util.RedirectionUtil;
 import com.nestandrest.util.ValidationUtil;
 
+/**
+ * Controller servlet for managing user profile operations.
+ *
+ * Handles profile updates, password changes, and profile picture uploads.
+ *
+ * @author 23049063 Himani Chaudhary
+ * @author 23048460 Safal Piya
+ */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50) // 50MB
@@ -31,6 +39,11 @@ public class UserProfileController extends HttpServlet {
 	private ValidationUtil validationUtil;
 	private ImageUtil imageUtil;
 
+	/**
+	 * Initializes the required services and utilities for user profile management.
+	 *
+	 * @throws ServletException if an error occurs during servlet initialization.
+	 */
 	@Override
 	public void init() throws ServletException {
 		this.userService = new UserService();
@@ -40,6 +53,16 @@ public class UserProfileController extends HttpServlet {
 		this.imageUtil = new ImageUtil();
 	}
 
+	/**
+	 * Handles HTTP GET requests to display the user profile page. Retrieves the
+	 * currently logged-in user's details and gender options, and forwards the
+	 * request to the user profile JSP page.
+	 *
+	 * @param request  The HttpServletRequest containing the client request.
+	 * @param response The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("user", this.userService.getCurrentlyLoggedInUser(request, null));
@@ -48,6 +71,16 @@ public class UserProfileController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/pages/user/user-profile.jsp").forward(request, response);
 	}
 
+	/**
+	 * Handles HTTP POST requests to update user profile information. Processes
+	 * profile updates, password changes, or profile picture uploads based on the
+	 * update type.
+	 *
+	 * @param req  The HttpServletRequest containing the client request.
+	 * @param resp The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String updateType = req.getParameter("update");
@@ -56,8 +89,6 @@ public class UserProfileController extends HttpServlet {
 
 		req.setAttribute("user", this.userService.getCurrentlyLoggedInUser(req, null));
 		req.setAttribute("genders", registrationService.getGenders());
-
-		System.err.println(req.getServletContext().getRealPath("/"));
 
 		switch (updateType.toLowerCase()) {
 		case "profile": {
@@ -97,6 +128,17 @@ public class UserProfileController extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Extracts and validates user input for updating profile details.
+	 *
+	 * @param req         The HttpServletRequest containing the client request.
+	 * @param resp        The HttpServletResponse for sending the response.
+	 * @param currentUser The currently logged-in user.
+	 * @return A UserModel object containing the updated profile details, or null if
+	 *         validation fails.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	private UserModel extractUpdateProfileUserModel(HttpServletRequest req, HttpServletResponse resp,
 			UserModel currentUser) throws ServletException, IOException {
 		String newFirstName = req.getParameter("first_name");
@@ -160,6 +202,17 @@ public class UserProfileController extends HttpServlet {
 		return user;
 	}
 
+	/**
+	 * Extracts and validates user input for updating the password.
+	 *
+	 * @param req         The HttpServletRequest containing the client request.
+	 * @param resp        The HttpServletResponse for sending the response.
+	 * @param currentUser The currently logged-in user.
+	 * @return A UserModel object containing the updated password, or null if
+	 *         validation fails.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	private UserModel extractUpdatePasswordUserModel(HttpServletRequest req, HttpServletResponse resp,
 			UserModel currentUser) throws ServletException, IOException {
 		String newPassword = req.getParameter("password");

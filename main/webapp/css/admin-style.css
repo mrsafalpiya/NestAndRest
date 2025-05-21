@@ -1,79 +1,90 @@
 /* === Layout Container === */
+/* Main sidebar container */
 .admin-sidebar {
-    width: 180px;
-    background: #f9f9f9;
-    padding: 10px;
-    border-right: 1px solid #ddd;
-    min-height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
+	width: 180px;
+	background: #f9f9f9;
+	padding: 10px;
+	border-right: 1px solid #ddd;
+	min-height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
+/* Enable scrolling if sidebar is collapsed */
 .admin-sidebar.collapsed {
 	overflow-y: auto;
 }
 
+/* Sidebar logo section */
 .admin-sidebar .logo {
-    text-align: left;
-    margin-bottom: 30px;
+	text-align: left;
+	margin-bottom: 30px;
 }
 
 .admin-sidebar .logo img {
-    width: 50px;
+	width: 50px;
 }
 
+/* Sidebar navigation list */
 .admin-sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 15px;
+	list-style: none;
+	padding: 0;
+	margin: 15px;
 }
 
 .admin-sidebar li {
-    margin-bottom: 18px;
+	margin-bottom: 18px;
 }
 
+/* Sidebar links */
 .admin-sidebar a {
-    color: #111;
-    text-decoration: none;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+	color: #111;
+	text-decoration: none;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
+/* Icon styling inside links */
 .admin-sidebar .icon {
-    width: 30px;
-    height: 20px;
+	width: 30px;
+	height: 20px;
+	object-fit: contain;
+	object-position: left;
 }
 
+/* Nested submenu items */
 .admin-sidebar .submenu {
-    margin-left: 45px;
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: right;
-    gap: 6px;
+	margin-left: 45px;
+	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: right;
+	gap: 6px;
 }
 
 .admin-sidebar .submenu li a {
-    font-size: 14px;
-    font-weight: 400;
-    color: #333;
+	font-size: 14px;
+	font-weight: 400;
+	color: #333;
 }
 
+/* Section title in the sidebar */
 .menu-title {
-    font-size: 12px;
-    color: #888;
-    text-transform: uppercase;
-    margin: 20px 0 10px 5px;
+	font-size: 12px;
+	color: #888;
+	text-transform: uppercase;
+	margin: 20px 0 10px 5px;
 }
 
+/* For expandable menu items (optional) */
 .menu-item.collapsible {
 	margin-top: 12px;
 }
 
-
+/* Arrow icon for collapsible menus */
 .sidebar-arrow {
 	margin-left: auto;
 	font-size: 12px;
@@ -81,80 +92,84 @@
 	transition: transform 0.3s ease;
 }
 
-/* Toggle button */
+/* === Sidebar Toggle Button === */
 .sidebar-toggle-btn {
-    position: absolute;
-    top: 12px;
-    right: -14px;
-    background: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    padding: 6px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.2);
-    z-index: 1200;
-    transition: left 0.3s ease;
+	position: absolute;
+	top: 12px;
+	right: -14px;
+	background: white;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+	z-index: 1200;
+	transition: left 0.3s ease;
 }
 
+/* When sidebar is collapsed, reposition toggle */
 .admin-sidebar.collapsed .sidebar-toggle-btn {
 	top: 72px;
-    right: 12px;
+	right: 12px;
 }
 
-/* Collapsed Sidebar */
+/* Collapsed sidebar width */
 .admin-sidebar.collapsed {
-    width: 64px;
+	width: 64px;
 }
 
+/* Sidebar toggle positioning when collapsed */
 .admin-sidebar.collapsed ~ .sidebar-toggle-btn {
-    left: 60px;
+	left: 60px;
 }
 
-.admin-sidebar.collapsed .menu-title,
-.admin-sidebar.collapsed .submenu,
-.admin-sidebar.collapsed a span {
-    display: none;
+.admin-sidebar.collapsed .menu-title, .admin-sidebar.collapsed .submenu,
+	.admin-sidebar.collapsed a span {
+	display: none;
 }
 
+/* === Content container beside sidebar === */
 /* Also shift content left */
 .admin-product-container {
-    transition: margin-left 0.3s ease;
+	transition: margin-left 0.3s ease;
 }
 
-.admin-sidebar.collapsed + .admin-product-container {
-    margin-left: 60px;
+.admin-sidebar.collapsed+.admin-product-container {
+	margin-left: 60px;
 }
 
+/* Layout for collapsible menu item */
 .menu-item.collapsible {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    gap: 8px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	gap: 8px;
 }
 
 .sidebar-arrow {
-    margin-left: auto;
-    font-size: 12px;
-    color: #888;
-    transition: transform 0.3s ease;
+	margin-left: auto;
+	font-size: 12px;
+	color: #888;
+	transition: transform 0.3s ease;
 }
 
+/* Arrow animation for open state */
 .menu-item.open .sidebar-arrow {
-    transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
+/* Submenu visibility toggle */
 .submenu {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    margin-left: 45px;
-    margin-top: 10px;
+	display: none;
+	flex-direction: column;
+	gap: 6px;
+	margin-left: 45px;
+	margin-top: 10px;
 }
 
 .submenu.show {
-    display: flex;
+	display: flex;
 }
-
 
 .admin-header {
 	margin-left: -19px;
@@ -171,6 +186,7 @@
 	box-sizing: border-box;
 }
 
+/* Right section of header (e.g., profile icon) */
 .header-right {
 	display: flex;
 	align-items: center;
@@ -178,6 +194,7 @@
 	width: auto;
 }
 
+/* Profile image styling */
 .profile-icon {
 	width: 40px;
 	height: 40px;
@@ -185,58 +202,60 @@
 	object-fit: cover;
 }
 
+/* Adjust header width when sidebar is collapsed */
 .admin-sidebar.collapsed ~ .admin-header {
 	margin-left: 0;
 	width: calc(100% - 60px);
 }
 
+/* Sidebar nav slight shift when collapsed */
 .admin-sidebar.collapsed .sidebar-nav {
 	transform: translateY(20px);
 }
 
+/* Rotate toggle icon when collapsed */
 .admin-sidebar.collapsed #sidebarToggle {
 	rotate: 180deg;
 }
 
+/* === Mobile Menu Button === */
 .mobile-menu-btn {
 	display: none;
 }
 
+/* === Responsive Styles for Tablets & Mobiles === */
 @media screen and (max-width: 768px) {
-    .admin-sidebar {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #f9f9f9;
-        width: 220px;
-        height: 100vh;
-        padding: 20px 10px;
-        z-index: 1000;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
-    }
-
-    .admin-sidebar.active {
-        display: block;
-    }
-
-    .mobile-menu-btn {
-    	display: block;
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        z-index: 1100;
-        background-color: #fff;
-        padding: 8px 10px;
-        border-radius: 8px;
-        border: none;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        cursor: pointer;
-    }
-
-    .mobile-menu-btn img {
-        width: 24px;
-        height: 24px;
-    }
+	.admin-sidebar {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background-color: #f9f9f9;
+		width: 220px;
+		height: 100vh;
+		padding: 20px 10px;
+		z-index: 1000;
+		box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+		transition: all 0.3s ease;
+	}
+	.admin-sidebar.active {
+		display: block;
+	}
+	.mobile-menu-btn {
+		display: block;
+		position: fixed;
+		top: 15px;
+		left: 15px;
+		z-index: 1100;
+		background-color: #fff;
+		padding: 8px 10px;
+		border-radius: 8px;
+		border: none;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+		cursor: pointer;
+	}
+	.mobile-menu-btn img {
+		width: 24px;
+		height: 24px;
+	}
 }

@@ -1,320 +1,322 @@
 @charset "UTF-8";
 
-/* Main Container */
+/* -------------------- Layout Container -------------------- */
+/* Main layout for the admin add product page */
 .admin-product-container {
-    margin-left: 180px;
-    padding: 24px;
-    background-color: #fefefe;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	margin-left: 180px;
+	padding: 24px;
+	background-color: #fefefe;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
-/* Breadcrumb */
+/* -------------------- Breadcrumb Navigation -------------------- */
+/* Styles for breadcrumb section showing page title and path */
 .breadcrumb {
 	margin-top: 10px;
-    margin-bottom: 30px;
-    margin-left: 60px;
+	margin-bottom: 30px;
+	margin-left: 60px;
 }
 
 .breadcrumb h4 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #1a1a1a;
+	font-size: 24px;
+	margin-bottom: 15px;
+	color: #1a1a1a;
 }
 
 .breadcrumb .path {
-    font-size: 14px;
-    color: #888;
-    display: flex;
-    gap: 20px;
+	font-size: 14px;
+	color: #888;
+	display: flex;
+	gap: 20px;
 }
 
 .breadcrumb .current {
-    font-weight: 500;
-    color: #000;
+	font-weight: 500;
+	color: #000;
 }
 
-/* Product Form */
+/* -------------------- Product Form Layout -------------------- */
+/* Container for the product add/edit form */
 .product-form {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 30px 40px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    margin-left: 170px;
-    max-width: 800px;
+	background-color: #fff;
+	border-radius: 12px;
+	padding: 30px 40px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	margin-left: 170px;
+	max-width: 800px;
 }
 
-.form-section{
+/* Section inside form with vertical spacing */
+.form-section {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-/* Section Title */
+/* -------------------- Section Headers -------------------- */
+/* Subtitles and description under each form section */
 .form-section h5 {
-    font-size: 15px;
-    margin-bottom: 3px;
-    color: #111;
+	font-size: 15px;
+	margin-bottom: 3px;
+	color: #111;
 }
 
 .form-section p {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 15px;
+	font-size: 14px;
+	color: #777;
+	margin-bottom: 15px;
 }
 
-/* All inputs/textareas/selects uniform style */
-.product-form input[type="text"],
-.product-form input[type="number"],
-.product-form textarea,
-.product-form select {
-    padding: 14px 16px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
-    resize: vertical;
-    min-height: 48px;
+/* -------------------- Input Fields -------------------- */
+/* Uniform styles for inputs, textareas, and select boxes */
+.product-form input[type="text"], .product-form input[type="number"],
+	.product-form textarea, .product-form select {
+	padding: 14px 16px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	width: 100%;
+	box-sizing: border-box;
+	resize: vertical;
+	min-height: 48px;
 }
 
-/* Fix textareas' height */
+/* Set specific height for description textareas */
 textarea[name="fullDescription"] {
-    min-height: 140px;
+	min-height: 140px;
 }
+
 textarea[name="subDescription"] {
-    min-height: 100px;
+	min-height: 100px;
 }
 
+/* -------------------- Image Upload Section -------------------- */
+/* Style for the image upload label area */
 .image-upload label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-    height: 120px; 
-    text-align: center;
-    cursor: pointer;
-    padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 120px;
+	text-align: center;
+	cursor: pointer;
+	padding: 20px;
 }
 
-/* Image Upload Box */
+/* Box for uploading product image */
 .image-upload {
-    border: 2px dashed #ccc;
-    border-radius: 10px;
-    padding: 100px 150px;
-    text-align: center;
-    cursor: pointer;
-    background-color: #fafafa;
+	border: 2px dashed #ccc;
+	border-radius: 10px;
+	padding: 100px 150px;
+	text-align: center;
+	cursor: pointer;
+	background-color: #fafafa;
 }
 
 .image-upload img {
-    width: 250px;
-    margin-bottom: -10px;
+	width: 250px;
+	margin-bottom: -10px;
 }
 
 .image-upload p {
-    font-size: 16px;
-    color: #666;
+	font-size: 16px;
+	color: #666;
 }
 
 .image-upload span {
-    font-size: 14px;
-    color: #aaa;
+	font-size: 14px;
+	color: #aaa;
 }
 
+/* Hide actual file input */
 .image-upload input[type="file"] {
-    display: none;
+	display: none;
 }
 
+/* -------------------- Image Action Buttons -------------------- */
+/* Layout and styling for upload and remove buttons */
 .image-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 20px;
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-top: 20px;
 }
 
 .image-actions .remove-btn {
-    padding: 10px 16px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: 500;
-    color: #333;
+	padding: 10px 16px;
+	border: 1px solid #ccc;
+	background-color: white;
+	border-radius: 8px;
+	font-size: 14px;
+	cursor: pointer;
+	font-weight: 500;
+	color: #333;
 }
 
 .image-actions .upload-btn {
-    padding: 10px 16px;
-    background-color: #111827;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+	padding: 10px 16px;
+	background-color: #111827;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 14px;
+	cursor: pointer;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
 
 .image-actions .upload-btn img {
-    width: 16px;
-    height: 16px;
+	width: 16px;
+	height: 16px;
 }
 
-/* Checkbox and Label */
+/* -------------------- Checkbox and Label -------------------- */
+/* Style for toggle options and associated text */
 .product-form label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: #333;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 14px;
+	color: #333;
 }
 
+/* -------------------- Properties Grid -------------------- */
+/* Grid layout for selecting colors, sizes, etc. */
 .properties-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 8px 20px;
-    gap: 20px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	padding: 8px 20px;
+	gap: 20px;
 }
 
+/* -------------------- Form Group -------------------- */
+/* Common structure for labeled input fields */
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 18px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-bottom: 18px;
 }
 
 .form-group label {
-    font-weight: 500;
-    color: #333;
-    font-size: 14px;
+	font-weight: 500;
+	color: #333;
+	font-size: 14px;
 }
 
-.form-group select,
-.form-group input[type="text"] {
-    padding: 10px 14px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    width: 100%;
+.form-group select, .form-group input[type="text"] {
+	padding: 10px 14px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	width: 100%;
 }
 
+/* -------------------- Discount Toggle -------------------- */
+/* Layout for checkbox toggle related to discount */
 .discount-toggle {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .discount-toggle input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
+	width: 20px;
+	height: 20px;
 }
 
-/* Button */
+/* -------------------- Submit Button -------------------- */
+/* Style for final 'Create' or 'Submit' button */
 .btn-create {
-    background-color: #111827;
-    color: white;
-    padding: 12px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    width: fit-content;
-    align-self: flex-end;
+	background-color: #111827;
+	color: white;
+	padding: 12px 20px;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+	width: fit-content;
+	align-self: flex-end;
 }
 
+/* -------------------- Responsive Design -------------------- */
+/* Media queries for mobile responsiveness */
 @media screen and (max-width: 768px) {
-    .admin-product-container {
-        margin-left: 0;
-        padding: 16px;
-    }
-
-    .breadcrumb {
-        margin-left: 0;
-        padding-left: 0;
-    }
-
-    .breadcrumb h4 {
-        font-size: 20px;
-        line-height: 1.4;
-    }
-
-    .breadcrumb .path {
-        font-size: 13px;
-        gap: 6px;
-        flex-wrap: wrap;
-    }
-
-    .product-form {
-        margin-left: 0;
-        padding: 20px;
-        box-shadow: none;
-        border-radius: 0;
-        max-width: 100%;
-        gap: 30px;
-    }
-
-    .form-section h5 {
-        font-size: 16px;
-    }
-
-    .form-section p {
-        font-size: 13px;
-        color: #777;
-    }
-
-    .image-upload {
-        padding: 40px 20px;
-    }
-
-    .image-upload img {
-        width: 120px;
-        margin-bottom: 10px;
-    }
-
-    .image-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .image-actions .remove-btn,
-    .image-actions .upload-btn {
-        width: 100%;
-        text-align: center;
-    }
-
-    .properties-grid {
-        grid-template-columns: 1fr;
-        padding: 0;
-    }
-
-    .form-group select,
-    .form-group input[type="text"] {
-        font-size: 14px;
-        padding: 12px;
-    }
-
-    .discount-toggle {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-
-    .btn-create {
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .product-form label[for="publish"] {
-        justify-content: space-between;
-        padding: 10px 0;
-    }
+	.admin-product-container {
+		margin-left: 0;
+		padding: 16px;
+	}
+	.breadcrumb {
+		margin-left: 0;
+		padding-left: 0;
+	}
+	.breadcrumb h4 {
+		font-size: 20px;
+		line-height: 1.4;
+	}
+	.breadcrumb .path {
+		font-size: 13px;
+		gap: 6px;
+		flex-wrap: wrap;
+	}
+	.product-form {
+		margin-left: 0;
+		padding: 20px;
+		box-shadow: none;
+		border-radius: 0;
+		max-width: 100%;
+		gap: 30px;
+	}
+	.form-section h5 {
+		font-size: 16px;
+	}
+	.form-section p {
+		font-size: 13px;
+		color: #777;
+	}
+	.image-upload {
+		padding: 40px 20px;
+	}
+	.image-upload img {
+		width: 120px;
+		margin-bottom: 10px;
+	}
+	.image-actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.image-actions .remove-btn, .image-actions .upload-btn {
+		width: 100%;
+		text-align: center;
+	}
+	.properties-grid {
+		grid-template-columns: 1fr;
+		padding: 0;
+	}
+	.form-group select, .form-group input[type="text"] {
+		font-size: 14px;
+		padding: 12px;
+	}
+	.discount-toggle {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 10px;
+	}
+	.btn-create {
+		width: 100%;
+		margin-top: 10px;
+	}
+	.product-form label[for="publish"] {
+		justify-content: space-between;
+		padding: 10px 0;
+	}
 }

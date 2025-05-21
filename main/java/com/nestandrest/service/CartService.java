@@ -6,19 +6,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import com.nestandrest.config.DbConfig;
 import com.nestandrest.model.CartProductVariantValueModel;
-import com.nestandrest.model.Product;
 import com.nestandrest.model.ProductModel;
-import com.nestandrest.model.ProductVariantModel;
 
+/**
+ * Service class that handles shopping cart related operations. Provides methods
+ * to manage cart items, add products to cart, and retrieve cart information.
+ * 
+ * @author 23047584 Bhumika Karki
+ * @author 23048460 Safal Piya
+ * @author 23047589 Sanniva Shakya
+ */
 public class CartService {
+	// Database connection
 	private Connection dbConn;
 
+	/**
+	 * Constructor initializes the database connection.
+	 */
 	public CartService() {
 		try {
 			this.dbConn = DbConfig.getDbConnection();
@@ -27,6 +36,16 @@ public class CartService {
 		}
 	}
 
+	/**
+	 * Adds a product with selected variants to the user's cart.
+	 * 
+	 * @param userId            the ID of the user
+	 * @param productId         the ID of the product to add
+	 * @param variantSelections map containing variant IDs as keys and variant value
+	 *                          IDs as values
+	 * @param qty               the quantity of the product to add
+	 * @return true if the product was added successfully, false otherwise
+	 */
 	public boolean addProductToCart(int userId, int productId, Map<Integer, Integer> variantSelections, int qty) {
 		int cartId = this.createUserCartAndReturnIfNotExist(userId);
 		if (cartId == -1) {
@@ -44,6 +63,12 @@ public class CartService {
 		return true; // Changed to return true if execution completes successfully
 	}
 
+	/**
+	 * Creates a user cart if it does not exist and returns the cart ID.
+	 * 
+	 * @param userId the ID of the user
+	 * @return the cart ID if successful, -1 otherwise
+	 */
 	private int createUserCartAndReturnIfNotExist(int userId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -79,6 +104,13 @@ public class CartService {
 		return -1;
 	}
 
+	/**
+	 * Inserts a product variant value into the cart.
+	 * 
+	 * @param cartProductVariantValue the model containing cart product variant
+	 *                                value details
+	 * @return true if the insertion was successful, false otherwise
+	 */
 	private Boolean insertCartProductVariantValue(CartProductVariantValueModel cartProductVariantValue) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -103,6 +135,12 @@ public class CartService {
 		return null;
 	}
 
+	/**
+	 * Retrieves the items in the user's cart.
+	 * 
+	 * @param userId the ID of the user
+	 * @return a list of product models representing the items in the cart
+	 */
 	public List<ProductModel> getUserCartItems(int userId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -132,6 +170,12 @@ public class CartService {
 		}
 	}
 
+	/**
+	 * Retrieves the items in a specific cart.
+	 * 
+	 * @param cartId the ID of the cart
+	 * @return a list of product models representing the items in the cart
+	 */
 	public List<ProductModel> getCartItems(int cartId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -161,6 +205,13 @@ public class CartService {
 		}
 	}
 
+	/**
+	 * Retrieves the product variants as a map for a specific user and product.
+	 * 
+	 * @param userId    the ID of the user
+	 * @param productId the ID of the product
+	 * @return a map containing variant names as keys and variant values as values
+	 */
 	private Map<String, String> getCartProductVariantsAsMap(int userId, int productId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -186,6 +237,13 @@ public class CartService {
 		}
 	}
 
+	/**
+	 * Removes a product from the user's cart.
+	 * 
+	 * @param userId    the ID of the user
+	 * @param productId the ID of the product to remove
+	 * @return true if the product was removed successfully, false otherwise
+	 */
 	public boolean removeProductFromCart(int userId, int productId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -222,6 +280,13 @@ public class CartService {
 		}
 	}
 
+	/**
+	 * Adds the items in the user's cart to an order.
+	 * 
+	 * @param userId    the ID of the user
+	 * @param addressId the ID of the address for the order
+	 * @return the ID of the newly created order, or -1 if the operation failed
+	 */
 	public int addCartItemsToOrder(int userId, int addressId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -244,6 +309,8 @@ public class CartService {
 			int totalPrice = 0;
 			for (ProductModel productModel : itemsInCart) {
 				totalPrice += (productModel.getSalePrice() * productModel.getCartQty());
+				// Decrease the stock quantity of product
+				decreaseProductStockQty(productModel.getProductId(), productModel.getCartQty());
 			}
 
 			String insertQuery = "INSERT INTO `order` (order_status_id, cart_id, address_id, total_price) VALUES (?, ?, ?, ?);";
@@ -268,4 +335,32 @@ public class CartService {
 		return -1;
 	}
 
+	/**
+	 * Decreases the stock quantity of a product.
+	 * 
+	 * @param productId          the ID of the product
+	 * @param quantityToDecrease the quantity to decrease
+	 * @return true if the stock quantity was decreased successfully, false
+	 *         otherwise
+	 */
+	public boolean decreaseProductStockQty(int productId, int quantityToDecrease) {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return false;
+		}
+
+		try {
+			String updateQuery = "UPDATE product SET stock_qty = stock_qty - ? WHERE product_id = ?";
+			PreparedStatement updateStmt = dbConn.prepareStatement(updateQuery);
+			updateStmt.setInt(1, quantityToDecrease);
+			updateStmt.setInt(2, productId);
+			int affectedRows = updateStmt.executeUpdate();
+
+			return affectedRows > 0;
+		} catch (SQLException e) {
+			System.err.println("Error during updating stock quantity: " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

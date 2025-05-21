@@ -13,13 +13,22 @@ import com.nestandrest.model.OrderModel;
 import com.nestandrest.model.UserAddressModel;
 import com.nestandrest.model.UserModel;
 
+/**
+ * Service class that handles order related operations. Provides methods to
+ * retrieve, create and manage orders.
+ * 
+ * @author 23048460 Safal Piya
+ */
 public class OrderService {
 
+	// Database connection
 	private Connection dbConn;
+
+	// Cart service for accessing cart related functionality
 	private CartService cartService;
 
 	/**
-	 * Constructor initializes the database connection.
+	 * Constructor initializes the database connection and cart service.
 	 */
 	public OrderService() {
 		try {
@@ -32,6 +41,13 @@ public class OrderService {
 		this.cartService = new CartService();
 	}
 
+	/**
+	 * Retrieves orders based on the order ID. If orderId is 0, retrieves all
+	 * orders.
+	 * 
+	 * @param orderId the ID of the order to retrieve, or 0 for all orders
+	 * @return a list of OrderModel objects, or null if an error occurs
+	 */
 	public List<OrderModel> getOrders(int orderId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -73,6 +89,13 @@ public class OrderService {
 		}
 	}
 
+	/**
+	 * Updates the status of an order.
+	 * 
+	 * @param orderId       the ID of the order to update
+	 * @param orderStatusId the new status ID to set for the order
+	 * @return true if the update was successful, false otherwise
+	 */
 	public boolean setOrderStatus(int orderId, int orderStatusId) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");

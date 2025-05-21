@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * Controller Servlet to handle Edit User Profile operations including
  * displaying user data, updating profile, and deleting user.
  * 
- * @author Sanniva Shakya
+ * @author 23047589 Sanniva Shakya
  */
 @WebServlet("/edit-user-profile")
 public class EditUserProfileController extends HttpServlet {

@@ -10,64 +10,73 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller servlet for managing the user list in the admin panel.
+ *
+ * @author 23047589 Sanniva Shakya
+ */
 @WebServlet("/usermanagement-list")
 public class UserListController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private UserService userService;
+	private static final long serialVersionUID = 1L;
+	private UserService userService;
 
-    /**
-     * Initializes the servlet by creating an instance of UserService.
-     * This method is called once when the servlet is first loaded.
-     */
+	/**
+	 * Initializes the servlet by creating an instance of UserService. This method
+	 * is called once when the servlet is first loaded.
+	 */
+	@Override
+	public void init() {
+		userService = new UserService();
+	}
 
-    @Override
-    public void init() {
-        userService = new UserService();
-    }
-    
-    /**
-     * Handles GET requests to list users with pagination and optional search.
-     *
-     * Parameters:
-     * - searchTerm (optional): Filters user list.
-     * - page (optional): Current page number (default is 1).
-     *
-     * Forwards to: usermanagement-list.jsp with user list and pagination data.
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	/**
+	 * Handles GET requests to list users with pagination and optional search.
+	 *
+	 * Parameters: - searchTerm (optional): Filters user list. - page (optional):
+	 * Current page number (default is 1).
+	 *
+	 * Forwards to: usermanagement-list.jsp with user list and pagination data.
+	 *
+	 * @param request  The HttpServletRequest containing the client request.
+	 * @param response The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        String searchTerm = request.getParameter("searchTerm");
-        int page = 1;
-        int recordsPerPage = 5;
+		String searchTerm = request.getParameter("searchTerm");
+		int page = 1;
+		int recordsPerPage = 5;
 
-        String pageParam = request.getParameter("page");
-        if (pageParam != null) {
-            try {
-                page = Integer.parseInt(pageParam);
-            } catch (NumberFormatException ignored) {}
-        }
+		String pageParam = request.getParameter("page");
+		if (pageParam != null) {
+			try {
+				page = Integer.parseInt(pageParam);
+			} catch (NumberFormatException ignored) {
+			}
+		}
 
-        List<UserModel> users;
-        int totalRecords;
+		List<UserModel> users;
+		int totalRecords;
 
-        if (searchTerm != null && !searchTerm.trim().isEmpty()) {
-            users = userService.searchUsers(searchTerm.trim(), (page - 1) * recordsPerPage, recordsPerPage);
-            totalRecords = userService.countSearchUsers(searchTerm.trim());
-        } else {
-            users = userService.getUsers((page - 1) * recordsPerPage, recordsPerPage);
-            totalRecords = userService.getUserCount();
-        }
+		if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+			users = userService.searchUsers(searchTerm.trim(), (page - 1) * recordsPerPage, recordsPerPage);
+			totalRecords = userService.countSearchUsers(searchTerm.trim());
+		} else {
+			users = userService.getUsers((page - 1) * recordsPerPage, recordsPerPage);
+			totalRecords = userService.getUserCount();
+		}
 
-        int totalPages = (int) Math.ceil(totalRecords / (double) recordsPerPage);
+		int totalPages = (int) Math.ceil(totalRecords / (double) recordsPerPage);
 
-        request.setAttribute("userList", users);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("totalPages", totalPages);
-        request.setAttribute("searchTerm", searchTerm); // Important for pagination links
+		request.setAttribute("userList", users);
+		request.setAttribute("currentPage", page);
+		request.setAttribute("totalPages", totalPages);
+		request.setAttribute("searchTerm", searchTerm); // Important for pagination links
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/user-management/usermanagement-list.jsp");
-        rd.forward(request, response);
-    }
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/user-management/usermanagement-list.jsp");
+		rd.forward(request, response);
+	}
 }

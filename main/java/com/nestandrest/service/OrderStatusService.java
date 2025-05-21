@@ -10,8 +10,15 @@ import java.util.List;
 import com.nestandrest.config.DbConfig;
 import com.nestandrest.model.OrderStatusModel;
 
+/**
+ * Service class that handles order status operations. Provides methods to
+ * retrieve and manage order statuses.
+ * 
+ * @author 23048460 Safal Piya
+ */
 public class OrderStatusService {
 
+	// Database connection
 	private Connection dbConn;
 
 	/**
@@ -26,6 +33,11 @@ public class OrderStatusService {
 		}
 	}
 
+	/**
+	 * Retrieves all order statuses from the database.
+	 * 
+	 * @return a list of OrderStatusModel objects, or null if an error occurs
+	 */
 	public List<OrderStatusModel> getAllOrderStatus() {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");

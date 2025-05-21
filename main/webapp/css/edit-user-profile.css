@@ -18,10 +18,7 @@ body, html {
 	margin-left: 250px;
 	width: calc(100% - 370px);
 	padding: 40px 20px;
-	box-sizing: border-box;
-
-.breadcrumb {
-	color: #6b7280;
+	box-sizing: border-box; . breadcrumb { color : #6b7280;
 	font-size: 14px;
 	margin-bottom: 40px;
 }
@@ -195,31 +192,28 @@ body, html {
 
 /* Button */
 .update-button-wrapper {
-  justify-content: center;
-  margin-top: 80px;
-  margin-left: 100px;
-
+	justify-content: center;
+	margin-top: 80px;
+	margin-left: 100px;
 }
 
 .update-button {
-  background-color: var(--primary-main);
-  color: var(--primary-contrast-text);
-  padding: var(--button-spacing) var(--button-lg-px);
-  height: var(--button-lg-height);
-  font-size: var(--components-button-large-size);
-  font-weight: var(--components-button-large-weight);
-  line-height: var(--components-button-large-line-height);
-  border: none;
-  border-radius: var(--button-radius);
-  cursor: pointer;
-  transition: background 0.3s;
-  
+	background-color: var(--primary-main);
+	color: var(--primary-contrast-text);
+	padding: var(--button-spacing) var(--button-lg-px);
+	height: var(--button-lg-height);
+	font-size: var(--components-button-large-size);
+	font-weight: var(--components-button-large-weight);
+	line-height: var(--components-button-large-line-height);
+	border: none;
+	border-radius: var(--button-radius);
+	cursor: pointer;
+	transition: background 0.3s;
 }
 
 .update-button:hover {
-  background-color:var(--primary-main);
+	background-color: var(--primary-main);
 }
-
 
 .delete-button {
 	background-color: #ffe4d9; /* red */

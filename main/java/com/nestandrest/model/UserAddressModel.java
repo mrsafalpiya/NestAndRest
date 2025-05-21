@@ -1,21 +1,49 @@
 package com.nestandrest.model;
 
 /**
- * Model class representing a user's address information.
- * Contains fields for address details, associated user, and default status.
+ * Represents the model for a user's address.
+ * 
+ * This class contains fields and methods to manage user address details such as
+ * the address ID, user ID, address string, user name, phone number, and default
+ * status.
+ * 
+ * @author 23047589 Sanniva Shakya
  */
 public class UserAddressModel {
+	// Unique identifier for the user address
 	private int userAddressId;
+
+	// Identifier for the user associated with this address
 	private int userId;
+
+	// The address string
 	private String address;
+
+	// Name of the user associated with this address
 	private String userName;
+
+	// Phone number associated with this address
 	private String phoneNumber;
+
+	// Indicates whether this is the default address
 	private boolean isDefault;
 
+	/**
+	 * Default constructor for UserAddressModel.
+	 */
 	public UserAddressModel() {
 		super();
 	}
 
+	/**
+	 * Constructor to initialize all fields of the UserAddressModel.
+	 * 
+	 * @param userId      the ID of the user
+	 * @param address     the address string
+	 * @param userName    the name of the user
+	 * @param phoneNumber the phone number associated with the address
+	 * @param isDefault   whether this is the default address
+	 */
 	public UserAddressModel(int userId, String address, String userName, String phoneNumber, boolean isDefault) {
 		super();
 		this.userId = userId;
@@ -25,6 +53,14 @@ public class UserAddressModel {
 		this.isDefault = isDefault;
 	}
 
+	/**
+	 * Constructor to initialize fields of the UserAddressModel with address ID.
+	 * 
+	 * @param userAddressId the unique ID of the user address
+	 * @param userId        the ID of the user
+	 * @param address       the address string
+	 * @param isDefault     whether this is the default address
+	 */
 	public UserAddressModel(int userAddressId, int userId, String address, boolean isDefault) {
 		super();
 		this.userAddressId = userAddressId;
@@ -34,84 +70,108 @@ public class UserAddressModel {
 	}
 
 	/**
-	 * @return the unique ID of this user address.
+	 * Gets the unique ID of this user address.
+	 * 
+	 * @return the user address ID
 	 */
 	public int getUserAddressId() {
 		return userAddressId;
 	}
-	
+
 	/**
-	 * @param userAddressId the unique ID of this user address to set.
+	 * Sets the unique ID of this user address.
+	 * 
+	 * @param userAddressId the user address ID to set
 	 */
 	public void setUserAddressId(int userAddressId) {
 		this.userAddressId = userAddressId;
 	}
-	
+
 	/**
-	 * @return the ID of the user this address belongs to.
+	 * Gets the ID of the user this address belongs to.
+	 * 
+	 * @return the user ID
 	 */
 	public int getUserId() {
 		return userId;
 	}
-	
+
 	/**
-	 * @param userId the ID of the user this address belongs to.
+	 * Sets the ID of the user this address belongs to.
+	 * 
+	 * @param userId the user ID to set
 	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
+
 	/**
-	 * @return the address string.
+	 * Gets the address string.
+	 * 
+	 * @return the address
 	 */
 	public String getAddress() {
 		return address;
 	}
 
 	/**
-	 * @param address the address string to set.
+	 * Sets the address string.
+	 * 
+	 * @param address the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
 	/**
-	 * @return the user name associated with this address.
+	 * Gets the user name associated with this address.
+	 * 
+	 * @return the user name
 	 */
 	public String getUserName() {
 		return userName;
 	}
 
 	/**
-	 * @param userName the user name to set for this address.
+	 * Sets the user name associated with this address.
+	 * 
+	 * @param userName the user name to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
 	/**
-	 * @return the phone number associated with this address.
+	 * Gets the phone number associated with this address.
+	 * 
+	 * @return the phone number
 	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
 	/**
-	 * @param phoneNumber the phone number to set for this address.
+	 * Sets the phone number associated with this address.
+	 * 
+	 * @param phoneNumber the phone number to set
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
 	/**
-	 * @return true if this is the default address, false otherwise.
+	 * Checks if this is the default address.
+	 * 
+	 * @return true if this is the default address, false otherwise
 	 */
 	public boolean isDefault() {
 		return isDefault;
 	}
 
 	/**
-	 * @param isDefault set whether this address is the default.
+	 * Sets whether this is the default address.
+	 * 
+	 * @param isDefault true to set this as the default address, false otherwise
 	 */
 	public void setDefault(boolean isDefault) {
 		this.isDefault = isDefault;

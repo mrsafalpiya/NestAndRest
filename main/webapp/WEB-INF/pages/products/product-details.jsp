@@ -22,7 +22,7 @@
 		ProductModel product = (ProductModel) request.getAttribute("product");
 		if (product != null) {
 		%>
-		
+
 		<!-- Breadcrumb navigation for user orientation -->
 		<nav class="breadcrumb">
 			<a href="${pageContext.request.contextPath}/home">Home</a> &gt; <a
@@ -30,11 +30,11 @@
 		</nav>
 
 		<div class="product-top">
-		
+
 			<!-- Image carousel for the product -->
 			<div class="carousel-container">
 				<button class="arrow left" onclick="prevSlide()">&#10094;</button>
-				
+
 				<!-- Main product image -->
 				<img id="mainImage" class="main-image"
 					src="<%=request.getContextPath()%>/resources/product-images/<%=product.getProductId()%>.png"
@@ -60,15 +60,15 @@
 
 			<!-- Product info and purchase options -->
 			<div class="product-info">
-			
+
 				<!-- SALE badge if discounted -->
 				<c:if test="${product.getDiscountedPrice() != 0.0}">
 					<span class="badge">SALE</span>
 				</c:if>
-				
+
 				<!-- Product name -->
 				<h1><%=product.getName()%></h1>
-				
+
 				<!-- Price: show both original and discounted if applicable -->
 				<p class="price">
 					<c:if test="${product.getDiscountedPrice() != 0.0}">
@@ -80,7 +80,7 @@
 					</c:if>
 
 				</p>
-				
+
 				<!-- Short product description -->
 				<p class="short-description"><%=product.getShortDescription()%></p>
 
@@ -97,7 +97,7 @@
 						method="post" style="margin-top: 20px">
 						<!-- Passing the product ID as hidden input -->
 						<input type="hidden" name="id" value="<%=product.getProductId()%>">
-						
+
 						<!-- Loop through product variants (e.g., Size, Color) -->
 						<c:forEach var="variant" items="${productVariants}">
 							<div class="option-row">
@@ -123,8 +123,9 @@
 								<button type="button" onclick="increaseQuantity()">+</button>
 							</div>
 						</div>
-						
-						<input type="hidden" name="product_id" value="${product.getProductId()}" />
+
+						<input type="hidden" name="product_id"
+							value="${product.getProductId()}" />
 
 						<!-- Add to Cart button -->
 						<button type="submit" class="add-to-cart">
@@ -135,7 +136,7 @@
 
 			</div>
 		</div>
-		
+
 		<!-- Product service highlights section -->
 		<div class="highlights">
 			<div class="highlight">
