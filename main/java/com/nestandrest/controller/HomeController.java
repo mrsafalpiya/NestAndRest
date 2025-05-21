@@ -3,7 +3,7 @@ package com.nestandrest.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.nestandrest.model.Category;
+import com.nestandrest.model.CategoryModel;
 import com.nestandrest.model.ProductModel;
 import com.nestandrest.service.ProductService;
 
@@ -35,7 +35,7 @@ public class HomeController extends HttpServlet {
 		}
 
 		// Get the list of all categories
-		List<Category> allCategories = this.productService.getAllCategories();
+		List<CategoryModel> allCategories = this.productService.getAllCategories();
 		req.setAttribute("allCategories", allCategories);
 
 		// Get all products
@@ -49,7 +49,7 @@ public class HomeController extends HttpServlet {
 		// Get products from allProducts of each categories in allCategories and store
 		// it in a map
 		Map<Integer, List<ProductModel>> categorizedProducts = new HashMap<>();
-		for (Category category : allCategories) {
+		for (CategoryModel category : allCategories) {
 			List<ProductModel> productsInCategory = allProducts.stream()
 					.filter(product -> product.getCategoryId() == category.getCategoryId()).toList();
 			categorizedProducts.put(category.getCategoryId(), productsInCategory);

@@ -1,8 +1,7 @@
 package com.nestandrest.service;
 
-import com.nestandrest.dao.CategoryDAO;
 import com.nestandrest.dao.ProductDAO;
-import com.nestandrest.model.Category;
+import com.nestandrest.model.CategoryModel;
 import com.nestandrest.model.Product;
 import com.nestandrest.model.ProductModel;
 import com.nestandrest.model.ProductVariantModel;
@@ -23,7 +22,6 @@ import java.util.List;
  */
 public class ProductService {
 	private ProductDAO productDAO;
-	private CategoryDAO categoryDAO;
 	private Connection dbConn;
 
 	/**
@@ -33,7 +31,6 @@ public class ProductService {
 		try {
 			this.dbConn = DbConfig.getDbConnection();
 			this.productDAO = new ProductDAO(dbConn);
-			this.categoryDAO = new CategoryDAO(dbConn);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -116,7 +113,7 @@ public class ProductService {
 	 *
 	 * @return list of Category objects or null if error
 	 */
-	public List<Category> getAllCategories() {
+	public List<CategoryModel> getAllCategories() {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
 			return null;
@@ -128,10 +125,10 @@ public class ProductService {
 			PreparedStatement genderStmt = dbConn.prepareStatement(query);
 			ResultSet result = genderStmt.executeQuery();
 
-			List<Category> categories = new ArrayList<Category>();
+			List<CategoryModel> categories = new ArrayList<CategoryModel>();
 
 			while (result.next()) {
-				categories.add(new Category(result.getInt("category_id"), result.getString("name"),
+				categories.add(new CategoryModel(result.getInt("category_id"), result.getString("name"),
 						result.getString("description")));
 			}
 

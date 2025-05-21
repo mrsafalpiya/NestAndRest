@@ -1,6 +1,6 @@
 <%@page import="com.nestandrest.util.CookiesUtil"%>
 <%@page import="com.nestandrest.service.ProductService"%>
-<%@page import="com.nestandrest.model.Category"%>
+<%@page import="com.nestandrest.model.CategoryModel"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -51,7 +51,7 @@
 					<div class="categories-menu-container">
 						<div class="categories-menu-content">
 							<%
-							List<Category> allCategories = (new ProductService()).getAllCategories();
+							List<CategoryModel> allCategories = (new ProductService()).getAllCategories();
 							%>
 							<c:forEach var="category" items="${allCategories}">
 								<a

@@ -1,14 +1,14 @@
 package com.nestandrest.model;
 
-public class Category {
+public class CategoryModel {
 	private int categoryId;
 	private String name;
 	private String description;
 
-	public Category() {
+	public CategoryModel() {
 	}
 
-	public Category(int categoryId, String name, String description) {
+	public CategoryModel(int categoryId, String name, String description) {
 		super();
 		this.categoryId = categoryId;
 		this.name = name;
