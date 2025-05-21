@@ -16,8 +16,7 @@
 	href="${pageContext.request.contextPath}/css/components.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/admin-style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/usermanagement-list.css">
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -68,6 +67,7 @@
 					</form>
 				</div>
 
+
 				<!-- Details Card -->
 				<div class="details-card">
 					<form class="details-form" method="post"
@@ -115,10 +115,23 @@
 						<c:if test="${not empty error}">
 							<p style="color: red;">${error}</p>
 						</c:if>
+						<!-- Show success message if exists -->
+						<c:if test="${not empty success}">
+							<p style="color: green; font-weight: bold;">${success}</p>
+						</c:if>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		function confirmUpdate() {
+			return confirm("Are you sure you want to update this user profile?");
+		}
+
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete this user? This action cannot be undone.");
+		}
+	</script>
 </body>
 </html>
