@@ -244,6 +244,8 @@ public class CartService {
 			int totalPrice = 0;
 			for (ProductModel productModel : itemsInCart) {
 				totalPrice += (productModel.getSalePrice() * productModel.getCartQty());
+				// Decrease the stock quantity of product
+				decreaseProductStockQty(productModel.getProductId(), productModel.getCartQty());
 			}
 
 			String insertQuery = "INSERT INTO `order` (order_status_id, cart_id, address_id, total_price) VALUES (?, ?, ?, ?);";
@@ -268,4 +270,24 @@ public class CartService {
 		return -1;
 	}
 
+	public boolean decreaseProductStockQty(int productId, int quantityToDecrease) {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return false;
+		}
+
+		try {
+			String updateQuery = "UPDATE product SET stock_qty = stock_qty - ? WHERE product_id = ?";
+			PreparedStatement updateStmt = dbConn.prepareStatement(updateQuery);
+			updateStmt.setInt(1, quantityToDecrease);
+			updateStmt.setInt(2, productId);
+			int affectedRows = updateStmt.executeUpdate();
+
+			return affectedRows > 0;
+		} catch (SQLException e) {
+			System.err.println("Error during updating stock quantity: " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
