@@ -6,15 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import com.nestandrest.config.DbConfig;
 import com.nestandrest.model.CartProductVariantValueModel;
-import com.nestandrest.model.Product;
 import com.nestandrest.model.ProductModel;
-import com.nestandrest.model.ProductVariantModel;
 
 public class CartService {
 	private Connection dbConn;

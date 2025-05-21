@@ -1,9 +1,7 @@
 package com.nestandrest.controller;
 
-import com.nestandrest.model.Product;
 import com.nestandrest.model.ProductModel;
 import com.nestandrest.service.ProductService;
-import com.nestandrest.util.ProductData;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

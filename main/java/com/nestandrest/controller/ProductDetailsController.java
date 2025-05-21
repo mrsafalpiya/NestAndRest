@@ -2,14 +2,12 @@ package com.nestandrest.controller;
 
 import java.io.IOException;
 
-import com.nestandrest.model.Product;
 import com.nestandrest.model.ProductModel;
 import com.nestandrest.model.ProductVariantModel;
 import com.nestandrest.model.UserModel;
 import com.nestandrest.service.CartService;
 import com.nestandrest.service.ProductService;
 import com.nestandrest.service.UserService;
-import com.nestandrest.util.ProductData;
 import com.nestandrest.util.RedirectionUtil;
 
 import jakarta.servlet.ServletException;

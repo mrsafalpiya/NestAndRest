@@ -1,8 +1,6 @@
 package com.nestandrest.service;
 
-import com.nestandrest.dao.ProductDAO;
 import com.nestandrest.model.CategoryModel;
-import com.nestandrest.model.Product;
 import com.nestandrest.model.ProductModel;
 import com.nestandrest.model.ProductVariantModel;
 import com.nestandrest.model.ProductVariantValueModel;
@@ -21,7 +19,6 @@ import java.util.List;
  * @author Bhumika Karki
  */
 public class ProductService {
-	private ProductDAO productDAO;
 	private Connection dbConn;
 
 	/**
@@ -30,80 +27,7 @@ public class ProductService {
 	public ProductService() {
 		try {
 			this.dbConn = DbConfig.getDbConnection();
-			this.productDAO = new ProductDAO(dbConn);
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Adds a new product and sets stock status based on quantity.
-	 *
-	 * @param Product product object to insert
-	 */
-	public void addProduct(Product product) {
-		try {
-			product.setStock(product.getQuantity()); // Set stock equal to quantity
-			product.setInStock(product.getQuantity() > 0);
-			productDAO.addProduct(product);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Retrieves all products from the database.
-	 *
-	 * @return list of products; returns an empty list if an error occurs
-	 */
-	public List<Product> getAllProducts() {
-		try {
-			return productDAO.getAllProducts();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return new ArrayList<>();
-		}
-	}
-
-	/**
-	 * Retrieves a product by its ID.
-	 *
-	 * @param productId product ID to fetch
-	 * @return Product object or null if not found
-	 */
-	public Product getProductById(int productId) {
-		try {
-			return productDAO.getProductById(productId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	/**
-	 * Updates a product and its stock status.
-	 *
-	 * @param Product product to update
-	 */
-	public void updateProduct(Product product) {
-		try {
-			product.setStock(product.getQuantity());
-			product.setInStock(product.getQuantity() > 0);
-			productDAO.updateProduct(product);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Deletes a product by its ID.
-	 *
-	 * @param productId product ID to delete
-	 */
-	public void deleteProduct(int productId) {
-		try {
-			productDAO.deleteProduct(productId);
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -348,6 +272,22 @@ public class ProductService {
 			System.err.println("Error during products get: " + e.getMessage());
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	/**
+	 * Deletes a product by its ID.
+	 *
+	 * @param productId product ID to delete
+	 */
+	public void deleteProduct(int productId) {
+		try {
+			String sql = "DELETE FROM product WHERE product_id = ?";
+			PreparedStatement stmt = dbConn.prepareStatement(sql);
+			stmt.setInt(1, productId);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

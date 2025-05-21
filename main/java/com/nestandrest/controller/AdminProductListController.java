@@ -1,6 +1,5 @@
 package com.nestandrest.controller;
 
-import com.nestandrest.model.Product;
 import com.nestandrest.model.ProductModel;
 import com.nestandrest.service.ProductService;
 import jakarta.servlet.ServletException;
@@ -12,9 +11,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Controller servlet for handling admin-side product listing, pagination, search,
- * and product management actions like update and delete.
- * @author Safal Piya 
+ * Controller servlet for handling admin-side product listing, pagination,
+ * search, and product management actions like update and delete.
+ * 
+ * @author Safal Piya
  * @author Bhumika Karki
  * @author Ayush Shrestha
  */
@@ -24,7 +24,6 @@ public class AdminProductListController extends HttpServlet {
 	private static final int PRODUCTS_PER_PAGE = 6;
 	private ProductService productService;
 
-	
 	/**
 	 * Initializes the ProductService instance during servlet startup.
 	 */
@@ -33,11 +32,12 @@ public class AdminProductListController extends HttpServlet {
 		productService = new ProductService();
 	}
 
-	
 	/**
-	 * Handles GET requests to fetch and display paginated list of products with optional search functionality.
+	 * Handles GET requests to fetch and display paginated list of products with
+	 * optional search functionality.
 	 *
-	 * @param request  HTTP request containing optional search and pagination parameters
+	 * @param request  HTTP request containing optional search and pagination
+	 *                 parameters
 	 * @param response HTTP response forwarded to the admin product list JSP
 	 * @throws ServletException if a servlet-specific error occurs
 	 * @throws IOException      if an I/O error occurs during forwarding
@@ -46,7 +46,7 @@ public class AdminProductListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("allCategories", this.productService.getAllCategories());
-		
+
 		// Get search query
 		String search = request.getParameter("search");
 		if (search == null || search.trim().isEmpty()) {
@@ -81,9 +81,9 @@ public class AdminProductListController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/pages/admin-products/admin-product-list.jsp").forward(request, response);
 	}
 
-	
 	/**
-	 * Handles POST requests to perform actions like deleting or updating products from the admin panel.
+	 * Handles POST requests to perform actions like deleting or updating products
+	 * from the admin panel.
 	 *
 	 * @param request  HTTP request containing form data and action type
 	 * @param response HTTP response redirected back to the product list
@@ -117,7 +117,7 @@ public class AdminProductListController extends HttpServlet {
 				if (name == null || name.trim().isEmpty() || stock < 0 || price <= 0 || category == null
 						|| category.trim().isEmpty()) {
 					request.setAttribute("error", "Invalid input. Please check the form.");
-					Product product = productService.getProductById(productId);
+					ProductModel product = productService.getById(productId);
 					request.setAttribute("editProduct", product);
 				} else {
 					ProductModel product = productService.getById(productId);
