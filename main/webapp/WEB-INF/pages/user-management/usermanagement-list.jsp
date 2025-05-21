@@ -62,8 +62,7 @@
 										<td><img
 											src="${pageContext.request.contextPath}/resources/user-images/${user.userId}.png"
 											onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/system/images/user-avatar.png';"
-											alt="Profile Image" width="150" /></td>
-
+											alt="Profile Image" width="150" /> ${user.name}</td>
 										<td>${user.phone}</td>
 										<td>${user.email}</td>
 										<td><c:choose>
