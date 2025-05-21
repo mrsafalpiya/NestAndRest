@@ -52,6 +52,6 @@ public class ImageUtil {
 	}
 
 	public String getSavePath(String saveFolder) {
-		return "C:\\Users\\Admin\\eclipse-workspace\\nest-and-rest\\src\\main\\webapp\\resources\\" + saveFolder + "/";
+		return "/home/safal/eclipse-workspace/nest-and-rest/src/main/webapp/resources/" + saveFolder + "/";
 	}
 }

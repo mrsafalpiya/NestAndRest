@@ -57,8 +57,6 @@ public class UserProfileController extends HttpServlet {
 		req.setAttribute("user", this.userService.getCurrentlyLoggedInUser(req, null));
 		req.setAttribute("genders", registrationService.getGenders());
 
-		System.err.println(req.getServletContext().getRealPath("/"));
-
 		switch (updateType.toLowerCase()) {
 		case "profile": {
 			UserModel updatedUser = this.extractUpdateProfileUserModel(req, resp, currentUser);
