@@ -1,4 +1,7 @@
 <%@page import="com.nestandrest.util.CookiesUtil"%>
+<%@page import="com.nestandrest.service.ProductService"%>
+<%@page import="com.nestandrest.model.Category"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -47,9 +50,14 @@
 				<div class="categories-menu">
 					<div class="categories-menu-container">
 						<div class="categories-menu-content">
-							<a href="${contextPath}/products" class="categories-entry">Category
-								1</a> <a href="${contextPath}/products" class="categories-entry">Category
-								2</a>
+							<%
+							List<Category> allCategories = (new ProductService()).getAllCategories();
+							%>
+							<c:forEach var="category" items="${allCategories}">
+								<a
+									href="${contextPath}/products?category=${category.categoryId}"
+									class="categories-entry">${category.name}</a>
+							</c:forEach>
 						</div>
 					</div>
 					<a href="${contextPath}/products" class="categories-menu-link">
@@ -73,9 +81,15 @@
 				Cookie emailCookie = CookiesUtil.getCookie(request, "email");
 				if (emailCookie != null) {
 				%>
-				<a href="${contextPath}/userprofile" style="margin-right: 12px; font-weight: 500;"><%=emailCookie.getValue()%></a>
+				<a href="${contextPath}/userprofile"
+					style="margin-right: 12px; font-weight: 500;"><%=emailCookie.getValue()%></a>
 
-				<a href="<%=request.getContextPath()%>/logout"
+				<!-- Cart Icon -->
+				<a href="${pageContext.request.contextPath}/checkout-cart"
+					class="cart-icon" style="transform: translate(-4px, 2px);"> <img
+					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/AddToCartIcon.png"
+					alt="Cart" /> <span class="cart-count"></span>
+				</a> <a href="<%=request.getContextPath()%>/logout"
 					class="btn btn-outlined">Logout</a>
 				<%
 				} else {

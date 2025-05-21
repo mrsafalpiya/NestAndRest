@@ -1,7 +1,10 @@
 package com.nestandrest.controller;
 
 import java.io.IOException;
-import java.util.UUID;
+
+import com.nestandrest.model.UserModel;
+import com.nestandrest.service.CartService;
+import com.nestandrest.service.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,20 +16,31 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/product-checkout-complete")
 public class ProductCheckOutController extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	private CartService cartService;
+	private UserService userService;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+	@Override
+	public void init() throws ServletException {
+		this.cartService = new CartService();
+		this.userService = new UserService();
+	}
 
-        // Generate a random order ID (UUID format)
-        String orderId = UUID.randomUUID().toString();
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// Create order of the cart items of current user
+		UserModel currentUser = this.userService.getCurrentlyLoggedInUser(req, null);
+		if (currentUser == null) {
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+		int newOrderId = this.cartService.addCartItemsToOrder(currentUser.getUserId(),
+				Integer.parseInt(req.getParameter("address_id")));
 
-        // Set it as a request attribute to access in JSP
-        req.setAttribute("orderId", orderId);
+		// Set it as a request attribute to access in JSP
+		req.setAttribute("orderId", newOrderId);
 
-        // Forward to JSP view
-        req.getRequestDispatcher("/WEB-INF/pages/checkout/product-checkout-complete.jsp").forward(req, resp);
-    }
+		// Forward to JSP view
+		req.getRequestDispatcher("/WEB-INF/pages/checkout/product-checkout-complete.jsp").forward(req, resp);
+	}
 }
-

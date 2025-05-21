@@ -31,6 +31,13 @@ public class UserModel {
 		this.roleId = roleId;
 	}
 
+	public UserModel(int userId, String name, String email, String phone) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.phone = phone;
+	}
+
 	/**
 	 * @return the userId
 	 */

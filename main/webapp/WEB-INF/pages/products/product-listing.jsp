@@ -1,13 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Product Listing - Nest and Rest</title>
-	<jsp:include page="../head.jsp" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-listing.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Listing - Nest and Rest</title>
+<jsp:include page="../head.jsp" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/product-listing.css">
 </head>
 
 <body>
@@ -19,30 +21,36 @@
 				<h4>Shop</h4>
 				<!-- Search and Filter Form -->
 				<form class="search-sort-container">
-					<input type="text" placeholder="Search..." class="search-input" name="search" value="${searchQuery}" />
+					<input type="text" placeholder="Search..." class="search-input"
+						name="search" value="${searchQuery}" />
 
 					<div class="filter-controls">
 						<!-- Category Dropdown -->
-						<select class="category-select" name="category" onchange="form.submit()">
-							<option value="0" <c:if test="${selectedCategory == null || selectedCategory == '0'}">selected</c:if>>All Categories</option>
+						<select class="category-select" name="category"
+							onchange="form.submit()">
+							<option value="0"
+								<c:if test="${selectedCategory == null || selectedCategory == '0'}">selected</c:if>>All
+								Categories</option>
 							<c:forEach var="category" items="${allCategories}">
-								<option value="${category.categoryId}" <c:if test="${category.categoryId == selectedCategory}">selected</c:if>>${category.name}</option>
+								<option value="${category.categoryId}"
+									<c:if test="${category.categoryId == selectedCategory}">selected</c:if>>${category.name}</option>
 							</c:forEach>
 						</select>
 
 						<!-- Sort Dropdown -->
 						<select class="sort-select" name="order" onchange="form.submit()">
-							<option value="new" <c:if test="${orderByQuery == 'new'}">selected</c:if>>Sort by: Newest First</option>
-							<option value="cheap" <c:if test="${orderByQuery == 'cheap'}">selected</c:if>>Price: Low to High</option>
-							<option value="expensive" <c:if test="${orderByQuery == 'expensive'}">selected</c:if>>Price: High to Low</option>
+							<option value="new"
+								<c:if test="${orderByQuery == 'new'}">selected</c:if>>Sort
+								by: Newest First</option>
+							<option value="cheap"
+								<c:if test="${orderByQuery == 'cheap'}">selected</c:if>>Price:
+								Low to High</option>
+							<option value="expensive"
+								<c:if test="${orderByQuery == 'expensive'}">selected</c:if>>Price:
+								High to Low</option>
 						</select>
 					</div>
 
-					<!-- Cart Icon -->
-					<a href="cart.jsp" class="cart-icon">
-						<img src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/AddToCartIcon.png" alt="Cart" />
-						<span class="cart-count"></span>
-					</a>
 				</form>
 			</div>
 		</div>
@@ -52,12 +60,16 @@
 			<c:choose>
 				<c:when test="${not empty products}">
 					<c:forEach var="p" items="${products}">
-						<a href="product-details?id=${p.productId}" style="text-decoration: none; color: inherit;">
+						<a href="product-details?id=${p.productId}"
+							style="text-decoration: none; color: inherit;">
 							<div class="product-card">
-								<img src="${pageContext.request.contextPath}/resources/product-images/${p.productId}.png" alt="${p.name}" />
+								<img
+									src="${pageContext.request.contextPath}/resources/product-images/${p.productId}.png"
+									alt="${p.name}" />
 								<h5>${p.name}</h5>
 								<p>
-									Rs <span class="<c:if test='${p.discountedPrice != 0.0}'>strike</c:if>">${p.price}</span>
+									Rs <span
+										class="<c:if test='${p.discountedPrice != 0.0}'>strike</c:if>">${p.price}</span>
 									<c:if test="${p.discountedPrice != 0.0}">
 										<span>${p.discountedPrice}</span>
 									</c:if>
@@ -81,7 +93,8 @@
 							<span class="active">${i}</span>
 						</c:when>
 						<c:otherwise>
-							<a href="products?<c:if test='${selectedCategory != null}'>category=${selectedCategory}&</c:if>page=${i}">${i}</a>
+							<a
+								href="products?<c:if test='${selectedCategory != null}'>category=${selectedCategory}&</c:if>page=${i}">${i}</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

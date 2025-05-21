@@ -72,9 +72,24 @@
 	color: var(--swap-dark-light-warning, #b76e00);
 }
 
-.tab-item-count.completed {
+.tab-item-count.delivered {
 	background: var(--success-16, rgba(34, 197, 94, 0.16));
 	color: var(--swap-dark-light-success, #118d57);
+}
+
+.tab-item-count.cancelled {
+	background: var(--error-16, rgba(255, 86, 48, 0.16));
+	color: var(--swap-dark-light-error, #B71D18);
+}
+
+.tab-item-count.processing {
+	background: var(--secondary-16, rgba(125, 157, 127, 0.16));
+	color: var(--swap-dark-light-secondary, #4D6A50);
+}
+
+.tab-item-count.shipped {
+	background: var(--info-16, rgba(0, 184, 217, 0.16));
+	color: var(--swap-dark-light-info, #006C9C);
 }
 
 .table-tab-item.selected {

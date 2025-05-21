@@ -179,7 +179,7 @@
     justify-content: center;
     gap: 10px;
 }
-.cart-icon::before {
+button>span.cart-icon::before {
     content: "🛒";
 }
 

@@ -15,6 +15,7 @@
 	href="${pageContext.request.contextPath}/css/styles.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/checkout-cart.css" />
+
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -22,41 +23,36 @@
 	<main class="cart-page container">
 		<h4>Checkout</h4>
 
-		<%
-		String currentStep = "cart";
-		%>
+		<c:set var="currentStep" value="cart" />
 
 		<div class="checkout-progress">
-			<div class="step <%=currentStep.equals("cart") ? "active" : ""%>">
-				<%
-				if (currentStep.equals("checkout-address") || currentStep.equals("complete")) {
-				%>
-				<div class="tick-mark">✓</div>
-				<%
-				} else {
-				%>
-				<div class="circle"></div>
-				<%
-				}
-				%>
-
+			<div class="step <c:if test='${currentStep == "cart"}'>active</c:if>">
+				<c:choose>
+					<c:when
+						test="${currentStep == 'checkout-address' || currentStep == 'complete'}">
+						<div class="tick-mark">✓</div>
+					</c:when>
+					<c:otherwise>
+						<div class="circle"></div>
+					</c:otherwise>
+				</c:choose>
 				<span>Cart</span>
 			</div>
 			<div
-				class="line <%=currentStep.equals("billing & address") || currentStep.equals("complete") ? "active-line" : ""%>"></div>
+				class="line <c:if test='${currentStep == "billing & address" || currentStep == "complete"}'>active-line</c:if>"></div>
 			<div
-				class="step <%=currentStep.equals("billing & address") || currentStep.equals("complete") ? "active" : ""%>">
+				class="step <c:if test='${currentStep == "billing & address" || currentStep == "complete"}'>active</c:if>">
 				<div class="circle"></div>
 				<span>Billing & address</span>
 			</div>
 			<div
-				class="line <%=currentStep.equals("complete") ? "active-line" : ""%>"></div>
-			<div class="step <%=currentStep.equals("complete") ? "active" : ""%>">
+				class="line <c:if test='${currentStep == "complete"}'>active-line</c:if>"></div>
+			<div
+				class="step <c:if test='${currentStep == "complete"}'>active</c:if>">
 				<div class="circle"></div>
 				<span>Complete</span>
 			</div>
 		</div>
-
 
 		<div class="checkout-container">
 			<!-- Cart Box -->
@@ -69,6 +65,7 @@
 							<th>Price</th>
 							<th>Quantity</th>
 							<th>Total price</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -83,7 +80,9 @@
 											<strong>${product.getName()}</strong><br />
 											<c:if test="${not empty product.getVariants()}">
 												<c:forEach var="variant" items="${product.getVariants()}">
-													<span style="font-size: 10px">${variant.key}: ${variant.value}</span><br />
+													<span style="font-size: 10px">${variant.key}:
+														${variant.value}</span>
+													<br />
 												</c:forEach>
 											</c:if>
 											<c:if test="${empty product.getVariants()}">
@@ -99,6 +98,17 @@
 									</div>
 								</td>
 								<td>Rs ${product.getSalePrice() * product.getCartQty()}</td>
+								<td>
+									<form method="post"
+										action="${pageContext.request.contextPath}/checkout-cart"
+										style="display: inline;">
+										<input type="hidden" name="action" value="remove" /> <input
+											type="hidden" name="productId"
+											value="${product.getProductId()}" />
+										<button type="submit" title="Remove from cart"
+											class="remove-btn">🗑️</button>
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -111,27 +121,29 @@
 				<p>
 					<c:set var="subtotal" value="0" />
 					<c:forEach var="product" items="${products}">
-						<c:set var="subtotal" value="${subtotal + (product.getSalePrice() * product.getCartQty())}" />
+						<c:set var="subtotal"
+							value="${subtotal + (product.salePrice * product.cartQty)}" />
 					</c:forEach>
 					<span>Subtotal:</span> <strong>Rs ${subtotal}</strong>
 				</p>
 				<p>
 					<span>Payment Method:</span> <strong>Cash on Delivery</strong>
 				</p>
-				<div class="checkout-wrapper">
-					<button class="checkout-btn"
-						onclick="location.href='${pageContext.request.contextPath}/checkout-address'">
-						Check out</button>
-				</div>
+				<c:if test="${not empty products}">
+					<div class="checkout-wrapper" style="width: 100%;">
+						<button class="checkout-btn"
+							onclick="location.href='${pageContext.request.contextPath}/checkout-address'">
+							Check out</button>
+					</div>
+				</c:if>
 			</div>
 		</div>
 
 		<!-- Bottom Actions -->
 		<div class="address-actions">
-			<a href="${pageContext.request.contextPath}/products" class="back-btn">←
-				Continue Shopping</a>
+			<a href="${pageContext.request.contextPath}/products"
+				class="back-btn">← Continue Shopping</a>
 		</div>
 	</main>
 </body>
 </html>
-

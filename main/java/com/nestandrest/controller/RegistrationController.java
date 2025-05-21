@@ -66,6 +66,14 @@ public class RegistrationController extends HttpServlet {
 		String confirmPassword = req.getParameter("password-confirm");
 		String genderId = req.getParameter("gender-id");
 
+		// Set the attributes as the inputs in the form data (to restore input values on
+		// validation errors)
+		req.setAttribute("restoreFirstName", firstName);
+		req.setAttribute("restoreLastName", lastName);
+		req.setAttribute("restoreEmail", email);
+		req.setAttribute("restorePhone", phone);
+		req.setAttribute("restoreGenderId", genderId);
+
 		// Checking if all fields are filled
 		if (validationUtil.isNullOrEmpty(firstName) || validationUtil.isNullOrEmpty(lastName)
 				|| validationUtil.isNullOrEmpty(email) || validationUtil.isNullOrEmpty(password)
@@ -88,11 +96,11 @@ public class RegistrationController extends HttpServlet {
 					RedirectionUtil.registerUrl);
 			return null;
 		}
-		
+
 		// Checking if a valid phone number was provided
 		if (!validationUtil.isValidPhoneNumber(phone)) {
-			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid phone number!",
-					RedirectionUtil.registerUrl);
+			redirectionUtil.setMsgAndRedirect(req, resp, "error",
+					"Please enter a valid phone number! (Start with 98 and of 10 digits)", RedirectionUtil.registerUrl);
 			return null;
 		}
 

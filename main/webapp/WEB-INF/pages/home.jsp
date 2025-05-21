@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,8 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	
-	
+
+
 
 	<!-- Interactive Hero Section -->
 	<section class="interactive-room-container">
@@ -45,52 +46,52 @@
 				preserveAspectRatio="xMidYMid meet">
 			      <!-- Stools -->
 			      <a
-					href="${pageContext.request.contextPath}/products?category=stool"
+					href="${pageContext.request.contextPath}/products?category=<c:forEach var="category" items="${allCategories}"><c:if test="${category.name == 'Stools'}"><c:out value="${category.categoryId}"/></c:if></c:forEach>"
 					title="Stools" data-tooltip="Stools">
         			<path
 						d="M95,993 L118,1006 L149,1009 L178,1006 L209,1002 L239,991 L259,984 L276,973 L281,948 L279,794 L247,785 L241,770 L187,765 L111,781 L106,796 L89,810 Z"
-						class="clickable-area" data-category="stools" />
+						class="clickable-area" />
       				</a>
 
-      <!-- Tables -->
+      			<!-- Tables -->
       			<a
-					href="${pageContext.request.contextPath}/products?category=table"
+					href="${pageContext.request.contextPath}/products?category=<c:forEach var="category" items="${allCategories}"><c:if test="${category.name == 'Tables'}"><c:out value="${category.categoryId}"/></c:if></c:forEach>"
 					title="Tables" data-tooltip="Tables">
         			<path
 						d="M793,879 L793,771 L770,763 L768,742 L777,731 L824,725 L846,718 L844,680 L867,673 L866,700 L895,698 L907,718 L938,720 L969,720 L988,729 L1010,740 L1009,760 L987,769 L987,857 L970,855 L967,772 L945,776 L943,875 L925,886 L927,792 L909,778 L860,778 L858,846 L842,846 L844,779 L835,776 L813,787 L811,877 Z"
 						class="clickable-area" data-category="tables" />
       			</a>
 
-      <!-- Chairs -->
+      			<!-- Chairs -->
       			<a
-					href="${pageContext.request.contextPath}/products?category=chair"
+					href="${pageContext.request.contextPath}/products?category=<c:forEach var="category" items="${allCategories}"><c:if test="${category.name == 'Chairs'}"><c:out value="${category.categoryId}"/></c:if></c:forEach>"
 					title="Chairs" data-tooltip="Chairs">
         			<path
 						d="M1314,801 L1312,658 L1327,651 L1434,649 L1455,593 L1468,588 L1472,566 L1488,570 L1596,575 L1607,575 L1598,658 L1611,664 L1605,680 L1614,821 L1595,817 L1595,779 L1472,781 L1468,837 L1450,839 L1450,787 L1329,758 L1327,799 Z"
 						class="clickable-area" data-category="chairs" />
      			 </a>
 
-      <!-- Hangers -->
+      			 <!-- Hangers -->
      			 <a
-					href="${pageContext.request.contextPath}/products?category=hanger"
+					href="${pageContext.request.contextPath}/products?category=<c:forEach var="category" items="${allCategories}"><c:if test="${category.name == 'Hangers'}"><c:out value="${category.categoryId}"/></c:if></c:forEach>"
 					title="Hangers" data-tooltip="Hangers">
         			<path
 						d="M1714,273 L2020,181 L2038,181 L2032,195 L2018,203 L1926,228 L1929,253 L1958,282 L1971,308 L1984,360 L1982,405 L1969,443 L1947,543 L1942,555 L1913,550 L1893,543 L1891,622 L1832,622 L1841,526 L1828,539 L1794,525 L1803,478 L1788,470 L1785,405 L1728,405 L1719,352 L1737,341 L1743,285 L1716,290 Z"
 						class="clickable-area" data-category="hangers" />
      				 </a>
 
-      <!-- Sofas (first area) -->
+      			<!-- Sofas (first area) -->
       			<a
-					href="${pageContext.request.contextPath}/products?category=sofa"
+					href="${pageContext.request.contextPath}/products?category=<c:forEach var="category" items="${allCategories}"><c:if test="${category.name == 'Sofas'}"><c:out value="${category.categoryId}"/></c:if></c:forEach>"
 					title="Sofas" data-tooltip="Sofas">
        				 <path
 						d="M120,781 L118,662 L136,653 L167,649 L162,613 L196,590 L211,591 L259,590 L296,590 L321,582 L353,573 L375,571 L406,568 L428,571 L442,571 L466,566 L487,562 L498,573 L511,591 L522,586 L534,586 L569,642 L601,640 L630,638 L686,642 L686,685 L692,707 L685,725 L688,747 L686,781 L686,798 L670,798 L672,758 L609,796 L603,848 L603,859 L587,861 L585,819 L491,874 L484,942 L464,951 L457,884 L285,881 L279,796 L249,787 L247,770 L185,765 Z"
 						class="clickable-area" data-category="sofas" />
       			</a>
 
-      <!-- Sofas (second area) -->
+      			 <!-- Sofas (second area) -->
      			 <a
-					href="${pageContext.request.contextPath}/products?category=sofa"
+					href="${pageContext.request.contextPath}/products?category=<c:forEach var="category" items="${allCategories}"><c:if test="${category.name == 'Sofas'}"><c:out value="${category.categoryId}"/></c:if></c:forEach>"
 					title="Sofas" data-tooltip="Sofas">
        				 <path
 						d="M707,787 L709,644 L740,628 L742,603 L754,595 L758,557 L782,557 L829,557 L877,556 L928,556 L973,554 L993,561 L1001,556 L1022,554 L1055,556 L1098,557 L1142,552 L1180,554 L1210,554 L1228,554 L1232,595 L1243,595 L1247,615 L1256,639 L1259,664 L1259,789 L1241,793 L1241,746 L1015,747 L976,723 L909,717 L898,696 L871,697 L867,670 L838,678 L836,719 L784,726 L768,732 L761,746 L724,743 L726,788 Z"
@@ -123,60 +124,20 @@
 		<section class="list-container">
 			<h4>Shop Our Top Categories</h4>
 			<div class="list-items">
-				<a href="${pageContext.request.contextPath}/products?category=sofa">
-					<div class="item-card">
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/TwoSitterSofa.png" />
+				<c:forEach var="category" items="${allCategories}">
+					<a
+						href="${pageContext.request.contextPath}/products?category=${category.categoryId}">
+						<div class="item-card">
+							<div class="item-img">
+								<img
+									src="${pageContext.request.contextPath}/resources/category-images/${category.categoryId}.png" />
+							</div>
+							<div class="item-info">
+								<p class="subtitle1">${category.name}</p>
+							</div>
 						</div>
-						<div class="item-info">
-							<p class="subtitle1">Sofas</p>
-						</div>
-					</div>
-				</a> <a
-					href="${pageContext.request.contextPath}/products?category=chair">
-					<div class="item-card">
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/OneSitterChair.png" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Chairs</p>
-						</div>
-					</div>
-				</a> <a
-					href="${pageContext.request.contextPath}/products?category=stool">
-					<div class="item-card">
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/CaneRattanStool.png" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Stools</p>
-						</div>
-					</div>
-				</a> <a href="${pageContext.request.contextPath}/products?category=rack">
-					<div class="item-card">
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/MandirRack.png" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Racks</p>
-						</div>
-					</div>
-				</a> <a
-					href="${pageContext.request.contextPath}/products?category=hanger">
-					<div class="item-card">
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/WallHanger.png" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Hangers</p>
-						</div>
-					</div>
-				</a>
+					</a>
+				</c:forEach>
 			</div>
 		</section>
 
@@ -184,82 +145,15 @@
 		<section class="list-container">
 			<h4>Products on Sale!</h4>
 			<div class="list-items">
-				<a href="${pageContext.request.contextPath}/product-details?id=2">
-					<div class="item-card item-card-product">
-						<span class="badge sale">SALE</span>
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/AppleSofaSet2.jpeg" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Apple Sofa Set 2</p>
-							<div class="price-info">
-								<span class="discounted-price subtitle1">Rs 10,500</span> <span
-									class="subtitle1">Rs 9,000</span>
-							</div>
-						</div>
-					</div>
-				</a> <a href="${pageContext.request.contextPath}/product-details?id=4">
-					<div class="item-card item-card-product">
-						<span class="badge sale">SALE</span>
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/BambooandRattanSofaSet.jpeg" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Bamboo and Rattan Sofa Set</p>
-							<div class="price-info">
-								<span class="discounted-price subtitle1">Rs 40,000</span> <span
-									class="subtitle1">Rs 30,000</span>
-							</div>
-						</div>
-					</div>
-				</a> <a href="${pageContext.request.contextPath}/product-details?id=7">
-					<div class="item-card item-card-product">
-						<span class="badge sale">SALE</span>
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/RattanSofaSet.jpeg" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Rattan Sofa Set</p>
-							<div class="price-info">
-								<span class="discounted-price subtitle1">Rs 30,000</span> <span
-									class="subtitle1">Rs 20,000</span>
-							</div>
-						</div>
-					</div>
-				</a> <a href="${pageContext.request.contextPath}/product-details?id=15">
-					<div class="item-card item-card-product">
-						<span class="badge sale">SALE</span>
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/RattanSofaSet.jpeg" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Wall Hanger</p>
-							<div class="price-info">
-								<span class="discounted-price subtitle1">Rs 3,500</span> <span
-									class="subtitle1">Rs 2,000</span>
-							</div>
-						</div>
-					</div>
-				</a> <a href="${pageContext.request.contextPath}/product-details?id=16">
-					<div class="item-card item-card-product">
-						<span class="badge sale">SALE</span>
-						<div class="item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/system/images/BanglesStand.png" />
-						</div>
-						<div class="item-info">
-							<p class="subtitle1">Bangles Stand</p>
-							<div class="price-info">
-								<span class="discounted-price subtitle1">Rs 6,000</span> <span
-									class="subtitle1">Rs 5,000</span>
-							</div>
-						</div>
-					</div>
-				</a>
+				<c:forEach var="product" items="${productsWithDiscounts}">
+					<jsp:include page="./product-card.jsp">
+						<jsp:param name="id" value="${product.productId}" />
+						<jsp:param name="name" value="${product.name}" />
+						<jsp:param name="discountedPrice"
+							value="${'' + product.discountedPrice}" />
+						<jsp:param name="price" value="${'' + product.price}" />
+					</jsp:include>
+				</c:forEach>
 			</div>
 		</section>
 
@@ -267,237 +161,23 @@
 		<section class="list-container">
 			<h4>Products By Category</h4>
 
-			<div class="category-listing">
-				<h5>Sofas</h5>
-				<div class="list-items">
-					<a href="${pageContext.request.contextPath}/product-details?id=0">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/TwoSitterSofa.png" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Two Sitter Sofa</p>
-								<div class="price-info">
-									<span class="subtitle1">Rs 9,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=1">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/AppleSofaSet1.jpeg" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Apple Sofa Set 1</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 10,500</span> <span
-										class="subtitle1">Rs 9,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=2">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/AppleSofaSet2.jpeg" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Apple Sofa Set 2</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 24,000</span> <span
-										class="subtitle1">Rs 20,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=3">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/AppleSofaSet3.jpeg" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Apple Sofa Set 3</p>
-								<div class="price-info">
-									<span class="subtitle1">Rs 20,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=4">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/RattanSofaSet.jpeg" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Chairs</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 24,000</span> <span
-										class="subtitle1">Rs 20,000</span>
-								</div>
-							</div>
-						</div>
-					</a>
+			<c:forEach var="category" items="${allCategories}">
+				<div class="category-listing">
+					<h5>${category.name}</h5>
+					<div class="list-items">
+						<c:forEach var="product"
+							items="${categorizedProducts[category.categoryId]}">
+							<jsp:include page="./product-card.jsp">
+								<jsp:param name="id" value="${product.productId}" />
+								<jsp:param name="name" value="${product.name}" />
+								<jsp:param name="discountedPrice"
+									value="${'' + product.discountedPrice}" />
+								<jsp:param name="price" value="${'' + product.price}" />
+							</jsp:include>
+						</c:forEach>
+					</div>
 				</div>
-			</div>
-
-			<div class="category-listing">
-				<h5>Chairs</h5>
-				<div class="list-items">
-					<a href="${pageContext.request.contextPath}/product-details?id=9">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/OneSitterChair.png" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">One Sitter Chair</p>
-								<div class="price-info">
-									<span class="subtitle1">Rs 9,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=10">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/RoundChair.png" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Round Chair</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 10,500</span> <span
-										class="subtitle1">Rs 9,000</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-
-			<div class="category-listing">
-				<h5>Stools</h5>
-				<div class="list-items">
-					<a href="${pageContext.request.contextPath}/product-details?id=11">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/CaneRattanStool.png" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Cane Rattan Stool</p>
-								<div class="price-info">
-									<span class="subtitle1">Rs 3,500</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=12">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/CaneStool.png" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Cane Stool</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 4,300</span> <span
-										class="subtitle1">Rs 2,800</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=2">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/RattanStool.png" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Rattan Stool</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 5,000</span> <span
-										class="subtitle1">Rs 3,500</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-
-			<div class="category-listing">
-				<h5>Sofas</h5>
-				<div class="list-items">
-					<a href="${pageContext.request.contextPath}/product-details?id=0">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/TwoSitterSofa.png" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Two Sitter Sofa</p>
-								<div class="price-info">
-									<span class="subtitle1">Rs 9,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=1">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/AppleSofaSet1.jpeg" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Apple Sofa Set 1</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 10,500</span> <span
-										class="subtitle1">Rs 9,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=2">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/AppleSofaSet2.jpeg" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Apple Sofa Set 2</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 24,000</span> <span
-										class="subtitle1">Rs 20,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=3">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/AppleSofaSet3.jpeg" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Apple Sofa Set 3</p>
-								<div class="price-info">
-									<span class="subtitle1">Rs 20,000</span>
-								</div>
-							</div>
-						</div>
-					</a> <a href="${pageContext.request.contextPath}/product-details?id=4">
-						<div class="item-card item-card-product">
-							<div class="item-img">
-								<img
-									src="${pageContext.request.contextPath}/resources/system/images/RattanSofaSet.jpeg" />
-							</div>
-							<div class="item-info">
-								<p class="subtitle1">Chairs</p>
-								<div class="price-info">
-									<span class="discounted-price subtitle1">Rs 24,000</span> <span
-										class="subtitle1">Rs 20,000</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
+			</c:forEach>
 		</section>
 	</div>
 

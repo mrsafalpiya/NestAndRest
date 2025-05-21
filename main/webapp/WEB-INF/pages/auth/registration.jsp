@@ -55,13 +55,15 @@
 						<div>
 							<p class="input-label">First Name</p>
 							<input type="text" class="input-text"
-								placeholder="Your First Name" name="first-name" id="first-name">
+								placeholder="Your First Name" name="first-name" id="first-name"
+								value="${restoreFirstName}">
 
 						</div>
 						<div>
 							<p class="input-label">Last Name</p>
 							<input type="text" class="input-text"
-								placeholder=" Your last Name" name="last-name" id="last-name">
+								placeholder=" Your last Name" name="last-name" id="last-name"
+								value="${restoreLastName}">
 
 						</div>
 					</div>
@@ -69,13 +71,13 @@
 					<div>
 						<p class="input-label">Email Address</p>
 						<input class="input-text" placeholder="yourname@gmail.com"
-							name="email" id="email">
+							name="email" id="email" value="${restoreEmail}">
 					</div>
 
 					<div>
 						<p class="input-label">Phone Number</p>
 						<input class="input-text" placeholder="Phone Number" name="phone"
-							id="phone">
+							id="phone" value="${restorePhone}">
 					</div>
 
 					<div>
@@ -84,7 +86,8 @@
 							required>
 							<option value="" disabled>Select your gender</option>
 							<c:forEach var="gender" items="${genders}">
-								<option value="${gender.genderId}">${gender.name}</option>
+								<option value="${gender.genderId}"
+									<c:if test="${gender.genderId == restoreGenderId}">selected</c:if>>${gender.name}</option>
 							</c:forEach>
 						</select>
 					</div>
