@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +11,7 @@
 <title>Product Listing - Nest and Rest</title>
 <jsp:include page="../head.jsp" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/product-listing.css">
+	href="${contextPath}/css/product-listing.css">
 </head>
 
 <body>
@@ -64,7 +66,7 @@
 							style="text-decoration: none; color: inherit;">
 							<div class="product-card">
 								<img
-									src="${pageContext.request.contextPath}/resources/product-images/${p.productId}.png"
+									src="${contextPath}/resources/product-images/${p.productId}.png"
 									alt="${p.name}" />
 								<h5>${p.name}</h5>
 								<p>

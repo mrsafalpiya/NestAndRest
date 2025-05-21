@@ -4,6 +4,8 @@
 <%@ page import="com.nestandrest.model.ProductVariantModel"%>
 <%@ page import="com.nestandrest.model.ProductVariantValueModel"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +14,7 @@
 <title>Product Details - Nest and Rest</title>
 <jsp:include page="../head.jsp" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/product-details.css">
+	href="${contextPath}/css/product-details.css">
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -25,8 +27,8 @@
 
 		<!-- Breadcrumb navigation for user orientation -->
 		<nav class="breadcrumb">
-			<a href="${pageContext.request.contextPath}/home">Home</a> &gt; <a
-				href="${pageContext.request.contextPath}/products">Shop</a> &gt; <span><%=product.getName()%></span>
+			<a href="${contextPath}/home">Home</a> &gt; <a
+				href="${contextPath}/products">Shop</a> &gt; <span><%=product.getName()%></span>
 		</nav>
 
 		<div class="product-top">

@@ -1,7 +1,6 @@
 .content-container {
 	display: flex;
-	padding: var(--container-vertical-py, 40px)
-		var(--container-vertical-px, 40px);
+	padding: var(--container-vertical-py, 40px) var(--container-vertical-px, 40px);
 	flex-direction: column;
 	align-items: flex-start;
 	gap: var(--spacing-3, 24px);
@@ -23,11 +22,7 @@
 .card {
 	border-radius: var(--card-radius, 16px);
 	background: var(--background-paper, #FFF);
-	box-shadow: var(--card-x1, 0px) var(--card-y1, 0px)
-		var(--card-blur1, 2px) var(--card-spread1, 0px)
-		var(--shadow-20, rgba(145, 158, 171, 0.20)), var(--card-x2, 0px)
-		var(--card-y2, 12px) var(--card-blur2, 24px) var(--card-spread2, -4px)
-		var(--shadow-12, rgba(145, 158, 171, 0.12));
+	box-shadow: var(--card-x1, 0px) var(--card-y1, 0px) var(--card-blur1, 2px) var(--card-spread1, 0px) var(--shadow-20, rgba(145, 158, 171, 0.20)), var(--card-x2, 0px) var(--card-y2, 12px) var(--card-blur2, 24px) var(--card-spread2, -4px) var(--shadow-12, rgba(145, 158, 171, 0.12));
 	padding: var(--card-content-p, 24px);
 }
 
@@ -61,6 +56,7 @@
 	.sales-gender-yearly-container {
 		flex-direction: column;
 	}
+
 	.sales-gender-yearly-container .sales-by-gender {
 		max-width: 100% !important;
 	}

@@ -37,7 +37,8 @@
 	margin-top: 10px;
 	margin-bottom: 20px;
 	font-size: 14px;
-	color: var(--text-primary); /* uses your token */
+	color: var(--text-primary);
+	/* uses your token */
 }
 
 .checkbox-group input[type="checkbox"] {
@@ -91,14 +92,17 @@
 /* Align First Name and Last Name fields side by side */
 .name-fields {
 	display: flex;
-	gap: 16px; /* Adjusts the spacing between the two fields */
+	gap: 16px;
+	/* Adjusts the spacing between the two fields */
 }
 
 .name-fields div {
-	flex: 1; /* Makes both fields take equal width */
+	flex: 1;
+	/* Makes both fields take equal width */
 }
 
 .input-text {
-	width: 100%; /* Ensures inputs take full width of their container */
+	width: 100%;
+	/* Ensures inputs take full width of their container */
 	background: white;
 }

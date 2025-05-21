@@ -1,5 +1,7 @@
 /* Set the percived size of the element in the DOM to include its border */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 }
 
@@ -9,19 +11,24 @@
 	padding: 0;
 }
 
-html, body {
+html,
+body {
 	max-width: 100%;
 	overflow-x: hidden;
 }
 
 /* Remove border */
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
 	border: none;
 	outline: none;
 }
 
 /* Remove default list style */
-ul, ol {
+ul,
+ol {
 	list-style: none;
 }
 
@@ -31,7 +38,10 @@ a {
 }
 
 /* Remove colors in the anchor tag */
-a, a:visited, a:hover, a:active {
+a,
+a:visited,
+a:hover,
+a:active {
 	color: inherit;
 }
 
@@ -46,7 +56,8 @@ html {
 }
 
 /* Set min height for the body */
-body, main {
+body,
+main {
 	min-height: 100dvh;
 	overflow-x: hidden;
 }
@@ -78,8 +89,7 @@ button {
 header {
 	position: sticky;
 	top: 0;
-	box-shadow: 0px 0px 2px 0px rgba(145, 158, 171, 0.20), 0px 12px 24px
-		-4px rgba(145, 158, 171, 0.12);
+	box-shadow: 0px 0px 2px 0px rgba(145, 158, 171, 0.20), 0px 12px 24px -4px rgba(145, 158, 171, 0.12);
 	z-index: 99;
 }
 
@@ -217,8 +227,7 @@ a.header-menu-link:hover {
 	left: 0;
 	pointer-events: none;
 	opacity: 0;
-	transition: opacity 0.3s cubic-bezier(0.36, -0.01, 0, 0.77), box-shadow
-		0.3s cubic-bezier(0.36, -0.01, 0, 0.77);
+	transition: opacity 0.3s cubic-bezier(0.36, -0.01, 0, 0.77), box-shadow 0.3s cubic-bezier(0.36, -0.01, 0, 0.77);
 	border-radius: 10px;
 	z-index: 99;
 }
@@ -233,8 +242,7 @@ a.header-menu-link:hover {
 .categories-menu:hover .categories-menu-container {
 	pointer-events: all;
 	opacity: 1;
-	box-shadow: 0 0 2px 0 rgba(145 158 171/ 0.24), -20px 20px 40px -4px
-		rgba(145 158 171/ 0.24);
+	box-shadow: 0 0 2px 0 rgba(145 158 171/ 0.24), -20px 20px 40px -4px rgba(145 158 171/ 0.24);
 }
 
 a.categories-entry {

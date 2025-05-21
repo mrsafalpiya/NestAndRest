@@ -34,7 +34,8 @@
 	margin-top: 10px;
 	gap: 8px;
 	font-size: 14px;
-	color: var(--text-primary); /* or your default text color */
+	color: var(--text-primary);
+	/* or your default text color */
 }
 
 .checkbox-group input[type="checkbox"] {

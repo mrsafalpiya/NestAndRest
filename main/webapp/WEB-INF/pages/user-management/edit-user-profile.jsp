@@ -3,6 +3,7 @@
 <%@ page import="java.util.*, com.nestandrest.model.UserModel"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +12,11 @@
 <title>Edit User Profile</title>
 <jsp:include page="../head.jsp" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/edit-user-profile.css" />
+	href="${contextPath}/css/edit-user-profile.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/components.css" />
+	href="${contextPath}/css/components.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-style.css">
+	href="${contextPath}/css/admin-style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,13 +45,13 @@
 							<%-- Profile Image with fallback --%> <c:choose>
 								<c:when test="${not empty user.profileImage}">
 									<img
-										src="${pageContext.request.contextPath}/resources/user-images/${user.profileImage}"
+										src="${contextPath}/resources/user-images/${user.profileImage}"
 										alt="Profile Image" width="150"
-										onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/system/images/user-avatar.png';" />
+										onerror="this.onerror=null;this.src='${contextPath}/resources/system/images/user-avatar.png';" />
 								</c:when>
 								<c:otherwise>
 									<img
-										src="${pageContext.request.contextPath}/resources/system/images/user-avatar.png"
+										src="${contextPath}/resources/system/images/user-avatar.png"
 										alt="Default Profile Image" width="150" />
 								</c:otherwise>
 							</c:choose>
@@ -59,7 +60,7 @@
 					</div>
 
 					<!-- Delete User Form -->
-					<form action="${pageContext.request.contextPath}/edit-user-profile"
+					<form action="${contextPath}/edit-user-profile"
 						method="POST" onsubmit="return confirmDelete()">
 						<input type="hidden" name="userId" value="${user.userId}">
 						<input type="hidden" name="action" value="delete">
@@ -71,7 +72,7 @@
 				<!-- Details Card -->
 				<div class="details-card">
 					<form class="details-form" method="post"
-						action="${pageContext.request.contextPath}/edit-user-profile"
+						action="${contextPath}/edit-user-profile"
 						onsubmit="return confirmUpdate()">
 						<input type="hidden" name="userId" value="${user.userId}" />
 

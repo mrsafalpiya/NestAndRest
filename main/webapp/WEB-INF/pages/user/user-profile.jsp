@@ -18,9 +18,9 @@
 	rel="stylesheet" />
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/user-profile.css" />
+	href="${contextPath}/css/user-profile.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/components.css" />
+	href="${contextPath}/css/components.css" />
 
 </head>
 <body>
@@ -40,8 +40,8 @@
 			<div class="photo-card">
 				<div class="profile-photo">
 					<label for="photo-upload" class="upload-overlay"> <img
-						src="${pageContext.request.contextPath}/resources/user-images/${user.getUserId()}.png"
-						onerror="this.src='${pageContext.request.contextPath}/resources/system/images/Avatar.png'"
+						src="${contextPath}/resources/user-images/${user.getUserId()}.png"
+						onerror="this.src='${contextPath}/resources/system/images/Avatar.png'"
 						alt="Profile Photo" />
 
 						<div class="hover-layer"></div>

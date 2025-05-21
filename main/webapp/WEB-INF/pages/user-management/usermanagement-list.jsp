@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="com.nestandrest.model.UserModel"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +13,9 @@
 <jsp:include page="../head.jsp" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-style.css">
+	href="${contextPath}/css/admin-style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/usermanagement-list.css">
+	href="${contextPath}/css/usermanagement-list.css">
 </head>
 <body>
 	<div class="admin-layout">
@@ -60,8 +61,8 @@
 									<tr>
 										<td><input type="checkbox" /></td>
 										<td><img
-											src="${pageContext.request.contextPath}/resources/user-images/${user.userId}.png"
-											onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/system/images/user-avatar.png';"
+											src="${contextPath}/resources/user-images/${user.userId}.png"
+											onerror="this.onerror=null;this.src='${contextPath}/resources/system/images/user-avatar.png';"
 											alt="Profile Image" width="150" /> ${user.name}</td>
 										<td>${user.phone}</td>
 										<td>${user.email}</td>
@@ -70,7 +71,7 @@
 												<c:otherwise>User</c:otherwise>
 											</c:choose></td>
 										<td><a
-											href="${pageContext.request.contextPath}/edit-user-profile?userId=${user.userId}"
+											href="${contextPath}/edit-user-profile?userId=${user.userId}"
 											title="Edit">✏️</a></td>
 									</tr>
 								</c:forEach>

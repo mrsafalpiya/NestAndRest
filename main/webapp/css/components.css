@@ -166,8 +166,7 @@ h6 {
 	font-size: var(--components-input-value-size);
 	font-weight: var(--components-input-value-weight);
 	line-height: var(--components-input-value-line-height);
-	padding: var(--textfield-standard-input-md-pt) 0px
-		var(--textfield-standard-input-pb) 0px;
+	padding: var(--textfield-standard-input-md-pt) 0px var(--textfield-standard-input-pb) 0px;
 	border-bottom: 1px solid var(--components-textfield-underline);
 }
 

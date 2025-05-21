@@ -25,13 +25,13 @@
 	rel="stylesheet">
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/contact-us.css" />
+	href="${contextPath}/css/contact-us.css" />
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/components.css" />
+	href="${contextPath}/css/components.css" />
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/styles.css" />
+	href="${contextPath}/css/styles.css" />
 
 </head>
 
@@ -41,7 +41,7 @@
 
 	<!-- Background image section with Hero.png -->
 	<section class="location-section"
-		style="background-image: url('${pageContext.request.contextPath}/resources/system/images/bg.png')">
+		style="background-image: url('${contextPath}/resources/system/images/bg.png')">
 		<h2>
 			<span>Where</span><br>to find us?
 		</h2>

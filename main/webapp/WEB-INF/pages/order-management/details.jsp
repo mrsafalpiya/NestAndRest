@@ -13,11 +13,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="../head.jsp" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-style.css">
+	href="${contextPath}/css/admin-style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-product-list.css">
+	href="${contextPath}/css/admin-product-list.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-orders-management-details.css">
+	href="${contextPath}/css/admin-orders-management-details.css">
 </head>
 <body>
 	<div class="admin-layout">
@@ -135,8 +135,8 @@
 					<div class="info-container">
 						<div class="user-info-container">
 							<img
-								src="${pageContext.request.contextPath}/resources/user-images/${order.user.userId}.png"
-								onerror="this.src='${pageContext.request.contextPath}/resources/system/images/Avatar.png'"
+								src="${contextPath}/resources/user-images/${order.user.userId}.png"
+								onerror="this.src='${contextPath}/resources/system/images/Avatar.png'"
 								width="48" height="48" style="border-radius: 50%;" />
 							<div>
 								<p class="subtitle2" style="color: var(--primary-text)">${order.user.name}</p>

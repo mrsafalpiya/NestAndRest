@@ -13,11 +13,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="../head.jsp" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-style.css">
+	href="${contextPath}/css/admin-style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-product-list.css">
+	href="${contextPath}/css/admin-product-list.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-orders-management-list.css">
+	href="${contextPath}/css/admin-orders-management-list.css">
 </head>
 <body>
 	<div class="admin-layout">
@@ -77,8 +77,8 @@
 								<td>
 									<div class="customer-info">
 										<img
-											src="${pageContext.request.contextPath}/resources/user-images/${order.user.userId}.png"
-											onerror="this.src='${pageContext.request.contextPath}/resources/system/images/Avatar.png'"
+											src="${contextPath}/resources/user-images/${order.user.userId}.png"
+											onerror="this.src='${contextPath}/resources/system/images/Avatar.png'"
 											width="40" height="40" />
 										<div class="customer-details">
 											<p class="body2 name">${order.user.name}</p>

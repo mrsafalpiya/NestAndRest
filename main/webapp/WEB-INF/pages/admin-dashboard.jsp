@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="head.jsp" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-style.css">
+	href="${contextPath}/css/admin-style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-dashboard.css">
+	href="${contextPath}/css/admin-dashboard.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

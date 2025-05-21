@@ -260,33 +260,42 @@ button>span.cart-icon::before {
 		flex-direction: column;
 		gap: 24px;
 	}
+
 	.main-image {
 		width: 100%;
 		height: auto;
 	}
+
 	.product-info {
 		padding: 0 16px;
 	}
+
 	.product-info h1 {
 		font-size: 20px;
 	}
+
 	.short-description {
 		font-size: 14px;
 	}
+
 	.product-options {
 		padding: 0 16px;
 	}
+
 	.option-row {
 		flex-direction: column;
 		align-items: flex-start;
 	}
+
 	.add-to-cart {
 		width: 100%;
 	}
+
 	.highlights {
 		flex-direction: column;
 		align-items: center;
 	}
+
 	.tab-content {
 		padding: 0 16px;
 	}

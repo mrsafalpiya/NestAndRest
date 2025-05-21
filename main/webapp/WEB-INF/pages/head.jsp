@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!-- Public Sans Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -8,6 +11,6 @@
 	rel="stylesheet" />
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/styles.css" />
+	href="${contextPath}/css/styles.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/components.css" />
+	href="${contextPath}/css/components.css" />

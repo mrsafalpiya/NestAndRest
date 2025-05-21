@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +14,9 @@
 
 <title>Checkout - Billing & Address</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/styles.css" />
+	href="${contextPath}/css/styles.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/checkout-address.css">
+	href="${contextPath}/css/checkout-address.css">
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -81,7 +83,7 @@
 								<p>${address.getPhoneNumber()}</p>
 							</div>
 							<button
-								onclick="location.href='${pageContext.request.contextPath}/product-checkout-complete?address_id=${address.getUserAddressId()}'">Deliver
+								onclick="location.href='${contextPath}/product-checkout-complete?address_id=${address.getUserAddressId()}'">Deliver
 								to this address</button>
 						</div>
 					</c:forEach>
@@ -89,7 +91,7 @@
 
 				<!-- Bottom Actions -->
 				<div class="address-actions">
-					<a href="${pageContext.request.contextPath}/checkout-cart"
+					<a href="${contextPath}/checkout-cart"
 						class="back-btn">← Back</a> <a href="#" class="new-address">➕
 						New address</a>
 				</div>

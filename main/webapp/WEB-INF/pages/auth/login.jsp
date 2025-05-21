@@ -54,14 +54,9 @@
 		<!-- Form -->
 		<div class="auth-form-container full-page-height">
 			<form class="auth-form" method="post" action="${contextPath}/login">
-				<%
-				String successMessage = (String) request.getAttribute("success");
-				if (successMessage != null) {
-				%>
-				<p class="success-message" style="margin-bottom: 12px;"><%=successMessage%></p>
-				<%
-				}
-				%>
+				<c:if test="${not empty success}">
+				<p class="success-message" style="margin-bottom: 12px;">${success}</p>
+				</c:if>
 				<h5 style="margin-bottom: 12px">Sign in to your account</h5>
 				<p class="body2" style="margin-bottom: 40px">
 					Don't have an account? <a href="${contextPath}/registration"
@@ -82,14 +77,9 @@
 					</div>
 
 
-					<%
-					String errorMessage = (String) request.getAttribute("error");
-					if (errorMessage != null) {
-					%>
-					<p class="error-message"><%=errorMessage%></p>
-					<%
-					}
-					%>
+					<c:if test="${not empty error}">
+					<p class="error-message">${error}</p>
+					</c:if>
 					<div class="checkbox-group" style="margin-bottom: 20px;">
 						<input type="checkbox" name="rememberMe" id="rememberMe">
 						<label for="rememberMe" style="margin-left: 8px;">Remember

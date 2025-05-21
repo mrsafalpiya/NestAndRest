@@ -2,8 +2,7 @@
 
 .container.details-container {
 	display: flex;
-	padding: var(--container-vertical-py, 80px)
-		var(--container-vertical-px, 40px);
+	padding: var(--container-vertical-py, 80px) var(--container-vertical-px, 40px);
 	flex-direction: column;
 	align-items: flex-start;
 	gap: var(--spacing-5, 40px);
@@ -44,7 +43,8 @@
 	text-align: center;
 	font-size: var(--components-label-size, 12px);
 	font-weight: var(--components-label-weight, 700);
-	line-height: var(--components-label-line-height, 20px); /* 166.667% */
+	line-height: var(--components-label-line-height, 20px);
+	/* 166.667% */
 	width: fit-content;
 }
 
@@ -77,8 +77,7 @@
 	height: 36px;
 	padding: 0px var(--button-md-px, 12px);
 	border-radius: var(--button-radius, 8px);
-	border: 1px solid
-		var(--components-button-outlined, rgba(145, 158, 171, 0.32));
+	border: 1px solid var(--components-button-outlined, rgba(145, 158, 171, 0.32));
 	background: white;
 	font-weight: 700;
 }
@@ -98,17 +97,12 @@
 	align-items: flex-end;
 	border-radius: var(--card-radius, 16px);
 	background: var(--background-paper, #FFF);
-	box-shadow: var(--card-x1, 0px) var(--card-y1, 0px)
-		var(--card-blur1, 2px) var(--card-spread1, 0px)
-		var(--shadow-20, rgba(145, 158, 171, 0.20)), var(--card-x2, 0px)
-		var(--card-y2, 12px) var(--card-blur2, 24px) var(--card-spread2, -4px)
-		var(--shadow-12, rgba(145, 158, 171, 0.12));
+	box-shadow: var(--card-x1, 0px) var(--card-y1, 0px) var(--card-blur1, 2px) var(--card-spread1, 0px) var(--shadow-20, rgba(145, 158, 171, 0.20)), var(--card-x2, 0px) var(--card-y2, 12px) var(--card-blur2, 24px) var(--card-spread2, -4px) var(--shadow-12, rgba(145, 158, 171, 0.12));
 }
 
 .details-container .header {
 	display: flex;
-	padding: var(--card-header-py, 24px) var(--card-header-pr, 16px)
-		var(--card-header-py, 24px) var(--card-header-pl, 24px);
+	padding: var(--card-header-py, 24px) var(--card-header-pr, 16px) var(--card-header-py, 24px) var(--card-header-pl, 24px);
 	align-items: flex-start;
 	gap: var(--card-header-spacing, 16px);
 	align-self: stretch;
@@ -136,8 +130,7 @@
 	flex: 1 0 0;
 }
 
-.details-container .items-list-container .item-entry .item-image-title img
-	{
+.details-container .items-list-container .item-entry .item-image-title img {
 	border-radius: 12px;
 }
 
@@ -152,8 +145,7 @@
 
 .order-details-total-container {
 	display: flex;
-	padding: var(--card-content-p, 24px) var(--card-content-p, 24px)
-		var(--card-content-p, 24px) 0px;
+	padding: var(--card-content-p, 24px) var(--card-content-p, 24px) var(--card-content-p, 24px) 0px;
 	align-items: center;
 }
 
@@ -177,17 +169,12 @@
 	width: 100%;
 	border-radius: var(--card-radius, 16px);
 	background: var(--background-paper, #FFF);
-	box-shadow: var(--card-x1, 0px) var(--card-y1, 0px)
-		var(--card-blur1, 2px) var(--card-spread1, 0px)
-		var(--shadow-20, rgba(145, 158, 171, 0.20)), var(--card-x2, 0px)
-		var(--card-y2, 12px) var(--card-blur2, 24px) var(--card-spread2, -4px)
-		var(--shadow-12, rgba(145, 158, 171, 0.12));
+	box-shadow: var(--card-x1, 0px) var(--card-y1, 0px) var(--card-blur1, 2px) var(--card-spread1, 0px) var(--shadow-20, rgba(145, 158, 171, 0.20)), var(--card-x2, 0px) var(--card-y2, 12px) var(--card-blur2, 24px) var(--card-spread2, -4px) var(--shadow-12, rgba(145, 158, 171, 0.12));
 }
 
 .customer-info-div .header {
 	display: flex;
-	padding: var(--card-header-py, 24px) var(--card-header-pr, 16px)
-		var(--card-header-py, 24px) var(--card-header-pl, 24px);
+	padding: var(--card-header-py, 24px) var(--card-header-pr, 16px) var(--card-header-py, 24px) var(--card-header-pl, 24px);
 	align-items: center;
 	gap: var(--card-header-spacing, 16px);
 	align-self: stretch;
@@ -202,8 +189,7 @@
 
 .customer-info-div .info-container .user-info-container {
 	display: flex;
-	padding: 0px var(--card-content-p, 24px) var(--spacing-3, 24px)
-		var(--card-content-p, 24px);
+	padding: 0px var(--card-content-p, 24px) var(--spacing-3, 24px) var(--card-content-p, 24px);
 	align-items: flex-start;
 	gap: var(--spacing-2, 16px);
 	align-self: stretch;
@@ -211,8 +197,7 @@
 
 .shipping-header {
 	display: flex;
-	padding: var(--card-header-py, 24px) var(--card-header-pr, 16px)
-		var(--card-header-py, 24px) var(--card-header-pl, 24px);
+	padding: var(--card-header-py, 24px) var(--card-header-pr, 16px) var(--card-header-py, 24px) var(--card-header-pl, 24px);
 	align-items: flex-start;
 	gap: var(--card-header-spacing, 16px);
 	align-self: stretch;
@@ -221,8 +206,7 @@
 .shipping-info-container {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	padding: 0px var(--card-content-p, 24px) var(--spacing-3, 24px)
-		var(--card-content-p, 24px);
+	padding: 0px var(--card-content-p, 24px) var(--spacing-3, 24px) var(--card-content-p, 24px);
 	flex-direction: column;
 	align-items: flex-start;
 	gap: var(--spacing-15, 12px);

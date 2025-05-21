@@ -1,6 +1,7 @@
 .interactive-room-container {
 	width: 100%;
-	max-width: 2038px; /* Maximum width of the original image */
+	max-width: 2038px;
+	/* Maximum width of the original image */
 	margin: 0 auto;
 	position: relative;
 }
@@ -15,6 +16,7 @@
 	.interactive-room-container {
 		display: none;
 	}
+
 	.mobile-hero {
 		display: block;
 	}
@@ -37,28 +39,20 @@
 	padding: 0 30px;
 }
 
-@
-keyframes slide-in-bottom { 0% {
-	transform: translateX(10px) translateY(30px);
-	opacity: 0;
+@ keyframes slide-in-bottom {
+	0% {
+		transform: translateX(10px) translateY(30px);
+		opacity: 0;
+	}
+
+	100 % {
+		transform:
+			translateX(10px) translateY(0);
+		opacity:
+			1;
+	}
 }
 
-100
-%
-{
-transform
-:
-translateX(
-10px
-)
-translateY(
-0
-);
-opacity
-:
-1;
-}
-}
 .interactive-room-container-text {
 	position: absolute;
 	z-index: 20;
@@ -99,7 +93,8 @@ opacity
 	left: 0;
 	width: 100%;
 	height: 100%;
-	pointer-events: none; /* This ensures clicks go through to the paths */
+	pointer-events: none;
+	/* This ensures clicks go through to the paths */
 }
 
 .clickable-area {
@@ -113,7 +108,8 @@ opacity
 
 .clickable-area:hover {
 	fill: rgba(255, 255, 255, 0.3);
-	z-index: 10; /* Ensure the hovered area appears above others */
+	z-index: 10;
+	/* Ensure the hovered area appears above others */
 }
 
 #furniture-info-div {
@@ -124,7 +120,8 @@ opacity
 	border-radius: 4px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 	margin-top: 10px;
-	display: none; /* Hidden by default */
+	display: none;
+	/* Hidden by default */
 	max-width: 300px;
 }
 
@@ -155,8 +152,7 @@ opacity
 	flex-direction: column;
 	border-radius: 16px;
 	background: #FFF;
-	box-shadow: 0px 0px 2px 0px rgba(145, 158, 171, 0.20), 0px 12px 24px
-		-4px rgba(145, 158, 171, 0.12);
+	box-shadow: 0px 0px 2px 0px rgba(145, 158, 171, 0.20), 0px 12px 24px -4px rgba(145, 158, 171, 0.12);
 	position: relative;
 }
 
@@ -269,14 +265,17 @@ opacity
 	.about {
 		padding: 80px 0;
 	}
+
 	.about .container {
 		grid-template-columns: repeat(1, minmax(0, 1fr));
 		justify-content: center;
 		text-align: center;
 	}
+
 	.about .container .images {
 		display: none;
 	}
+
 	.about .our-work-btn {
 		justify-content: center;
 	}

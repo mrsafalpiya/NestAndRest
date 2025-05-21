@@ -7,12 +7,16 @@ main.container {
 	padding: 20px;
 }
 
-section, .policy-section {
+section,
+.policy-section {
 	margin-bottom: 2.5rem;
 }
 
 /* Headings */
-h3, h4, h5, h6 {
+h3,
+h4,
+h5,
+h6 {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 }
@@ -20,11 +24,13 @@ h3, h4, h5, h6 {
 p {
 	margin-bottom: 1.2rem;
 	font-size: 1rem;
-	color: #333 !important; /* Force override of link or other rules */
+	color: #333 !important;
+	/* Force override of link or other rules */
 }
 
 /* Lists */
-ol, ul {
+ol,
+ul {
 	margin-left: 2rem;
 	margin-bottom: 1.5rem;
 	padding-left: 1.2rem;
@@ -48,36 +54,47 @@ a {
 }
 
 /* Specific header nav links styling */
-header a, .header a, nav a {
-	color: #222; /* or whatever color matches your theme */
+header a,
+.header a,
+nav a {
+	color: #222;
+	/* or whatever color matches your theme */
 	text-decoration: none;
 }
 
 /* Optional: hover effect */
-header a:hover, .header a:hover, nav a:hover {
+header a:hover,
+.header a:hover,
+nav a:hover {
 	color: #0066cc;
 	text-decoration: underline;
 }
 
 /* Responsive Design */
-@media ( max-width : 768px) {
+@media (max-width : 768px) {
 	main.container {
 		padding: 20px;
 		margin: 20px;
 	}
+
 	h3 {
 		font-size: 1.6rem;
 	}
+
 	h4 {
 		font-size: 1.3rem;
 	}
+
 	h5 {
 		font-size: 1.1rem;
 	}
+
 	h6 {
 		font-size: 1rem;
 	}
-	p, li {
+
+	p,
+	li {
 		font-size: 0.95rem;
 	}
 }

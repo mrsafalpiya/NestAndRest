@@ -119,12 +119,13 @@
 }
 
 /* Sidebar toggle positioning when collapsed */
-.admin-sidebar.collapsed ~ .sidebar-toggle-btn {
+.admin-sidebar.collapsed~.sidebar-toggle-btn {
 	left: 60px;
 }
 
-.admin-sidebar.collapsed .menu-title, .admin-sidebar.collapsed .submenu,
-	.admin-sidebar.collapsed a span {
+.admin-sidebar.collapsed .menu-title,
+.admin-sidebar.collapsed .submenu,
+.admin-sidebar.collapsed a span {
 	display: none;
 }
 
@@ -176,13 +177,15 @@
 	margin-top: 0px;
 	top: 0;
 	display: flex;
-	justify-content: flex-end; /* Pushes profile to the right */
+	justify-content: flex-end;
+	/* Pushes profile to the right */
 	align-items: center;
 	padding: 10px 20px;
 	position: relative;
 	border-bottom: 1px solid #eee;
 	background-color: #f9f9f9;
-	width: calc(100% + 20px); /* Adjust based on sidebar width */
+	width: calc(100% + 20px);
+	/* Adjust based on sidebar width */
 	box-sizing: border-box;
 }
 
@@ -203,7 +206,7 @@
 }
 
 /* Adjust header width when sidebar is collapsed */
-.admin-sidebar.collapsed ~ .admin-header {
+.admin-sidebar.collapsed~.admin-header {
 	margin-left: 0;
 	width: calc(100% - 60px);
 }
@@ -238,9 +241,11 @@
 		box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
 		transition: all 0.3s ease;
 	}
+
 	.admin-sidebar.active {
 		display: block;
 	}
+
 	.mobile-menu-btn {
 		display: block;
 		position: fixed;
@@ -254,6 +259,7 @@
 		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 		cursor: pointer;
 	}
+
 	.mobile-menu-btn img {
 		width: 24px;
 		height: 24px;

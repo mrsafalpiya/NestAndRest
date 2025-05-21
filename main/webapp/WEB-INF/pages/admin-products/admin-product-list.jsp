@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +11,9 @@
 <title>Admin - Product List</title>
 <jsp:include page="../head.jsp" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-style.css">
+	href="${contextPath}/css/admin-style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-product-list.css">
+	href="${contextPath}/css/admin-product-list.css">
 <style>
 .stock-bar.low {
 	background-color: #ff4d4d;
@@ -133,7 +135,7 @@
 					</form>
 				</div>
 
-				<a href="${pageContext.request.contextPath}/admin/products/add"
+				<a href="${contextPath}/admin/products/add"
 					class="btn-new-product">+ New product</a>
 			</div>
 
@@ -159,7 +161,7 @@
 										<td>
 											<div class="product-info">
 												<img
-													src="${pageContext.request.contextPath}/resources/product-images/${product.getProductId()}.png"
+													src="${contextPath}/resources/product-images/${product.getProductId()}.png"
 													alt="${product.getName()}"
 													style="width: 50px; height: 50px;" />
 
@@ -180,7 +182,7 @@
 										<td class="actions"><a href="#"
 											onclick="openEditModal(${product.getProductId()}, '${product.getName()}', ${product.getStockQty()}, ${product.getPrice()}, ${product.getDiscountedPrice()}, '${product.getCategoryId()}')">Edit</a>
 											<form
-												action="${pageContext.request.contextPath}/admin/products/list"
+												action="${contextPath}/admin/products/list"
 												method="post">
 												<input type="hidden" name="action" value="delete" /> <input
 													type="hidden" name="productId" value="${product.productId}" />
@@ -220,7 +222,7 @@
 				<div class="modal-content">
 					<h3 style="margin-bottom: 10px;">Edit Product</h3>
 					<form id="editForm"
-						action="${pageContext.request.contextPath}/admin/products/list"
+						action="${contextPath}/admin/products/list"
 						method="post">
 						<input type="hidden" name="action" value="update" /> <input
 							type="hidden" name="productId" id="editProductId" /> <label

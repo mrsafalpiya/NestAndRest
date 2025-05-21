@@ -207,7 +207,8 @@
 }
 
 /* Adjust table cell padding globally */
-.product-table th, .product-table td {
+.product-table th,
+.product-table td {
 	padding: 16px 12px;
 	font-size: 14px;
 	text-align: left;
@@ -229,7 +230,8 @@
 	margin-right: 40px;
 }
 
-.admin-pagination .arrow-btn, .admin-pagination .page-number {
+.admin-pagination .arrow-btn,
+.admin-pagination .page-number {
 	background-color: #111;
 	color: white;
 	padding: 6px 12px;
@@ -244,8 +246,8 @@
 	font-weight: bold;
 }
 
-.admin-pagination .arrow-btn:hover, .admin-pagination .page-number:hover
-	{
+.admin-pagination .arrow-btn:hover,
+.admin-pagination .page-number:hover {
 	background-color: #333;
 }
 
@@ -255,33 +257,41 @@
 		padding: 16px;
 		margin-left: 0;
 	}
+
 	.breadcrumb {
 		margin-left: 0;
 		padding: 0 10px;
 	}
+
 	.breadcrumb h2 {
 		font-size: 20px;
 	}
+
 	.breadcrumb .path {
 		font-size: 14px;
 		gap: 10px;
 		flex-wrap: wrap;
 	}
+
 	.stock-bar {
 		flex-direction: column;
 		align-items: flex-start;
 		margin-left: 0;
 		gap: 16px;
 	}
+
 	.filters {
 		width: 100%;
 		flex-direction: column;
 		gap: 12px;
 	}
-	.filter-select, .search-box {
+
+	.filter-select,
+	.search-box {
 		width: 100%;
 		padding: 12px;
 	}
+
 	.filter-controls {
 		margin-left: 0;
 		width: 100%;
@@ -289,6 +299,7 @@
 		align-items: flex-start;
 		gap: 10px;
 	}
+
 	.btn-new-product {
 		width: 100%;
 		text-align: center;
@@ -296,35 +307,44 @@
 		padding: 12px;
 		font-size: 16px;
 	}
+
 	.product-table {
 		margin-left: 0;
 		padding: 10px;
 		overflow-x: auto;
 	}
+
 	.product-info {
 		flex-direction: row;
 		align-items: center;
 		gap: 8px;
 	}
+
 	.product-info img {
 		width: 40px;
 		height: 40px;
 	}
+
 	.product-info strong {
 		font-size: 13px;
 	}
+
 	.product-info small {
 		font-size: 11px;
 	}
-	.product-table th, .product-table td {
+
+	.product-table th,
+	.product-table td {
 		font-size: 13px;
 		padding: 8px;
 	}
+
 	.admin-pagination {
 		flex-direction: column;
 		align-items: center;
 		margin: 20px 0 10px 0;
 	}
+
 	.page-info {
 		margin-bottom: 10px;
 	}

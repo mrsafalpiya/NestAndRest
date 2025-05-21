@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:include page="../head.jsp" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-style.css">
+	href="${contextPath}/css/admin-style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/admin-add-product.css">
+	href="${contextPath}/css/admin-add-product.css">
 <title>Create New Product</title>
 </head>
 <body>
@@ -34,7 +36,7 @@
 			</c:if>
 
 			<!-- Form Container -->
-			<form action="${pageContext.request.contextPath}/admin/products/add"
+			<form action="${contextPath}/admin/products/add"
 				method="post" enctype="multipart/form-data" class="product-form">
 				<!-- Product Details -->
 				<div class="form-section">
@@ -53,7 +55,7 @@
 					<h5>Images</h5>
 					<div class="image-upload">
 						<label for="images"> <img
-							src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/AddImage.png"
+							src="${contextPath}/resources/system/images/ProductPageLogo/AddImage.png"
 							alt="Upload" />
 							<p>
 								Select files<br>
@@ -65,7 +67,7 @@
 						<button type="button" class="remove-btn">Remove</button>
 						<button type="submit" class="upload-btn">
 							<img
-								src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/upload-icon.png"
+								src="${contextPath}/resources/system/images/ProductPageLogo/upload-icon.png"
 								alt="Upload Icon"> Upload
 						</button>
 					</div>

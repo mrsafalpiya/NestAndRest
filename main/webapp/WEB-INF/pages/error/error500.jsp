@@ -18,19 +18,19 @@
 
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/error.css" />
+	href="${contextPath}/css/error.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/components.css" />
+	href="${contextPath}/css/components.css" />
 
 </head>
 <body>
 	<div class="error-layout">
 		<!-- Header -->
 		<div class="error-header">
-			<a href="${pageContext.request.contextPath}/"> <img
-				src="${pageContext.request.contextPath}/resources/system/images/logo.png"
+			<a href="${contextPath}/"> <img
+				src="${contextPath}/resources/system/images/logo.png"
 				alt="Logo" class="error-header-logo" /></a> <a
-				href="${pageContext.request.contextPath}/contact-us"
+				href="${contextPath}/contact-us"
 				class="subtitle2" style="color: var(--text-primary)">Need help?</a>
 		</div>
 
@@ -41,7 +41,7 @@
 				<p class="body1">There was an error, please try again later.</p>
 				<div class="error-img">
 					<img
-						src="${pageContext.request.contextPath}/resources/system/images/illustration-500.png"
+						src="${contextPath}/resources/system/images/illustration-500.png"
 						alt="error500" />
 				</div>
 

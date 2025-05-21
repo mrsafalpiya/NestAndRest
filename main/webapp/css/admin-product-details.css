@@ -292,37 +292,46 @@
 		padding: 16px;
 		gap: 12px;
 	}
+
 	.product-details.container {
 		margin-left: 0;
 		padding: 16px;
 	}
+
 	.product-top {
 		grid-template-columns: 1fr;
 		gap: 24px;
 	}
+
 	.main-image {
 		max-width: 100%;
 		height: auto;
 	}
+
 	.product-options {
 		width: 100%;
 	}
+
 	.option-row {
 		flex-direction: column;
 		align-items: flex-start;
 	}
+
 	.highlights {
 		flex-direction: column;
 		gap: 16px;
 	}
+
 	.highlight {
 		flex-direction: column;
 		align-items: flex-start;
 		text-align: left;
 	}
+
 	.tabs {
 		flex-direction: column;
 	}
+
 	.tab-content {
 		padding: 0;
 	}

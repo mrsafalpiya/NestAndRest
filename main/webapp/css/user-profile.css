@@ -157,7 +157,9 @@ body {
 	line-height: var(--components-input-label-line-height);
 }
 
-.details-form input, .details-form select, .details-form textarea {
+.details-form input,
+.details-form select,
+.details-form textarea {
 	width: 100%;
 	border: none;
 	border-bottom: 1px solid var(--components-textfield-underline);
@@ -201,58 +203,70 @@ body {
 	background-color: var(--primary-main);
 }
 
-@media ( max-width : 1200px) {
+@media (max-width : 1200px) {
 	.main-wrapper {
 		padding: 40px 2cm;
 	}
+
 	.details-card {
 		width: 100%;
 	}
+
 	.photo-card {
 		width: 100%;
 		max-width: 344px;
 	}
 }
 
-@media ( max-width : 768px) {
+@media (max-width : 768px) {
 	.main-wrapper {
 		padding: 30px 1cm;
 	}
+
 	.cards-container {
 		flex-direction: column;
 		align-items: center;
 	}
-	.photo-card, .details-card {
+
+	.photo-card,
+	.details-card {
 		width: 100%;
 		max-width: 600px;
 	}
+
 	.details-form {
 		grid-template-columns: 1fr;
 		gap: 20px;
 	}
+
 	.full-width {
 		grid-column: 1/2;
 	}
+
 	.header h2 {
 		font-size: var(--h3-size);
 	}
 }
 
-@media ( max-width : 480px) {
+@media (max-width : 480px) {
 	.main-wrapper {
 		padding: 20px 0.5cm;
 	}
+
 	.photo-card {
 		height: auto;
 		padding: 15px;
 	}
+
 	.details-card {
 		padding: 20px;
 	}
+
 	.update-button {
 		width: 100%;
 		text-align: center;
 	}
+
 	.header h2 {
 		font-size: var(--h3-size);
 	}

@@ -102,7 +102,8 @@ form {
 	gap: 30px;
 }
 
-form input, form textarea {
+form input,
+form textarea {
 	width: 100%;
 	border: none;
 	color: var(--text-secondary);
@@ -123,7 +124,8 @@ form textarea {
 	padding-right: 10px;
 }
 
-form input:focus, form textarea:focus {
+form input:focus,
+form textarea:focus {
 	border-bottom-color: var(--primary-main);
 }
 
@@ -159,7 +161,7 @@ button:hover {
 }
 
 /* Responsive */
-@media ( max-width : 768px) {
+@media (max-width : 768px) {
 	.locations {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -168,14 +170,18 @@ button:hover {
 		text-align: left;
 		justify-items: start;
 	}
+
 	.location-section h2 {
 		text-align: center;
 	}
+
 	.main-container {
 		flex-direction: column;
 		align-items: center;
 	}
-	.form-area, .map-area {
+
+	.form-area,
+	.map-area {
 		max-width: 100%;
 	}
 }

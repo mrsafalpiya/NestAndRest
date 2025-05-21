@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8" />
@@ -8,9 +11,9 @@
 <jsp:include page="../head.jsp" />
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/styles.css" />
+	href="${contextPath}/css/styles.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/product-checkout-complete.css" />
+	href="${contextPath}/css/product-checkout-complete.css" />
 
 <title>Checkout - Nest and Rest Furniture</title>
 </head>
@@ -20,7 +23,7 @@
 
 		<div class="image-container">
 			<img
-				src="${pageContext.request.contextPath}/resources/system/images/illustration-order_complete.png"
+				src="${contextPath}/resources/system/images/illustration-order_complete.png"
 				alt="illustration-order_complete" class="auth-header-logo" />
 		</div>
 
@@ -36,7 +39,7 @@
 
 		<div class="button-group">
 			<button class="btn-outline"
-				onclick="location.href='${pageContext.request.contextPath}/'">←
+				onclick="location.href='${contextPath}/'">←
 				Continue shopping</button>
 		</div>
 	</div>

@@ -17,7 +17,8 @@
 	margin-bottom: 10px;
 	gap: 15px;
 	margin-top: 3rem;
-	margin-bottom: 3rem; /* already present, tweak if needed */
+	margin-bottom: 3rem;
+	/* already present, tweak if needed */
 }
 
 .step {
@@ -30,7 +31,8 @@
 .circle {
 	width: 12px;
 	height: 12px;
-	border: 4px solid #e2e8f0; /* light border */
+	border: 4px solid #e2e8f0;
+	/* light border */
 	border-radius: 50%;
 	background-color: white;
 	transition: all 0.3s;
@@ -41,7 +43,8 @@
 	width: 120px;
 	align-self: center;
 	margin-top: -18px;
-	background-color: #e5e7eb; /* Gray-200 */
+	background-color: #e5e7eb;
+	/* Gray-200 */
 	flex-shrink: 0;
 	margin-top: -18px;
 	background-color: #e5e7eb;
@@ -54,7 +57,8 @@
 }
 
 .tick-mark {
-	background: none; /* remove background */
+	background: none;
+	/* remove background */
 	color: #fbbf24;
 	font-size: 18px;
 	font-weight: bold;
@@ -71,21 +75,25 @@
 	margin-top: 8px;
 	font-size: 14px;
 	font-weight: 500;
-	color: #4b5563; /* Gray-700 */
+	color: #4b5563;
+	/* Gray-700 */
 }
 
 .step.completed span::after {
 	font-size: 18px;
 	color: #fbbf24;
-	margin-left: 5px; /* Adjust spacing between text and tick */
+	margin-left: 5px;
+	/* Adjust spacing between text and tick */
 }
 
 /* Active step text color */
-.step.active span, .step.completed span {
+.step.active span,
+.step.completed span {
 	margin-top: 8px;
 	font-size: 14px;
 	font-weight: 500;
-	color: #4b5563; /* Gray-700 */
+	color: #4b5563;
+	/* Gray-700 */
 }
 
 /* Active line between steps */
@@ -159,7 +167,8 @@
 	padding-left: 0.5rem;
 }
 
-.back-btn, .new-address {
+.back-btn,
+.new-address {
 	font-size: 0.9rem;
 	text-decoration: none;
 	color: black;
@@ -168,7 +177,8 @@
 	transition: color 0.3s;
 }
 
-.back-btn:hover, .new-address:hover {
+.back-btn:hover,
+.new-address:hover {
 	color: #d48d1f;
 }
 
@@ -247,7 +257,8 @@
 	justify-content: space-between;
 }
 
-.cancel-btn, .submit-btn {
+.cancel-btn,
+.submit-btn {
 	padding: 0.5rem 1rem;
 	border: none;
 	border-radius: 6px;
@@ -263,14 +274,16 @@
 	color: #fff;
 }
 
-@media ( max-width : 768px) {
+@media (max-width : 768px) {
 	.checkout-wrapper {
 		flex-direction: column;
 		gap: 2rem;
 	}
+
 	.order-summary {
 		width: 100%;
 	}
+
 	.checkout-progress {
 		flex-direction: row;
 		justify-content: center;
@@ -279,12 +292,14 @@
 		margin-top: 1rem;
 		margin-bottom: 2rem;
 	}
+
 	.step {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		flex-shrink: 0;
 	}
+
 	.circle {
 		width: 10px;
 		height: 10px;
@@ -292,6 +307,7 @@
 		border-radius: 50%;
 		border: none;
 	}
+
 	.tick-mark {
 		width: auto;
 		height: auto;
@@ -306,15 +322,19 @@
 		margin-bottom: 2px;
 		border: none;
 	}
-	.line, .line.active-line {
+
+	.line,
+	.line.active-line {
 		width: 40px;
 		height: 2px;
 		background-color: #e5e7eb;
 		margin-top: -2px 4px;
 	}
+
 	.line.active-line {
 		background-color: #fbbf24;
 	}
+
 	.step span {
 		font-size: 12px;
 		font-weight: 500;
@@ -322,6 +342,7 @@
 		color: #4b5563;
 		text-align: center;
 	}
+
 	.address-card button {
 		padding: 0.4rem 0.8rem;
 		font-size: 0.8rem;

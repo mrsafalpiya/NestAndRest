@@ -106,14 +106,9 @@
 							id="password-confirm">
 					</div>
 
-					<%
-					String errorMessage = (String) request.getAttribute("error");
-					if (errorMessage != null) {
-					%>
-					<p class="error-message"><%=errorMessage%></p>
-					<%
-					}
-					%>
+					<c:if test="${not empty error}">
+					<p class="error-message">${error}</p>
+					</c:if>
 
 
 					<button class="btn btn-lg">Create account</button>

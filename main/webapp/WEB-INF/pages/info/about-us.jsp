@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +12,7 @@
 <jsp:include page="../head.jsp" />
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/about.css" />
+	href="${contextPath}/css/about.css" />
 <title>About Us - Nest and Rest Furnitures</title>
 </head>
 <body>
@@ -32,12 +35,12 @@
 			<div class="images">
 				<div>
 					<img
-						src="${pageContext.request.contextPath}/resources/system/images/about-img1.jpg"
+						src="${contextPath}/resources/system/images/about-img1.jpg"
 						alt="" />
 				</div>
 				<div>
 					<img
-						src="${pageContext.request.contextPath}/resources/system/images/about-img2.jpg"
+						src="${contextPath}/resources/system/images/about-img2.jpg"
 						alt="" />
 				</div>
 			</div>
@@ -102,7 +105,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
+							src="${contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +167,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
+							src="${contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +229,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
+							src="${contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -288,7 +291,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
+							src="${contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -350,7 +353,7 @@
 					</div>
 					<div style="flex-grow: 1">
 						<img
-							src="${pageContext.request.contextPath}/resources/system/images/about-member.jpeg" />
+							src="${contextPath}/resources/system/images/about-member.jpeg" />
 					</div>
 					<div class="social">
 						<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"

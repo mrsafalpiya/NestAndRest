@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +14,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/styles.css" />
+	href="${contextPath}/css/styles.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/checkout-cart.css" />
+	href="${contextPath}/css/checkout-cart.css" />
 
 </head>
 <body>
@@ -74,7 +76,7 @@
 								<td>
 									<div class="product-info">
 										<img
-											src="${pageContext.request.contextPath}/resources/product-images/${product.getProductId()}.png"
+											src="${contextPath}/resources/product-images/${product.getProductId()}.png"
 											alt="${product.getName()}" />
 										<div>
 											<strong>${product.getName()}</strong><br />
@@ -100,7 +102,7 @@
 								<td>Rs ${product.getSalePrice() * product.getCartQty()}</td>
 								<td>
 									<form method="post"
-										action="${pageContext.request.contextPath}/checkout-cart"
+										action="${contextPath}/checkout-cart"
 										style="display: inline;">
 										<input type="hidden" name="action" value="remove" /> <input
 											type="hidden" name="productId"
@@ -132,7 +134,7 @@
 				<c:if test="${not empty products}">
 					<div class="checkout-wrapper" style="width: 100%;">
 						<button class="checkout-btn"
-							onclick="location.href='${pageContext.request.contextPath}/checkout-address'">
+							onclick="location.href='${contextPath}/checkout-address'">
 							Check out</button>
 					</div>
 				</c:if>
@@ -141,7 +143,7 @@
 
 		<!-- Bottom Actions -->
 		<div class="address-actions">
-			<a href="${pageContext.request.contextPath}/products"
+			<a href="${contextPath}/products"
 				class="back-btn">← Continue Shopping</a>
 		</div>
 	</main>

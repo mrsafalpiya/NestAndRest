@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-body, html {
+body,
+html {
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -113,7 +114,8 @@ body, html {
 	margin-top: 20px;
 }
 
-.user-table th, .user-table td {
+.user-table th,
+.user-table td {
 	padding: 16px;
 	text-align: left;
 	border-bottom: 1px solid #e5e7eb;
@@ -174,7 +176,8 @@ body, html {
 	border-radius: 6px;
 }
 
-@media ( max-width : 768px) {
+@media (max-width : 768px) {
+
 	/* Layout tweaks */
 	.container {
 		flex-direction: column;
@@ -182,15 +185,18 @@ body, html {
 		height: auto;
 		overflow-x: hidden;
 	}
+
 	.main {
 		padding: 20px;
 		margin: 0;
 		width: 100%;
 		max-width: 100%;
 	}
+
 	.admin-header {
 		padding: 10px 20px;
 	}
+
 	.header-right {
 		margin-left: 0;
 		margin-top: 10px;
@@ -212,9 +218,11 @@ body, html {
 		background-color: #fff;
 		overflow-y: auto;
 	}
+
 	.sidebar.show {
 		transform: translateX(0);
 	}
+
 	.toggle-sidebar {
 		position: fixed;
 		top: 15px;
@@ -227,6 +235,7 @@ body, html {
 		box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 		z-index: 1100;
 	}
+
 	.sidebar.collapsed+.toggle-sidebar {
 		left: 15px;
 	}
@@ -242,6 +251,7 @@ body, html {
 		background-color: rgba(0, 0, 0, 0.3);
 		z-index: 999;
 	}
+
 	.overlay.show {
 		display: block;
 	}
@@ -251,6 +261,7 @@ body, html {
 		font-size: 20px;
 		margin-top: 20px;
 	}
+
 	.breadcrumb {
 		font-size: 12px;
 	}
@@ -260,7 +271,9 @@ body, html {
 		overflow-x: auto;
 		width: 100%;
 	}
-	.user-table th, .user-table td {
+
+	.user-table th,
+	.user-table td {
 		padding: 12px;
 		font-size: 13px;
 	}
@@ -272,6 +285,7 @@ body, html {
 		padding: 10px 0;
 		flex-wrap: wrap;
 	}
+
 	.search-bar input {
 		font-size: 14px;
 		padding: 12px 14px;

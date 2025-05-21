@@ -11,7 +11,7 @@
 <header class="user-header">
 	<div class="header-menu-content">
 		<a href="${contextPath}/home" style="width: 100%"><img
-			src="${pageContext.request.contextPath}/resources/system/images/logo.png"
+			src="${contextPath}/resources/system/images/logo.png"
 			alt="Nest and Rest" width="55" height="55" /></a>
 		<div class="header-menu-links-container">
 			<a href="${contextPath}/home" class="header-menu-link">Home</a> <a
@@ -40,7 +40,7 @@
 			</button>
 
 			<a href="${contextPath}/home"><img
-				src="${pageContext.request.contextPath}/resources/system/images/logo.png"
+				src="${contextPath}/resources/system/images/logo.png"
 				alt="Nest and Rest" width="40" height="40" /></a>
 		</div>
 
@@ -50,9 +50,8 @@
 				<div class="categories-menu">
 					<div class="categories-menu-container">
 						<div class="categories-menu-content">
-							<%
-							List<CategoryModel> allCategories = (new ProductService()).getAllCategories();
-							%>
+							<c:set var="productService" value="<%= new ProductService() %>"/>
+							<c:set var="allCategories" value="${productService.getAllCategories()}"/>
 							<c:forEach var="category" items="${allCategories}">
 								<a
 									href="${contextPath}/products?category=${category.categoryId}"
@@ -77,29 +76,26 @@
 					href="${contextPath}/contact-us">Contact Us</a>
 			</div>
 			<div class="header-auth">
-				<%
-				Cookie emailCookie = CookiesUtil.getCookie(request, "email");
-				if (emailCookie != null) {
-				%>
+				<c:set var="emailCookie" value="${cookie.email}"/>
+				<c:choose>
+				<c:when test="${not empty emailCookie}">
 				<a href="${contextPath}/userprofile"
-					style="margin-right: 12px; font-weight: 500;"><%=emailCookie.getValue()%></a>
+					style="margin-right: 12px; font-weight: 500;">${emailCookie.value}</a>
 
 				<!-- Cart Icon -->
-				<a href="${pageContext.request.contextPath}/checkout-cart"
+				<a href="${contextPath}/checkout-cart"
 					class="cart-icon" style="transform: translate(-4px, 2px);"> <img
-					src="${pageContext.request.contextPath}/resources/system/images/ProductPageLogo/AddToCartIcon.png"
+					src="${contextPath}/resources/system/images/ProductPageLogo/AddToCartIcon.png"
 					alt="Cart" /> <span class="cart-count"></span>
-				</a> <a href="<%=request.getContextPath()%>/logout"
+				</a> <a href="${contextPath}/logout"
 					class="btn btn-outlined">Logout</a>
-				<%
-				} else {
-				%>
-				<a href="<%=request.getContextPath()%>/login"
+				</c:when>
+				<c:otherwise>
+				<a href="${contextPath}/login"
 					class="btn btn-outlined">Sign In</a> <a
-					href="<%=request.getContextPath()%>/registration" class="btn">Register</a>
-				<%
-				}
-				%>
+					href="${contextPath}/registration" class="btn">Register</a>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

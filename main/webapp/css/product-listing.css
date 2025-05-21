@@ -56,7 +56,8 @@
 }
 
 /* Dropdown styles for category and sort */
-.category-select, .sort-select {
+.category-select,
+.sort-select {
 	padding: 8px 14px;
 	font-size: 14px;
 	border: 1px solid #ccc;
@@ -68,7 +69,8 @@
 /* Grid layout for listing product cards */
 .product-grid {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr); /* 4-column layout */
+	grid-template-columns: repeat(4, 1fr);
+	/* 4-column layout */
 	gap: 32px;
 	margin-top: 10px;
 	width: 100%;
@@ -139,7 +141,8 @@
 }
 
 /* Pagination button styling */
-.pagination span, .pagination a {
+.pagination span,
+.pagination a {
 	width: 32px;
 	height: 32px;
 	display: grid;
@@ -153,7 +156,9 @@
 }
 
 /* Active and hover state for pagination */
-.pagination span.active, .pagination span:hover, .pagination a:hover {
+.pagination span.active,
+.pagination span:hover,
+.pagination a:hover {
 	background: #c89b63;
 	color: white;
 	border-color: #c89b63;
@@ -176,28 +181,34 @@
 		gap: 20px;
 		padding: 0 16px;
 	}
+
 	.search-sort-container {
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 20px;
 	}
+
 	.filter-controls {
 		flex-direction: column;
 		align-items: flex-start;
 		margin-left: 0;
 		gap: 10px;
 	}
+
 	.search-input {
 		width: 100%;
 	}
-	.category-select, .sort-select {
+
+	.category-select,
+	.sort-select {
 		width: 100%;
 	}
 }
 
 @media screen and (max-width: 480px) {
 	.product-grid {
-		grid-template-columns: 1fr; /* Single column layout for phones */
+		grid-template-columns: 1fr;
+		/* Single column layout for phones */
 		padding: 0 12px;
 	}
 }
