@@ -101,7 +101,7 @@ public class AuthenticationFilter implements Filter {
 		boolean isAdmin = userRole != null && userRole.equalsIgnoreCase("admin");
 
 		// Protect admin pages from unauthorized users
-		if ((uri.endsWith(ADMIN_DASHBOARD) || uri.contains(USER_MANAGEMENT) || uri.contains(QUERIES_LIST)
+		if ((uri.contains(USER_MANAGEMENT) || uri.contains(QUERIES_LIST)
 				|| uri.contains(ORDERS_LIST) || uri.contains(PRODUCTS_ADMIN_LIST) || uri.contains(USER_DETAILS_EDIT))
 				&& (!isLoggedIn || !isAdmin)) {
 			res.sendRedirect(contextPath + UNAUTHORIZED);

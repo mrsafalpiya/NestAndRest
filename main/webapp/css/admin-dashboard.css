@@ -9,7 +9,7 @@
 .product-sold-total-balance-contrainer {
 	display: grid;
 	gap: var(--spacing-3, 24px);
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	width: 100%;
 }
 
