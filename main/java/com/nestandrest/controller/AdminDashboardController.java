@@ -3,6 +3,7 @@ package com.nestandrest.controller;
 import java.io.IOException;
 
 import com.nestandrest.service.AdminDashboardService;
+import com.nestandrest.service.ProductService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,6 +22,7 @@ public class AdminDashboardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private AdminDashboardService adminDashboardService;
+	private ProductService productService;
 
 	/**
 	 * Initializes the AdminDashboardService instance when the servlet is first
@@ -31,6 +33,7 @@ public class AdminDashboardController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		this.adminDashboardService = new AdminDashboardService();
+		this.productService = new ProductService();
 		super.init();
 	}
 
@@ -45,8 +48,13 @@ public class AdminDashboardController extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("sales_last_7_days", this.adminDashboardService.getSalesOfLast7Days());
+		req.setAttribute("total_products", this.productService.getProducts(null, null).size());
+		req.setAttribute("products_sold", this.adminDashboardService.getProductsSold());
 		req.setAttribute("total_sales", this.adminDashboardService.getTotalSales());
+		req.setAttribute("sales_by_gender", this.adminDashboardService.getSalesByGender());
+		req.setAttribute("yearly_sales", this.adminDashboardService.getYearlySales());
+		req.setAttribute("top_5_products", this.adminDashboardService.getTop5SoldProducts());
+
 		req.getRequestDispatcher("WEB-INF/pages/admin-dashboard.jsp").forward(req, resp);
 	}
 }

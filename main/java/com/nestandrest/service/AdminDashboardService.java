@@ -1,16 +1,18 @@
 package com.nestandrest.service;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.nestandrest.config.DbConfig;
-import com.nestandrest.model.GenderModel;
-import com.nestandrest.model.Sale;
-import com.nestandrest.model.UserModel;
+import com.nestandrest.model.ProductModel;
 
 /**
  * Service class that handles admin dashboard related operations. Provides
@@ -36,43 +38,35 @@ public class AdminDashboardService {
 	}
 
 	/**
-	 * Retrieves the sales data for the last 7 days.
+	 * Retrieves the total number of products sold.
 	 * 
-	 * @return ArrayList of Sale objects containing date and sales count, or null if
-	 *         an error occurs
+	 * @return Integer representing the total number of products sold
 	 */
-	public ArrayList<Sale> getSalesOfLast7Days() {
+	public Integer getProductsSold() {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
 			return null;
 		}
 
-		ArrayList<Sale> sales = new ArrayList<Sale>();
-
-		String query = "SELECT DATE(order_date) AS order_day, COUNT(*) AS total_orders FROM `order` WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY DATE(order_date) ORDER BY order_day ASC;";
+		String query = "SELECT SUM(cpvv.qty) AS total_products_sold FROM `order` o LEFT JOIN cart c ON o.cart_id = c.cart_id LEFT JOIN cart_product_variant_value cpvv ON c.cart_id = cpvv.cart_id;";
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
 			ResultSet result = stmt.executeQuery();
 
-			while (result.next()) {
-				String date = result.getString("order_day");
-				int sales_date = result.getInt("total_orders");
-				Sale current_date_sale = new Sale();
-				current_date_sale.date = date;
-				current_date_sale.sales = sales_date;
-				sales.add(current_date_sale);
+			if (result.next()) {
+				int total_sales = result.getInt("total_products_sold");
+				return total_sales;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		return sales;
+		return null;
 	}
 
 	/**
-	 * Gets the total number of sales from all orders.
+	 * Retrieves the total sales of all orders.
 	 * 
-	 * @return Integer representing the total number of sales, or null if an error
-	 *         occurs
+	 * @return Integer representing the total sales of all orders
 	 */
 	public Integer getTotalSales() {
 		if (dbConn == null) {
@@ -80,17 +74,121 @@ public class AdminDashboardService {
 			return null;
 		}
 
-		int totalSales = 0;
-
-		String query = "SELECT COUNT(*) AS total_sales FROM `order`;";
+		String query = "SELECT SUM(o.total_price) AS total_sales FROM `order` o;";
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
 			ResultSet result = stmt.executeQuery();
 
 			if (result.next()) {
-				totalSales = result.getInt("total_sales");
-				return totalSales;
+				int total_sales = result.getInt("total_sales");
+				return total_sales;
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
+		}
+		return null;
+	}
+
+	/**
+	 * Retrieves the sales count by gender.
+	 * 
+	 * @return Map<String, Integer> representing the sales count by gender
+	 */
+	public Map<String, Integer> getSalesByGender() {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
+
+		Map<String, Integer> salesByGender = new HashMap<String, Integer>();
+
+		String query = "SELECT SUM(qty) AS qty, g.name AS gender_name FROM `order` o LEFT JOIN cart c ON o.cart_id = c.cart_id LEFT JOIN cart_product_variant_value cpvv ON c.cart_id = cpvv.cart_id LEFT JOIN `user` u ON c.user_id = u.user_id LEFT JOIN gender g ON u.gender_id = g.gender_id GROUP BY g.name;";
+		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+			ResultSet result = stmt.executeQuery();
+
+			while (result.next()) {
+				String genderName = result.getString("gender_name");
+				int sales = result.getInt("qty");
+
+				salesByGender.put(genderName, sales);
+			}
+
+			return salesByGender;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Retrieves the sales by month.
+	 * 
+	 * @return int[] representing the sales of each month from idx 0 to 11
+	 */
+	public int[] getYearlySales() {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
+
+		int[] yearlySales = new int[12];
+		// Pre-fill sales of all months as 0
+		Arrays.fill(yearlySales, 0);
+
+		String query = "SELECT MONTH(o.order_date) AS month, YEAR(o.order_date) AS year, SUM(cpvv.qty * o.total_price) AS total_sales FROM `order` o JOIN cart c ON o.cart_id = c.cart_id JOIN cart_product_variant_value cpvv ON c.cart_id = cpvv.cart_id WHERE o.order_date >= '2025-01-01' AND o.order_date < '2026-01-01' GROUP BY YEAR(o.order_date), MONTH(o.order_date) ORDER BY year, month;";
+		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+			ResultSet result = stmt.executeQuery();
+
+			while (result.next()) {
+				int month = result.getInt("month");
+				int sales = result.getInt("total_sales");
+
+				yearlySales[month - 1] = sales;
+			}
+
+			return yearlySales;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Retrieves the top 5 sold products.
+	 * 
+	 * @return List<ProductModel> representing the top 5 sold products
+	 */
+	public List<ProductModel> getTop5SoldProducts() {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
+
+		List<ProductModel> top5SoldProducts = new ArrayList<ProductModel>();
+
+		String query = "SELECT p.product_id, p.name AS product_name, p.price AS product_price, p.discounted_price AS product_discounted_price, SUM(cpvv.qty) AS total_sold FROM `order` o JOIN cart c ON o.cart_id = c.cart_id JOIN cart_product_variant_value cpvv ON c.cart_id = cpvv.cart_id JOIN product p ON cpvv.product_id = p.product_id GROUP BY p.product_id, p.name ORDER BY total_sold DESC LIMIT 5;";
+		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+			ResultSet result = stmt.executeQuery();
+
+			while (result.next()) {
+				int productId = result.getInt("product_id");
+				String productName = result.getString("product_name");
+				double productPrice = result.getDouble("product_price");
+				double productDiscountedPrice = result.getDouble("product_discounted_price");
+				int totalSold = result.getInt("total_sold");
+				
+				// Create the product model object
+				ProductModel product = new ProductModel();
+				product.setProductId(productId);
+				product.setName(productName);
+				product.setPrice(productPrice);
+				product.setDiscountedPrice(productDiscountedPrice);
+				product.setCartQty(totalSold);
+
+				top5SoldProducts.add(product);
+			}
+
+			return top5SoldProducts;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

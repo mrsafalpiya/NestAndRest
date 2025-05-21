@@ -26,6 +26,12 @@ public class ProductModel {
 	private int cartQty;
 
 	/**
+	 * Empty constructor.
+	 */
+	public ProductModel() {
+	}
+
+	/**
 	 * Constructor for creating a ProductModel with only basic informations.
 	 *
 	 * @param productId       unique product identifier
