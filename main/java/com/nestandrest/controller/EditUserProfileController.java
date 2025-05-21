@@ -2,7 +2,6 @@ package com.nestandrest.controller;
 
 import java.io.IOException;
 
-
 import com.nestandrest.model.UserModel;
 import com.nestandrest.service.UserService;
 
@@ -12,21 +11,32 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
+/**
+ * Controller servlet for editing user profiles.
+ *
+ * @author 23047589 Sanniva Shakya
+ */
 @WebServlet("/edit-user-profile")
 public class EditUserProfileController extends HttpServlet {
 
 	/**
 	 * Handles HTTP GET requests for retrieving and deleting user data. If
 	 * 'action=delete' is provided, it deletes the user. Otherwise, it fetches user
-	 * data and forwards to edit page.
+	 * data and forwards to the edit page.
+	 *
+	 * @param request  The HttpServletRequest containing the client request.
+	 * @param response The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Extract userId and action parameters from the request
 		String userIdParam = request.getParameter("userId");
 		String action = request.getParameter("action");
 
+		// Validate userId parameter
 		if (userIdParam == null || userIdParam.isEmpty()) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User ID is required");
 			return;
@@ -36,7 +46,7 @@ public class EditUserProfileController extends HttpServlet {
 			int userId = Integer.parseInt(userIdParam);
 			UserService userService = new UserService();
 
-			// Handle deletion from POST request
+			// Handle user deletion if action is 'delete'
 			if ("delete".equalsIgnoreCase(action)) {
 				boolean deleted = userService.deleteUserById(userId);
 				if (deleted) {
@@ -47,6 +57,7 @@ public class EditUserProfileController extends HttpServlet {
 				return;
 			}
 
+			// Fetch user details for editing
 			UserModel user = userService.getUserById(userId);
 
 			if (user == null) {
@@ -54,6 +65,7 @@ public class EditUserProfileController extends HttpServlet {
 				return;
 			}
 
+			// Set user details as request attribute and forward to edit page
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("/WEB-INF/pages/user-management/edit-user-profile.jsp").forward(request,
 					response);
@@ -69,11 +81,17 @@ public class EditUserProfileController extends HttpServlet {
 	/**
 	 * Handles HTTP POST requests for updating or deleting user data. Updates user
 	 * profile and address if valid form data is provided.
+	 *
+	 * @param request  The HttpServletRequest containing the client request.
+	 * @param response The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// Extract action parameter to determine operation
 		String action = request.getParameter("action");
 
 		if ("delete".equalsIgnoreCase(action)) {
@@ -98,12 +116,11 @@ public class EditUserProfileController extends HttpServlet {
 			return;
 		}
 
-		// Handle update
+		// Handle user profile update
 		try {
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
-			
 
 			// Basic form validation
 			if (name == null || name.isEmpty()) {
@@ -136,6 +153,7 @@ public class EditUserProfileController extends HttpServlet {
 			int genderId = Integer.parseInt(genderIdParam);
 			int roleId = Integer.parseInt(roleIdParam);
 
+			// Create and populate UserModel object
 			UserModel user = new UserModel();
 			user.setUserId(userId);
 			user.setName(name);
@@ -147,9 +165,7 @@ public class EditUserProfileController extends HttpServlet {
 			UserService userService = new UserService();
 			boolean updated = userService.updateUser(user);
 
-			
-
-			// Final redirect or error message
+			// Redirect or display error message based on update result
 			if (updated) {
 				response.sendRedirect(request.getContextPath() + "/usermanagement-list");
 			} else {

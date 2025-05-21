@@ -12,6 +12,11 @@ import com.nestandrest.service.QueryService;
 import com.nestandrest.util.RedirectionUtil;
 import com.nestandrest.util.ValidationUtil;
 
+/**
+ * Controller servlet for handling Contact Us page requests.
+ *
+ * @author 23049063 Himani Chaudhary
+ */
 @WebServlet(asyncSupported = true, urlPatterns = { "/contact-us" })
 public class ContactUsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +24,11 @@ public class ContactUsController extends HttpServlet {
 	private RedirectionUtil redirectionUtil;
 	private QueryService queryService;
 
+	/**
+	 * Initializes the ValidationUtil, RedirectionUtil, and QueryService instances.
+	 *
+	 * @throws ServletException if an error occurs during servlet initialization.
+	 */
 	@Override
 	public void init() throws ServletException {
 		this.validationUtil = new ValidationUtil();
@@ -26,10 +36,26 @@ public class ContactUsController extends HttpServlet {
 		this.queryService = new QueryService();
 	}
 
+	/**
+	 * Handles HTTP GET requests to display the Contact Us page.
+	 *
+	 * @param req  The HttpServletRequest containing the client request.
+	 * @param resp The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/pages/info/contact-us.jsp").forward(req, resp);
 	}
 
+	/**
+	 * Handles HTTP POST requests to process and save user queries.
+	 *
+	 * @param req  The HttpServletRequest containing the client request.
+	 * @param resp The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -51,6 +77,16 @@ public class ContactUsController extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Extracts and validates user input to build a QueryModel.
+	 *
+	 * @param req  The HttpServletRequest containing the client request.
+	 * @param resp The HttpServletResponse for sending the response.
+	 * @return A QueryModel object containing the validated query data.
+	 * @throws ServletException if validation fails or an error occurs during
+	 *                          processing.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	private QueryModel extractQueryModel(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String name = req.getParameter("name");

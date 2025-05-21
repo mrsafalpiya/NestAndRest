@@ -10,8 +10,15 @@ import java.util.List;
 import com.nestandrest.config.DbConfig;
 import com.nestandrest.model.QueryModel;
 
+/**
+ * Service class that handles user query operations. Provides methods to save
+ * and retrieve user queries.
+ * 
+ * @author 23049063 Himani Chaudhary
+ */
 public class QueryService {
 
+	// Database connection
 	private Connection dbConn;
 
 	/**
@@ -26,6 +33,12 @@ public class QueryService {
 		}
 	}
 
+	/**
+	 * Saves a new user query to the database.
+	 * 
+	 * @param queryModel the query model containing user information and message
+	 * @return Boolean indicating success or failure, or null if an error occurs
+	 */
 	public Boolean saveQuery(QueryModel queryModel) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -50,6 +63,12 @@ public class QueryService {
 		}
 	}
 
+	/**
+	 * Retrieves all user queries from the database.
+	 * 
+	 * @return List of QueryModel objects representing user queries, or null if an
+	 *         error occurs
+	 */
 	public List<QueryModel> getAllQueries() {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");

@@ -16,7 +16,9 @@ import java.util.List;
  * Service class for managing products, categories, and variants. Provides
  * high-level business logic and database access coordination.
  * 
- * @author Bhumika Karki
+ * @author 23047626 Ayush Shrestha
+ * @author 23047584 Bhumika Karki
+ * @author 23048460 Safal Piya
  */
 public class ProductService {
 	private Connection dbConn;

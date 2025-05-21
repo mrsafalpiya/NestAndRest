@@ -11,8 +11,15 @@ import com.nestandrest.config.DbConfig;
 import com.nestandrest.model.GenderModel;
 import com.nestandrest.model.UserModel;
 
+/**
+ * Service class that handles user registration operations. Provides methods to
+ * add new users and retrieve user-related information.
+ * 
+ * @author 23049063 Himani Chaudhary
+ */
 public class RegistrationService {
 
+	// Database connection
 	private Connection dbConn;
 
 	/**
@@ -27,6 +34,12 @@ public class RegistrationService {
 		}
 	}
 
+	/**
+	 * Adds a new user to the system.
+	 * 
+	 * @param userModel the user model containing user information
+	 * @return Boolean indicating success or failure, or null if an error occurs
+	 */
 	public Boolean addUser(UserModel userModel) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available.");
@@ -53,6 +66,11 @@ public class RegistrationService {
 		}
 	}
 
+	/**
+	 * Retrieves the list of genders from the database.
+	 * 
+	 * @return List of GenderModel objects, or null if an error occurs
+	 */
 	public List<GenderModel> getGenders() {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -79,6 +97,11 @@ public class RegistrationService {
 		}
 	}
 
+	/**
+	 * Retrieves the role ID for customers.
+	 * 
+	 * @return Customer role ID, or 0 if an error occurs
+	 */
 	public int getCustomerRoleId() {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -105,6 +128,12 @@ public class RegistrationService {
 		}
 	}
 
+	/**
+	 * Checks if a user with the given email exists in the system.
+	 * 
+	 * @param email the email to check
+	 * @return Boolean indicating existence, or null if an error occurs
+	 */
 	public Boolean doesAUserWithEmailExist(String email) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -129,6 +158,12 @@ public class RegistrationService {
 		}
 	}
 
+	/**
+	 * Checks if a user with the given phone number exists in the system.
+	 * 
+	 * @param phone the phone number to check
+	 * @return Boolean indicating existence, or null if an error occurs
+	 */
 	public Boolean doesAUserWithPhoneNumberExist(String phone) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");

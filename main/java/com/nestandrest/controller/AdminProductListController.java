@@ -14,9 +14,9 @@ import java.util.List;
  * Controller servlet for handling admin-side product listing, pagination,
  * search, and product management actions like update and delete.
  * 
- * @author Safal Piya
- * @author Bhumika Karki
- * @author Ayush Shrestha
+ * @author 23048460 Safal Piya
+ * @author 23047584 Bhumika Karki
+ * @author 23047626 Ayush Shrestha
  */
 @WebServlet(asyncSupported = true, urlPatterns = "/admin/products/list")
 public class AdminProductListController extends HttpServlet {

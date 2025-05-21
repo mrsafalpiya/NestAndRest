@@ -20,14 +20,12 @@ import com.nestandrest.util.RedirectionUtil;
 import com.nestandrest.util.ValidationUtil;
 
 /**
- * CheckoutAddressController.java
- * 
  * This servlet handles both GET and POST requests for the checkout address
  * step. - GET: Retrieves user's cart and addresses, then forwards to the
  * address selection page. - POST: Validates and saves a new address entered by
  * the user.
  * 
- * Author: Sanniva Shakya
+ * @author 23047589 Sanniva Shakya
  */
 @WebServlet("/checkout-address")
 public class CheckoutAddressController extends HttpServlet {
@@ -37,8 +35,12 @@ public class CheckoutAddressController extends HttpServlet {
 	private ValidationUtil validationUtil;
 	private RedirectionUtil redirectionUtil;
 
+	/**
+	 * Initializes all service and utility objects used by this controller.
+	 * 
+	 * @throws ServletException if an error occurs during servlet initialization.
+	 */
 	@Override
-	// Initialize all service and utility objects
 	public void init() throws ServletException {
 		this.userService = new UserService();
 		this.cartService = new CartService();
@@ -47,7 +49,14 @@ public class CheckoutAddressController extends HttpServlet {
 	}
 
 	/**
-	 * Handles GET request to display cart items and user addresses
+	 * Handles HTTP GET requests to display cart items and user addresses. Retrieves
+	 * the currently logged-in user's cart and addresses, then forwards the request
+	 * to the checkout address JSP page.
+	 * 
+	 * @param request  The HttpServletRequest containing the client request.
+	 * @param response The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -68,11 +77,17 @@ public class CheckoutAddressController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/pages/checkout/checkout-address.jsp").forward(request, response);
 	}
 
-	@Override
-
 	/**
-	 * Handles POST request to add a new address from the checkout page
+	 * Handles HTTP POST requests to add a new address from the checkout page.
+	 * Validates the submitted address form data, saves the new address, and
+	 * redirects back to the checkout address page.
+	 * 
+	 * @param req  The HttpServletRequest containing the client request.
+	 * @param resp The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
 	 */
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		UserModel currentUser = this.userService.getCurrentlyLoggedInUser(req, null);
 		if (currentUser == null) {
@@ -89,10 +104,10 @@ public class CheckoutAddressController extends HttpServlet {
 		try {
 			// Extract and validate the submitted address form data
 			UserAddressModel address = this.extractUserAddressModel(req, resp, currentUser.getUserId());
-			
+
 			// Save the new address
 			this.userService.addAddressOfUser(address);
-			
+
 			// Redirect back to the checkout address page
 			resp.sendRedirect(req.getContextPath() + "/checkout-address");
 		} catch (Exception e) {
@@ -101,7 +116,15 @@ public class CheckoutAddressController extends HttpServlet {
 	}
 
 	/**
-	 * Extracts and validates user input to build a UserAddressModel
+	 * Extracts and validates user input to build a UserAddressModel. Validates the
+	 * submitted address form fields and constructs a UserAddressModel object if all
+	 * validations pass.
+	 * 
+	 * @param req    The HttpServletRequest containing the client request.
+	 * @param resp   The HttpServletResponse for sending the response.
+	 * @param userId The ID of the currently logged-in user.
+	 * @return A UserAddressModel object containing the validated address data.
+	 * @throws Exception if validation fails or an error occurs during processing.
 	 */
 	private UserAddressModel extractUserAddressModel(HttpServletRequest req, HttpServletResponse resp, int userId)
 			throws Exception {
@@ -127,11 +150,12 @@ public class CheckoutAddressController extends HttpServlet {
 
 		// Checking if a valid phone number was provided
 		if (!validationUtil.isValidPhoneNumber(phone)) {
-			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please enter a valid phone number! (Start with 98 and of 10 digits)",
+			redirectionUtil.setMsgAndRedirect(req, resp, "error",
+					"Please enter a valid phone number! (Start with 98 and of 10 digits)",
 					RedirectionUtil.checkoutAddressUrl);
 			return null;
 		}
-		
+
 		// Construct and return the address object
 		return new UserAddressModel(userId, address + " " + city, fullName, phone, false);
 	}

@@ -15,6 +15,16 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Filter for handling authentication and authorization for various pages.
+ *
+ * Redirects users based on their login status and role to ensure proper access
+ * control.
+ *
+ * @author 23049063 Himani Chaudhary
+ * @author 23048460 Safal Piya
+ * @author 23047589 Sanniva Shakya
+ */
 @WebFilter(asyncSupported = true, urlPatterns = { "/*" })
 public class AuthenticationFilter implements Filter {
 
@@ -31,12 +41,31 @@ public class AuthenticationFilter implements Filter {
 	private static final String UNAUTHORIZED = "/error403";
 	private static final String ROOT = "/";
 
+	/**
+	 * Initializes the filter. This method is called once when the filter is first
+	 * loaded.
+	 *
+	 * @param filterConfig The filter configuration object.
+	 * @throws ServletException if an error occurs during initialization.
+	 */
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
 		Filter.super.init(filterConfig);
 	}
 
+	/**
+	 * Filters incoming requests to enforce authentication and authorization rules.
+	 *
+	 * Redirects users based on their login status and role to appropriate pages or
+	 * error pages.
+	 *
+	 * @param request  The ServletRequest containing the client request.
+	 * @param response The ServletResponse for sending the response.
+	 * @param chain    The FilterChain to pass the request and response to the next
+	 *                 filter or servlet.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 * @throws ServletException if an error occurs during request handling.
+	 */
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -79,13 +108,7 @@ public class AuthenticationFilter implements Filter {
 			return;
 		}
 
+		// Pass the request and response to the next filter or servlet
 		chain.doFilter(request, response);
 	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		Filter.super.destroy();
-	}
-
 }

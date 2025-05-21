@@ -22,16 +22,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Controller that handles the display of individual product details.
- * It retrieves product information and associated variants to render
- * the product-details.jsp page.
+ * Controller that handles the display of individual product details. It
+ * retrieves product information and associated variants to render the
+ * product-details.jsp page.
  * 
  * URL pattern: /product-details
  * 
- * Example usage:
- * GET /product-details?id=3
+ * Example usage: GET /product-details?id=3
  * 
- * @author Bhumika Karki
+ * @author 23047584 Bhumika Karki
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/product-details" })
 public class ProductDetailsController extends HttpServlet {
@@ -52,9 +51,9 @@ public class ProductDetailsController extends HttpServlet {
 	}
 
 	/**
-	 * Handles GET requests to show a product's detail page.
-	 * Validates the product ID, retrieves the product and its variants,
-	 * and forwards them to the product-details.jsp page.
+	 * Handles GET requests to show a product's detail page. Validates the product
+	 * ID, retrieves the product and its variants, and forwards them to the
+	 * product-details.jsp page.
 	 *
 	 * @param req  HttpServletRequest carrying the "id" parameter
 	 * @param resp HttpServletResponse to forward the view
@@ -86,8 +85,8 @@ public class ProductDetailsController extends HttpServlet {
 	}
 
 	/**
-	 * Handles POST requests by simply forwarding to the product details view.
-	 * Used when product variant selections or quantity are submitted.
+	 * Handles POST requests by simply forwarding to the product details view. Used
+	 * when product variant selections or quantity are submitted.
 	 *
 	 * @param req  HttpServletRequest carrying form data
 	 * @param resp HttpServletResponse to display the page again

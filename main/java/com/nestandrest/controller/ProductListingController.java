@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Controller that handles product listing functionality for the "/products" route.
- * Supports category filtering, search, sorting, and pagination of products.
+ * Controller that handles product listing functionality for the "/products"
+ * route. Supports category filtering, search, sorting, and pagination of
+ * products.
  *
- * @author Bhumika Karki
+ * @author 23047584 Bhumika Karki
  */
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/products" })
 public class ProductListingController extends HttpServlet {
-	private static final int PAGE_SIZE = 8;     // Number of products per page
+	private static final int PAGE_SIZE = 8; // Number of products per page
 	private ProductService productService;
 
-	
 	/**
 	 * Initializes the ProductService instance when the servlet is first loaded.
 	 */
@@ -32,8 +32,8 @@ public class ProductListingController extends HttpServlet {
 	}
 
 	/**
-	 * Handles GET requests for displaying the product listing page.
-	 * Applies optional filters: category, search keyword, sorting, and pagination.
+	 * Handles GET requests for displaying the product listing page. Applies
+	 * optional filters: category, search keyword, sorting, and pagination.
 	 *
 	 * @param req  HttpServletRequest object containing client request parameters
 	 * @param resp HttpServletResponse object for sending the response
@@ -88,7 +88,7 @@ public class ProductListingController extends HttpServlet {
 		// Handle out-of-range start index
 		List<ProductModel> paginated;
 		if (start >= totalProducts) {
-			paginated = List.of();     // If page exceeds range, return empty list
+			paginated = List.of(); // If page exceeds range, return empty list
 		} else {
 			paginated = filteredProducts.subList(start, end);
 		}

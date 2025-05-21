@@ -1,16 +1,11 @@
 package com.nestandrest.util;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import jakarta.servlet.http.Cookie;
 
-
-
 import java.util.Arrays;
-
-
 
 /**
  * Utility class for managing cookies in a web application. Provides methods to

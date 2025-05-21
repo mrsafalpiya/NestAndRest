@@ -17,9 +17,9 @@ import java.sql.SQLException;
  * admin users. It supports GET and POST methods to render the form and process
  * product data including image upload.
  * 
- * @author Safal Piya
- * @author Bhumika Karki
- * @author Ayush Shrestha
+ * @author 23048460 Safal Piya
+ * @author 23047584 Bhumika Karki
+ * @author 23047626 Ayush Shrestha
  */
 @WebServlet(asyncSupported = true, urlPatterns = "/admin/products/add")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)

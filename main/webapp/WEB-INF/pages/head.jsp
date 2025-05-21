@@ -7,5 +7,7 @@
 	href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap"
 	rel="stylesheet" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/styles.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/components.css" />
