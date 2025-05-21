@@ -24,7 +24,7 @@ public class ProductService {
 	private Connection dbConn;
 
 	/**
-	 * Initializes ProductService with DAO instances and DB connection.
+	 * Initializes ProductService with DB connection.
 	 */
 	public ProductService() {
 		try {
