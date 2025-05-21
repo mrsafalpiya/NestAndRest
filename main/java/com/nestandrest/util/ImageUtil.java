@@ -29,7 +29,7 @@ public class ImageUtil {
 	 * @return {@code true} if the file was successfully uploaded, {@code false}
 	 *         otherwise.
 	 */
-	public boolean uploadImage(Part part, String saveFolder, int fileId) {
+	public boolean uploadImage(Part part, String saveFolder, String fileId) {
 		String savePath = getSavePath(saveFolder);
 		File fileSaveDir = new File(savePath);
 
