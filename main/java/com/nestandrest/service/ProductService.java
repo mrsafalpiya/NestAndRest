@@ -292,4 +292,96 @@ public class ProductService {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Adds a new product to the database along with its variants and variant
+	 * values.
+	 *
+	 * @param product       The ProductModel object containing the product details
+	 *                      to be added
+	 * @param variantNames  An array of variant names (e.g., "Color", "Size") for
+	 *                      the product
+	 * @param variantValues An array of variant values corresponding to each variant
+	 *                      name (e.g., "Red", "XL")
+	 * @return The generated product ID if successful, 0 if failed
+	 */
+	public int addProduct(ProductModel product, String[] variantNames, String[] variantValues) {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available!");
+			return 0;
+		}
+
+		int generatedProductId = 0;
+
+		try {
+			// 1. Insert product first
+			String productSql = "INSERT INTO product (name, short_description, long_description, price, discounted_price, category_id, stock_qty) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement productStmt = dbConn.prepareStatement(productSql,
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			productStmt.setString(1, product.getName());
+			productStmt.setString(2, product.getShortDescription());
+			productStmt.setString(3, product.getLongDescription());
+			productStmt.setDouble(4, product.getPrice());
+			productStmt.setDouble(5, product.getDiscountedPrice());
+			productStmt.setInt(6, product.getCategoryId());
+			productStmt.setInt(7, product.getStockQty());
+
+			productStmt.executeUpdate();
+
+			// Get the generated product ID
+			ResultSet generatedKeys = productStmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				generatedProductId = generatedKeys.getInt(1);
+			}
+
+			// 2. Process variants and variant values if they exist
+			if (variantNames != null && variantValues != null && variantNames.length > 0) {
+				for (int i = 0; i < variantNames.length; i++) {
+					String variantName = variantNames[i];
+					if (variantName != null && !variantName.trim().isEmpty()) {
+						// Insert the variant
+						String variantSql = "INSERT INTO product_variant (product_id, variant_name) VALUES (?, ?)";
+						PreparedStatement variantStmt = dbConn.prepareStatement(variantSql,
+								PreparedStatement.RETURN_GENERATED_KEYS);
+						variantStmt.setInt(1, generatedProductId);
+						variantStmt.setString(2, variantName);
+
+						variantStmt.executeUpdate();
+
+						// Get the generated variant ID
+						ResultSet variantKeys = variantStmt.getGeneratedKeys();
+						if (variantKeys.next()) {
+							int variantId = variantKeys.getInt(1);
+
+							// Process variant values if they exist for this variant
+							if (variantValues != null && i < variantValues.length) {
+								String variantValuesStr = variantValues[i];
+								if (variantValuesStr != null && !variantValuesStr.trim().isEmpty()) {
+									// Split values by new line
+									String[] valueArray = variantValuesStr.split("\\n");
+									
+									for (String value : valueArray) {
+										String trimmedValue = value.trim();
+										if (!trimmedValue.isEmpty()) {
+											// Insert variant value
+											String valuesSql = "INSERT INTO product_variant_value (product_variant_id, variant_value) VALUES (?, ?)";
+											PreparedStatement valuesStmt = dbConn.prepareStatement(valuesSql);
+											valuesStmt.setInt(1, variantId);
+											valuesStmt.setString(2, trimmedValue);
+											valuesStmt.executeUpdate();
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println("Error during product add: " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return generatedProductId;
+	}
 }

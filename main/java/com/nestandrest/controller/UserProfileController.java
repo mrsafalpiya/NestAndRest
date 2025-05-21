@@ -119,7 +119,7 @@ public class UserProfileController extends HttpServlet {
 		}
 		case "picture": {
 			Part image = req.getPart("image");
-			imageUtil.uploadImage(image, "user-images", currentUser.getUserId());
+			imageUtil.uploadImage(image, "user-images", String.valueOf(currentUser.getUserId()));
 
 			redirectionUtil.setMsgAndRedirect(req, resp, "success", "Profile picture updated successfully!",
 					RedirectionUtil.editUserProfileUrl);

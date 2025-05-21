@@ -2,6 +2,8 @@ package com.nestandrest.controller;
 
 import com.nestandrest.model.ProductModel;
 import com.nestandrest.service.ProductService;
+import com.nestandrest.util.ImageUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.*;
-import java.sql.SQLException;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Controller servlet responsible for handling the addition of new products by
@@ -26,6 +29,7 @@ import java.sql.SQLException;
 public class AdminAddProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService;
+	private ImageUtil imageUtil;
 
 	/**
 	 * Initializes the ProductService instance when the servlet is first created.
@@ -33,6 +37,7 @@ public class AdminAddProductController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		productService = new ProductService();
+		this.imageUtil = new ImageUtil();
 	}
 
 	/**
@@ -63,35 +68,33 @@ public class AdminAddProductController extends HttpServlet {
 			String name = request.getParameter("productName");
 			String subDescription = request.getParameter("subDescription");
 			String fullDescription = request.getParameter("fullDescription");
+
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
 			String category = request.getParameter("category");
-			String color = request.getParameter("colors");
-			String size = request.getParameter("sizes");
 			double price = Double.parseDouble(request.getParameter("price"));
 			String discountedPriceStr = request.getParameter("discountedPrice");
 			double discountedPrice = (discountedPriceStr != null && !discountedPriceStr.isEmpty())
 					? Double.parseDouble(discountedPriceStr)
 					: 0.0;
-			int quantity = Integer.parseInt(request.getParameter("quantity"));
-			boolean inStock = quantity > 0;
-			boolean isPublished = request.getParameter("publish") != null;
 
-			// Handle file upload
-			String imagePath = null;
-			Part filePart = request.getPart("images");
-			if (filePart != null && filePart.getSize() > 0) {
-				String fileName = extractFileName(filePart);
-				String savePath = getServletContext().getRealPath("/Uploads") + File.separator + fileName;
-				File fileSaveDir = new File(getServletContext().getRealPath("/Uploads"));
-				if (!fileSaveDir.exists()) {
-					fileSaveDir.mkdir();
-				}
-				filePart.write(savePath);
-				imagePath = "Uploads/" + fileName;
+			// Retrieve variant names array
+			String[] variantNames = request.getParameterValues("variantNames[]");
+			// If no variants were submitted, initialize as empty array
+			if (variantNames == null) {
+				variantNames = new String[0];
+			}
+
+			// Retrieve variant values array
+			String[] variantValues = request.getParameterValues("variantValues[]");
+			// If no variants were submitted, initialize as empty array
+			if (variantValues == null) {
+				variantValues = new String[0];
 			}
 
 			// Validate input
-			if (name == null || name.trim().isEmpty() || price <= 0 || category == null || category.trim().isEmpty()
-					|| quantity < 0) {
+			if (name == null || name.isEmpty() || subDescription == null || subDescription.isEmpty()
+					|| fullDescription == null || fullDescription.isEmpty() || category == null || category.isEmpty()
+					|| quantity <= 0 || price <= 0) {
 				request.setAttribute("error", "Invalid input. Please check the form.");
 				request.setAttribute("categories", productService.getAllCategories());
 				request.getRequestDispatcher("/WEB-INF/pages/admin-products/admin-add-product.jsp").forward(request,
@@ -99,24 +102,31 @@ public class AdminAddProductController extends HttpServlet {
 				return;
 			}
 
-			// Create Product object
-			// TODO: Complete implementation
-//			ProductModel product = new ProductModel();
-//			product.setName(name);
-//			product.setSubDescription(subDescription);
-//			product.setFullDescription(fullDescription);
-//			product.setCategory(category);
-//			product.setColor(color);
-//			product.setSize(size);
-//			product.setPrice(price);
-//			product.setDiscountedPrice(discountedPrice);
-//			product.setQuantity(quantity);
-//			product.setInStock(inStock);
-//			product.setPublished(isPublished);
-//			product.setImage(imagePath);
-//
-//			// Save the product
-//			productService.addProduct(product);
+			// Create ProductModel object
+			ProductModel product = new ProductModel(0, name, subDescription, fullDescription, price, discountedPrice,
+					Integer.parseInt(category), quantity);
+
+			// Save the product with the variants and image path
+			int productId = productService.addProduct(product, variantNames, variantValues);
+
+			// Handle file upload
+			Collection<Part> imageParts = request.getParts();
+			List<Part> imageFiles = imageParts.stream()
+					.filter(part -> "images".equals(part.getName()) && part.getSize() > 0).toList();
+
+			if (imageFiles.isEmpty()) {
+				// Handle case where no images were uploaded
+				request.setAttribute("error", "No images were uploaded. Please add at least one product image.");
+				request.setAttribute("categories", productService.getAllCategories());
+				request.getRequestDispatcher("/WEB-INF/pages/admin-products/admin-add-product.jsp").forward(request,
+						response);
+				return;
+			}
+			// loop over each images and upload
+			for (int i = 0; i < imageFiles.size(); i++) {
+				Part imagePart = imageFiles.get(i);
+				imageUtil.uploadImage(imagePart, "product-images", productId + (i > 0 ? "-" + (i + 1) : ""));
+			}
 
 			// Redirect to product list
 			response.sendRedirect(request.getContextPath() + "/admin/products/list");
@@ -127,23 +137,5 @@ public class AdminAddProductController extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/pages/admin-products/admin-add-product.jsp").forward(request,
 					response);
 		}
-	}
-
-	/**
-	 * Extracts the file name from the Content-Disposition header of the uploaded
-	 * file.
-	 *
-	 * @param part The Part object representing the uploaded file
-	 * @return The extracted file name as a string
-	 */
-	private String extractFileName(Part part) {
-		String contentDisposition = part.getHeader("content-disposition");
-		String[] items = contentDisposition.split(";");
-		for (String item : items) {
-			if (item.trim().startsWith("filename")) {
-				return item.substring(item.indexOf("=") + 2, item.length() - 1);
-			}
-		}
-		return "";
 	}
 }

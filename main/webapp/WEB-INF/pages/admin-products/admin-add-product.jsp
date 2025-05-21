@@ -53,24 +53,7 @@
 				<!-- Image Upload -->
 				<div class="form-section">
 					<h5>Images</h5>
-					<div class="image-upload">
-						<label for="images"> <img
-							src="${contextPath}/resources/system/images/ProductPageLogo/AddImage.png"
-							alt="Upload" />
-							<p>
-								Select files<br>
-								<span>Click to browse through your machine.</span>
-							</p>
-						</label> <input type="file" name="images" id="images" accept="image/*" />
-					</div>
-					<div class="image-actions">
-						<button type="button" class="remove-btn">Remove</button>
-						<button type="submit" class="upload-btn">
-							<img
-								src="${contextPath}/resources/system/images/ProductPageLogo/upload-icon.png"
-								alt="Upload Icon"> Upload
-						</button>
-					</div>
+					<input type="file" name="images" id="images" accept="image/*" multiple />
 				</div>
 
 				<!-- Product Properties -->
@@ -82,31 +65,10 @@
 						<!-- Category -->
 						<div class="form-group">
 							<select id="category" name="category">
-								<option value="">Category</option>
-								<option value="1">Sofas</option>
-								<option value="2">Chairs</option>
-								<option value="3">Tables</option>
-							</select>
-						</div>
-
-						<!-- Colors -->
-						<div class="form-group">
-							<select id="colors" name="colors">
-								<option value="">Select Color</option>
-								<option value="Natural">Natural</option>
-								<option value="Orange">Orange</option>
-								<option value="White">White</option>
-							</select>
-						</div>
-
-						<!-- Sizes -->
-						<div class="form-group">
-							<select id="sizes" name="sizes">
-								<option value="">Select Size</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
+								<option disabled selected>Select a category</option>
+								<c:forEach var="category" items="${categories}">
+									<option value="${category.categoryId}">${category.name}</option>
+								</c:forEach>
 							</select>
 						</div>
 
@@ -128,8 +90,41 @@
 					</div>
 				</div>
 
-				<label> <input type="checkbox" name="publish" /> Publish
-				</label>
+				<!-- Product Variants -->
+				<div class="form-section">
+					<h5>Variants</h5>
+					<div class="variants-container">
+						<p>Define product variants (e.g., Color, Size)</p>
+						<div class="variant-row">
+							<input type="text" name="variantNames[]" placeholder="Variant name (e.g. Color)" class="variant-name"/>
+							<textarea name="variantValues[]" placeholder="Enter values, one per line&#10;e.g.&#10;Red&#10;Blue&#10;Green" class="variant-values"></textarea>
+							<button type="button" class="remove-variant" onclick="removeVariantRow(this)">×</button>
+						</div>
+						<button type="button" class="add-variant" onclick="addVariantRow()">+ Add Variant</button>
+					</div>
+
+					<script>
+						function addVariantRow() {
+							const container = document.querySelector('.variants-container');
+							const newRow = document.createElement('div');
+							newRow.className = 'variant-row';
+							newRow.innerHTML = `
+								<input type="text" name="variantNames[]" placeholder="Variant name (e.g. Color)" class="variant-name"/>
+								<textarea name="variantValues[]" placeholder="Enter values, one per line&#10;e.g.&#10;Red&#10;Blue&#10;Green" class="variant-values"></textarea>
+								<button type="button" class="remove-variant" onclick="removeVariantRow(this)">×</button>
+							`;
+							container.insertBefore(newRow, container.querySelector('.add-variant'));
+						}
+
+						function removeVariantRow(button) {
+							const row = button.parentElement;
+							if (document.querySelectorAll('.variant-row').length > 1) {
+								row.remove();
+							}
+						}
+					</script>
+				</div>
+
 				<button type="submit" class="btn-create">Create Product</button>
 			</form>
 		</main>
