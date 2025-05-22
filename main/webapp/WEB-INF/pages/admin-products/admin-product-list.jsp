@@ -10,10 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin - Product List</title>
 <jsp:include page="../head.jsp" />
-<link rel="stylesheet"
-	href="${contextPath}/css/admin-style.css">
-<link rel="stylesheet"
-	href="${contextPath}/css/admin-product-list.css">
+<link rel="stylesheet" href="${contextPath}/css/admin-style.css">
+<link rel="stylesheet" href="${contextPath}/css/admin-product-list.css">
 <style>
 .stock-bar.low {
 	background-color: #ff4d4d;
@@ -135,8 +133,8 @@
 					</form>
 				</div>
 
-				<a href="${contextPath}/admin/products/add"
-					class="btn-new-product">+ New product</a>
+				<a href="${contextPath}/admin/products/add" class="btn-new-product">+
+					New product</a>
 			</div>
 
 			<c:if test="${not empty error}">
@@ -179,10 +177,12 @@
 											style="${product.getDiscountedPrice() != 0.0 ? 'text-decoration: line-through' : ''}">${product.price}</span>
 											${product.getDiscountedPrice() != 0.0 ? product.getDiscountedPrice() : ''}
 										</td>
-										<td class="actions"><a href="#"
-											onclick="openEditModal(${product.getProductId()}, '${product.getName()}', ${product.getStockQty()}, ${product.getPrice()}, ${product.getDiscountedPrice()}, '${product.getCategoryId()}')">Edit</a>
-											<form
-												action="${contextPath}/admin/products/list"
+										<td class="actions"><a
+											href="${contextPath}/admin/products/edit?id=${product.productId}">Edit</a><a
+											href="#"
+											onclick="openEditModal(${product.getProductId()}, '${product.getName()}', ${product.getStockQty()}, ${product.getPrice()}, ${product.getDiscountedPrice()}, '${product.getCategoryId()}')">Quick
+												Edit</a>
+											<form action="${contextPath}/admin/products/list"
 												method="post">
 												<input type="hidden" name="action" value="delete" /> <input
 													type="hidden" name="productId" value="${product.productId}" />
@@ -221,8 +221,7 @@
 			<div id="editModal" class="modal">
 				<div class="modal-content">
 					<h3 style="margin-bottom: 10px;">Edit Product</h3>
-					<form id="editForm"
-						action="${contextPath}/admin/products/list"
+					<form id="editForm" action="${contextPath}/admin/products/list"
 						method="post">
 						<input type="hidden" name="action" value="update" /> <input
 							type="hidden" name="productId" id="editProductId" /> <label

@@ -222,6 +222,12 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Updates an existing product in the database with new information.
+	 *
+	 * @param product The ProductModel object containing updated product details
+	 * @return Boolean indicating success (true) or failure (false/null)
+	 */
 	public Boolean updateProduct(ProductModel product) {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -250,6 +256,12 @@ public class ProductService {
 		}
 	}
 
+	/**
+	 * Retrieves all products that have a discount applied (discounted_price > 0).
+	 * These are considered to be on sale.
+	 *
+	 * @return List of ProductModel objects representing products on sale or null if error
+	 */
 	public List<ProductModel> getProductsOnSale() {
 		if (dbConn == null) {
 			System.err.println("Database connection is not available!");
@@ -383,5 +395,89 @@ public class ProductService {
 		}
 
 		return generatedProductId;
+	}
+
+	/**
+	 * Updates the variants and their values for an existing product.
+	 * This method first removes all existing variants and values for the product,
+	 * then adds the new variants and values.
+	 *
+	 * @param productId     The ID of the product to update variants for
+	 * @param variantNames  An array of variant names (e.g., "Color", "Size") for the product
+	 * @param variantValues An array of variant values corresponding to each variant name
+	 *                      (e.g., "Red\nBlue\nGreen", "XL\nL\nM\nS")
+	 * @return Boolean indicating success (true) or failure (false/null)
+	 */
+	public Boolean updateProductVariants(int productId, String[] variantNames, String[] variantValues) {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available!");
+			return null;
+		}
+		
+		try {
+			// 1. Delete existing variants and their values for this product
+			String deleteVariantValuesSql = "DELETE pvv FROM product_variant_value pvv " +
+					"JOIN product_variant pv ON pvv.product_variant_id = pv.product_variant_id " +
+					"WHERE pv.product_id = ?";
+			
+			PreparedStatement deleteValuesStmt = dbConn.prepareStatement(deleteVariantValuesSql);
+			deleteValuesStmt.setInt(1, productId);
+			deleteValuesStmt.executeUpdate();
+			
+			String deleteVariantsSql = "DELETE FROM product_variant WHERE product_id = ?";
+			PreparedStatement deleteVariantsStmt = dbConn.prepareStatement(deleteVariantsSql);
+			deleteVariantsStmt.setInt(1, productId);
+			deleteVariantsStmt.executeUpdate();
+			
+			// 2. Process and insert new variants and variant values if they exist
+			if (variantNames != null && variantValues != null && variantNames.length > 0) {
+				for (int i = 0; i < variantNames.length; i++) {
+					String variantName = variantNames[i];
+					if (variantName != null && !variantName.trim().isEmpty()) {
+						// Insert the variant
+						String variantSql = "INSERT INTO product_variant (product_id, variant_name) VALUES (?, ?)";
+						PreparedStatement variantStmt = dbConn.prepareStatement(variantSql,
+								PreparedStatement.RETURN_GENERATED_KEYS);
+						variantStmt.setInt(1, productId);
+						variantStmt.setString(2, variantName);
+
+						variantStmt.executeUpdate();
+
+						// Get the generated variant ID
+						ResultSet variantKeys = variantStmt.getGeneratedKeys();
+						if (variantKeys.next()) {
+							int variantId = variantKeys.getInt(1);
+
+							// Process variant values if they exist for this variant
+							if (variantValues != null && i < variantValues.length) {
+								String variantValuesStr = variantValues[i];
+								if (variantValuesStr != null && !variantValuesStr.trim().isEmpty()) {
+									// Split values by new line
+									String[] valueArray = variantValuesStr.split("\\n");
+									
+									for (String value : valueArray) {
+										String trimmedValue = value.trim();
+										if (!trimmedValue.isEmpty()) {
+											// Insert variant value
+											String valuesSql = "INSERT INTO product_variant_value (product_variant_id, variant_value) VALUES (?, ?)";
+											PreparedStatement valuesStmt = dbConn.prepareStatement(valuesSql);
+											valuesStmt.setInt(1, variantId);
+											valuesStmt.setString(2, trimmedValue);
+											valuesStmt.executeUpdate();
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			return true;
+		} catch (SQLException e) {
+			System.err.println("Error during product variants update: " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
