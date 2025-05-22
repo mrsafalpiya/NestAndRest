@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author 23047626 Ayush Shrestha
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/terms" })
-public class TermsAndConditions extends HttpServlet {
+public class TermsAndConditionsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**

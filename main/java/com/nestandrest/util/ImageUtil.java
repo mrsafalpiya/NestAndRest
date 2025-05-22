@@ -51,6 +51,16 @@ public class ImageUtil {
 		}
 	}
 
+	/**
+	 * Returns the absolute save path for a given folder name on the server.
+	 * <p>
+	 * This method constructs the full directory path where image files should be saved
+	 * based on the provided folder name. The path is relative to the server's resources directory.
+	 * </p>
+	 *
+	 * @param saveFolder the name of the folder where images will be saved
+	 * @return the absolute path as a String
+	 */
 	public String getSavePath(String saveFolder) {
 		return "/home/safal/eclipse-workspace/nest-and-rest/src/main/webapp/resources/" + saveFolder + "/";
 	}

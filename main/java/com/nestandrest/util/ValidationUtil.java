@@ -19,7 +19,6 @@ public class ValidationUtil {
 	 * @param value the string to validate
 	 * @return true if the string is null or empty, false otherwise
 	 */
-	// 1. Validate if a field is null or empty
 	public boolean isNullOrEmpty(String value) {
 		return value == null || value.trim().isEmpty();
 	}
@@ -30,7 +29,6 @@ public class ValidationUtil {
 	 * @param value the string to validate
 	 * @return true if the string contains only letters, false otherwise
 	 */
-	// 2. Validate if a string contains only letters
 	public boolean isAlphabetic(String value) {
 		return !isNullOrEmpty(value) && value.matches("^[a-zA-Z]+$"); //
 	}
@@ -43,8 +41,6 @@ public class ValidationUtil {
 	 * @return true if the string starts with a letter and contains only
 	 *         alphanumeric characters, false otherwise
 	 */
-	// 3. Validate if a string starts with a letter and is composed of letters and
-	// numbers
 	public boolean isAlphanumericStartingWithLetter(String value) {
 		return !isNullOrEmpty(value) && value.matches("^[a-zA-Z][a-zA-Z0-9]*$");
 	}
@@ -55,7 +51,6 @@ public class ValidationUtil {
 	 * @param value the string to validate
 	 * @return true if the string is either "male" or "female", false otherwise
 	 */
-	// 4. Validate if a string is "male" or "female" (case insensitive)
 	public boolean isValidGender(String value) {
 		return !isNullOrEmpty(value) && (value.equalsIgnoreCase("male") || value.equalsIgnoreCase("female"));
 	}
@@ -67,7 +62,6 @@ public class ValidationUtil {
 	 * @param email the email string to validate
 	 * @return true if the string is a valid email format, false otherwise
 	 */
-	// 5. Validate if a string is a valid email address
 	public boolean isValidEmail(String email) {
 		String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 		return !isNullOrEmpty(email) && Pattern.matches(emailRegex, email);
@@ -80,7 +74,6 @@ public class ValidationUtil {
 	 * @param number the phone number string to validate
 	 * @return true if the string is a valid phone number format, false otherwise
 	 */
-	// 6. Validate if a number is of 10 digits and starts with 98
 	public boolean isValidPhoneNumber(String number) {
 		return !isNullOrEmpty(number) && number.matches("^98\\d{8}$");
 	}
@@ -93,8 +86,6 @@ public class ValidationUtil {
 	 * @param password the password string to validate
 	 * @return true if the password meets the security requirements, false otherwise
 	 */
-	// 7. Validate if a password is composed of at least 1 capital letter, 1 number,
-	// 1 symbol and is of at least 8 characters
 	public boolean isValidPassword(String password) {
 		String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 		return !isNullOrEmpty(password) && password.matches(passwordRegex);
@@ -107,8 +98,6 @@ public class ValidationUtil {
 	 * @param imagePart the Part object containing the uploaded file
 	 * @return true if the file has a valid image extension, false otherwise
 	 */
-	// 8. Validate if a Part's file extension matches with image extensions (jpg,
-	// jpeg, png, gif)
 	public boolean isValidImageExtension(Part imagePart) {
 		if (imagePart == null || isNullOrEmpty(imagePart.getSubmittedFileName())) {
 			return false;
@@ -126,7 +115,6 @@ public class ValidationUtil {
 	 * @param retypePassword the retyped password to compare with
 	 * @return true if both passwords are not empty and match, false otherwise
 	 */
-	// 9. Validate if password and retype password match
 	public boolean doPasswordsMatch(String password, String retypePassword) {
 		return !isNullOrEmpty(password) && !isNullOrEmpty(retypePassword) && password.equals(retypePassword);
 	}
@@ -137,7 +125,6 @@ public class ValidationUtil {
 	 * @param dob the date of birth to validate
 	 * @return true if the person is at least 16 years old, false otherwise
 	 */
-	// 10. Validate if the date of birth is at least 16 years before today
 	public boolean isAgeAtLeast16(LocalDate dob) {
 		if (dob == null) {
 			return false;

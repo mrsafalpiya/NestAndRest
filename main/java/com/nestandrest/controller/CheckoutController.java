@@ -24,13 +24,26 @@ public class CheckoutController extends HttpServlet {
 	private CartService cartService;
 	private UserService userService;
 
+	/**
+	 * Initializes the UserService and CartService instances when the servlet is first created.
+	 *
+	 * @throws ServletException if an error occurs during servlet initialization.
+	 */
 	@Override
 	public void init() throws ServletException {
 		this.userService = new UserService();
 		this.cartService = new CartService();
 	}
 
-	// Handle GET requests - show the cart page
+	/**
+	 * Handles HTTP GET requests to display the cart page for the currently logged-in user.
+	 * Redirects to login if the user is not authenticated.
+	 *
+	 * @param request  The HttpServletRequest containing the client request.
+	 * @param response The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -47,7 +60,15 @@ public class CheckoutController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/pages/checkout/checkout-cart.jsp").forward(request, response);
 	}
 
-	// Handle POST requests - for actions like removing an item
+	/**
+	 * Handles HTTP POST requests for actions such as removing an item from the cart.
+	 * Redirects to login if the user is not authenticated. After action, redirects back to GET to refresh cart page.
+	 *
+	 * @param request  The HttpServletRequest containing the client request.
+	 * @param response The HttpServletResponse for sending the response.
+	 * @throws ServletException if an error occurs during request handling.
+	 * @throws IOException      if an I/O error occurs during request processing.
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
